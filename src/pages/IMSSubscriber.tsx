@@ -66,6 +66,10 @@ const IMSSubscriber = () => {
                         <TableCell/>
                         <TableCell>IMSI</TableCell>
                         <TableCell>MSISDN</TableCell>
+                        <TableCell>IFC</TableCell>
+                        <TableCell>SH</TableCell>
+                        <TableCell>Last Modified</TableCell>
+                        <TableCell/>
                       </TableRow>
                     </TableHead>
                     <TableBody>

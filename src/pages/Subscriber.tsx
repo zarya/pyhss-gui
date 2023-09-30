@@ -65,7 +65,14 @@ const Subscriber = () => {
                       <TableRow>
                         <TableCell/>
                         <TableCell>IMSI</TableCell>
-                        <TableCell align="right">Serving MME</TableCell>
+                        <TableCell>Auc</TableCell>
+                        <TableCell>Enabled</TableCell>
+                        <TableCell>MSISDN</TableCell>
+                        <TableCell>APN</TableCell>
+                        <TableCell>AMBR DL</TableCell>
+                        <TableCell>AMBR UL</TableCell>
+                        <TableCell>TUA Timer</TableCell>
+                        <TableCell/>
                       </TableRow>
                     </TableHead>
                     <TableBody>

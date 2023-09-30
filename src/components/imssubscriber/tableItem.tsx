@@ -31,7 +31,10 @@ const ImsSubscriberItem = (props: { row: ReturnType<typeof Object>, deleteCallba
         <TableCell component="th" scope="row">
           {row.imsi}
         </TableCell>
-        <TableCell>{row.msisdn}</TableCell>
+        <TableCell>{row.msisdn} ({row.msisdn_list})</TableCell>
+        <TableCell>{row.ifc_path}</TableCell>
+        <TableCell>{row.sh_profile}</TableCell>
+        <TableCell>{row.last_modified}</TableCell>
         <TableCell><DeleteDialog id={row.ims_subscriber_id} callback={deleteCallback}/></TableCell>
       </TableRow>
       <TableRow>
@@ -42,22 +45,6 @@ const ImsSubscriberItem = (props: { row: ReturnType<typeof Object>, deleteCallba
                 Details
               </Typography>
               <Table size="small" aria-label="purchases">
-                <TableHead>
-                  <TableRow>
-                    <TableCell>MSISDN</TableCell>
-                    <TableCell>IFC</TableCell>
-                    <TableCell>SH</TableCell>
-                    <TableCell>Last modified</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                    <TableRow key="arp_preemption_capability">
-                      <TableCell>{row.msisdn} ({row.msisdn_list})</TableCell>
-                      <TableCell>{row.ifc_path}</TableCell>
-                      <TableCell>{row.sh_profile}</TableCell>
-                      <TableCell>{row.last_modified}</TableCell>
-                    </TableRow>
-                </TableBody>
                 <TableHead>
                   <TableRow>
                     <TableCell>PCSCF</TableCell>

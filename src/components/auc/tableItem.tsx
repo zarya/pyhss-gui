@@ -33,6 +33,8 @@ const AucItem = (props: { row: ReturnType<typeof Object>, single: ReturnType<typ
         </TableCell>
         <TableCell>{row.imsi}</TableCell>
         <TableCell>{row.iccid}</TableCell>
+        <TableCell>{row.sim_vendor}</TableCell>
+        <TableCell>{(row.esim?'Yes':'No')}</TableCell>
         <TableCell><DeleteDialog id={row.auc_id} callback={deleteCallback}/></TableCell>
       </TableRow>
       <TableRow>
@@ -45,9 +47,7 @@ const AucItem = (props: { row: ReturnType<typeof Object>, single: ReturnType<typ
               <Table size="small" aria-label="purchases">
                 <TableHead>
                   <TableRow>
-                    <TableCell>Vendor</TableCell>
                     <TableCell>Batch</TableCell>
-                    <TableCell>eSim</TableCell>
                     <TableCell>LPA</TableCell>
                     <TableCell>AMF</TableCell>
                     <TableCell>SQN</TableCell>
@@ -64,9 +64,7 @@ const AucItem = (props: { row: ReturnType<typeof Object>, single: ReturnType<typ
                 </TableHead>
                 <TableBody>
                     <TableRow>
-                      <TableCell>{row.sim_vendor}</TableCell>
                       <TableCell>{row.batch_name}</TableCell>
-                      <TableCell>{(row.esim?'Yes':'No')}</TableCell>
                       <TableCell>{row.lpa}</TableCell>
                       <TableCell>{row.amf}</TableCell>
                       <TableCell>{row.sqn}</TableCell>

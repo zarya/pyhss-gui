@@ -33,7 +33,13 @@ const SubscriberItem = (props: { row: ReturnType<typeof Object>, deleteCallback:
         <TableCell component="th" scope="row">
           {row.imsi}
         </TableCell>
-        <TableCell align="right">{row.serving_mme}</TableCell>
+        <TableCell><Button component={NavLink} to={`/auc?auc=${row.auc_id}`} variant="outlined">{row.auc_id}</Button></TableCell>
+        <TableCell>{(row.enabled?'Yes':'No')}</TableCell>
+        <TableCell>{row.msisdn}</TableCell>
+        <TableCell>{row.apn_list} ({row.default_apn})</TableCell>
+        <TableCell>{row.ue_ambr_dl}</TableCell>
+        <TableCell>{row.ue_ambr_ul}</TableCell>
+        <TableCell>{row.subscribed_rau_tau_timer}</TableCell>
         <TableCell><DeleteDialog id={row.subscriber_id} callback={deleteCallback}/></TableCell>
       </TableRow>
       <TableRow>
@@ -46,31 +52,17 @@ const SubscriberItem = (props: { row: ReturnType<typeof Object>, deleteCallback:
               <Table size="small" aria-label="purchases">
                 <TableHead>
                   <TableRow>
-                    <TableCell>MSISDN</TableCell>
-                    <TableCell>AUC</TableCell>
-                    <TableCell>APN List</TableCell>
-                    <TableCell>Default APN</TableCell>
-                    <TableCell>AMBR DL</TableCell>
-                    <TableCell>AMBR UL</TableCell>
-                    <TableCell>Enabled</TableCell>
-                    <TableCell>TAU Timer</TableCell>
                     <TableCell>MME</TableCell>
                     <TableCell>Realm</TableCell>
+                    <TableCell>Peer</TableCell>
                     <TableCell>Timestamp</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
                     <TableRow key="arp_preemption_capability">
-                      <TableCell>{row.msisdn}</TableCell>
-                      <TableCell><Button component={NavLink} to={`/auc?auc=${row.auc_id}`} variant="outlined">{row.auc_id}</Button></TableCell>
-                      <TableCell>{row.apn_list}</TableCell>
-                      <TableCell>{row.default_apn}</TableCell>
-                      <TableCell>{row.ue_ambr_dl}</TableCell>
-                      <TableCell>{row.ue_ambr_ul}</TableCell>
-                      <TableCell>{(row.enabled?'Yes':'No')}</TableCell>
-                      <TableCell>{row.subscribed_rau_tau_timer}</TableCell>
                       <TableCell>{row.serving_mme}</TableCell>
                       <TableCell>{row.serving_mme_realm}</TableCell>
+                      <TableCell>{row.serving_mme_peer}</TableCell>
                       <TableCell>{row.serving_mme_timestamp}</TableCell>
                     </TableRow>
                 </TableBody>

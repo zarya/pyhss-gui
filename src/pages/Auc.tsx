@@ -74,6 +74,8 @@ const Auc = () => {
                         <TableCell>ID</TableCell>
                         <TableCell>IMSI</TableCell>
                         <TableCell>ICCID</TableCell>
+                        <TableCell>Vendor</TableCell>
+                        <TableCell>eSim</TableCell>
                         <TableCell/>
                       </TableRow>
                     </TableHead>
