@@ -4,6 +4,7 @@ import MenuItem from './menu-item/MenuItem';
 import ApnItem from './apn/item';
 import ApnAddItem from './apn/add';
 import SubscriberItem from './subscriber/tableItem';
+import SubscriberAddItem from './subscriber/add';
 import ImsSubscriberItem from './imssubscriber/tableItem'
 import AucItem from './auc/tableItem';
 import AucAddItem from './auc/add';
@@ -20,6 +21,7 @@ export {
     ApnItem,
     ApnAddItem,
     SubscriberItem,
+    SubscriberAddItem,
     ImsSubscriberItem,
     AucItem,
     AucAddItem,

@@ -10,7 +10,7 @@ class ImsSubscriberApi {
   }
 
   create(data) {
-    return http.post("/ims_subscriber", data);
+    return http.put("/ims_subscriber/", data);
   }
 
   update(id, data) {

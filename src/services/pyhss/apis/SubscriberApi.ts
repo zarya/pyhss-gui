@@ -10,7 +10,7 @@ class SubscriberApi {
   }
 
   create(data) {
-    return http.post("/subscriber", data);
+    return http.put("/subscriber/", data);
   }
 
   update(id, data) {

@@ -12,9 +12,10 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import {NavLink} from 'react-router-dom';
 import Button from '@mui/material/Button';
+import { DeleteDialog } from '@components';
 
-const SubscriberItem = (props: { row: ReturnType<typeof Object> }) => {
-  const { row } = props;
+const SubscriberItem = (props: { row: ReturnType<typeof Object>, deleteCallback: ReturnType<typeof any> }) => {
+  const { row, deleteCallback } = props;
   const [open, setOpen] = React.useState(false);
 
   return (
@@ -33,6 +34,7 @@ const SubscriberItem = (props: { row: ReturnType<typeof Object> }) => {
           {row.imsi}
         </TableCell>
         <TableCell align="right">{row.serving_mme}</TableCell>
+        <TableCell><DeleteDialog id={row.subscriber_id} callback={deleteCallback}/></TableCell>
       </TableRow>
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
