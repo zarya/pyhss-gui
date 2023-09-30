@@ -10,9 +10,10 @@ import TableRow from '@mui/material/TableRow';
 import Typography from '@mui/material/Typography';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import { DeleteDialog } from '@components';
 
-const ImsSubscriberItem = (props: { row: ReturnType<typeof Object> }) => {
-  const { row } = props;
+const ImsSubscriberItem = (props: { row: ReturnType<typeof Object>, deleteCallback: ReturnType<typeof any> }) => {
+  const { row, deleteCallback } = props;
   const [open, setOpen] = React.useState(false);
 
   return (
@@ -31,6 +32,7 @@ const ImsSubscriberItem = (props: { row: ReturnType<typeof Object> }) => {
           {row.imsi}
         </TableCell>
         <TableCell>{row.msisdn}</TableCell>
+        <TableCell><DeleteDialog id={row.ims_subscriber_id} callback={deleteCallback}/></TableCell>
       </TableRow>
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>

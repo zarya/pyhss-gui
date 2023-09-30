@@ -6,6 +6,7 @@ import ApnAddItem from './apn/add';
 import SubscriberItem from './subscriber/tableItem';
 import SubscriberAddItem from './subscriber/add';
 import ImsSubscriberItem from './imssubscriber/tableItem'
+import ImsSubscriberAddItem from './imssubscriber/add'
 import AucItem from './auc/tableItem';
 import AucAddItem from './auc/add';
 import AddAucWizard from './addwizard/auc';
@@ -23,6 +24,7 @@ export {
     SubscriberItem,
     SubscriberAddItem,
     ImsSubscriberItem,
+    ImsSubscriberAddItem,
     AucItem,
     AucAddItem,
     AddAucWizard,

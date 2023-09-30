@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
-import {ContentHeader, ImsSubscriberItem} from '@components';
+import {ContentHeader, ImsSubscriberItem, ImsSubscriberAddItem} from '@components';
 import {ImsSubscriberApi} from "../services/pyhss";
 
 import Table from '@mui/material/Table';
@@ -11,8 +11,11 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import TextField from '@mui/material/TextField';
+import SpeedDial from '@mui/material/SpeedDial';
+import SpeedDialIcon from '@mui/material/SpeedDialIcon';
 
 const IMSSubscriber = () => {
+  const [openAdd, setOpenAdd] = React.useState(false);
   const [subscribers, setSubscribers] = React.useState([]);
   const [search, setSearch] = React.useState("");
 
@@ -25,6 +28,26 @@ const IMSSubscriber = () => {
   const onSearchHandler = event => {
    setSearch(event.target.value);
   };
+  const refresh = () => {
+    ImsSubscriberApi.getAll().then((data => {
+        setSubscribers(data.data)
+    }))
+  }
+
+  const handleDelete = (id) => {
+    ImsSubscriberApi.delete(id).then((data) => {
+      console.log(id, data);
+      refresh();
+    })
+  }
+
+  const handleAdd = () => {
+    setOpenAdd(true);
+  }
+  const handleAddClose = () => {
+    setOpenAdd(false);
+    refresh();
+  }
 
   return (
     <div>
@@ -51,7 +74,7 @@ const IMSSubscriber = () => {
                           else if (row.imsi.includes(search)) return row;
                           else if (row.msisdn.includes(search)) return row;
                         }).map((row) => (
-                        <ImsSubscriberItem key={row.ims_subscriber_id} row={row} />
+                        <ImsSubscriberItem key={row.ims_subscriber_id} row={row} deleteCallback={handleDelete} />
                       ))}
                     </TableBody>
                   </Table>
@@ -59,6 +82,14 @@ const IMSSubscriber = () => {
             </div>
           </div>
         </div>
+        <SpeedDial
+          ariaLabel="Add"
+          sx={{ position: 'absolute', bottom: 80, right: 16 }}
+          icon={<SpeedDialIcon />}
+          onClick={() => handleAdd()}
+          open={openAdd}
+        />
+        <ImsSubscriberAddItem open={openAdd} handleClose={handleAddClose} />
       </section>
     </div>
   );
