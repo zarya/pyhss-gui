@@ -68,7 +68,7 @@ const Subscriber = () => {
                         <TableCell>Auc</TableCell>
                         <TableCell>Enabled</TableCell>
                         <TableCell>MSISDN</TableCell>
-                        <TableCell>APN</TableCell>
+                        <TableCell>APN (default)</TableCell>
                         <TableCell>AMBR DL</TableCell>
                         <TableCell>AMBR UL</TableCell>
                         <TableCell>TUA Timer</TableCell>

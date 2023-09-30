@@ -21,32 +21,32 @@ export const MENU: IMenuItem[] = [
   },
   {
     name: i18n.t('menusidebar.label.apn'),
-    icon: 'fas fa-wrench nav-icon',
+    icon: 'fas fa-wifi nav-icon',
     path: '/apn'
   },
   {
     name: i18n.t('menusidebar.label.auc'),
-    icon: 'fas fa-wrench nav-icon',
+    icon: 'fas fa-sim-card nav-icon',
     path: '/auc'
   },
   {
     name: i18n.t('menusidebar.label.subscriber'),
-    icon: 'fas fa-wrench nav-icon',
+    icon: 'fas fa-users nav-icon',
     path: '/subscriber'
   },
   {
     name: i18n.t('menusidebar.label.imssubscriber'),
-    icon: 'fas fa-wrench nav-icon',
+    icon: 'fas fa-user-tie nav-icon',
     path: '/imssubscriber'
   },
   {
     name: i18n.t('menusidebar.label.tft'),
-    icon: 'fas fa-wrench nav-icon',
+    icon: 'fas fa-shield-alt nav-icon',
     path: '/tft'
   },
   {
     name: i18n.t('menusidebar.label.chargingrule'),
-    icon: 'fas fa-wrench nav-icon',
+    icon: 'fas fa-search-dollar nav-icon',
     path: '/chargingrule'
   }
 ];
