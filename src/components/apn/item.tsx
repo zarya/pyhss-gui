@@ -1,0 +1,120 @@
+import React from 'react';
+import Box from '@mui/material/Box';
+import Collapse from '@mui/material/Collapse';
+import IconButton from '@mui/material/IconButton';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Typography from '@mui/material/Typography';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import {DeleteDialog} from "@components";
+
+const ApnItem = (props: { row: ReturnType<typeof Object>, chargingRules: ReturnType<typeof Object>, deleteCallback: ReturnType<typeof any> }) => {
+  const { row, chargingRules, deleteCallback } = props;
+  const [open, setOpen] = React.useState(false);
+
+  const ipVersion = ['ipv4','ipv6','ipv4+6', 'ipv4 or ipv6'];
+  const rules = chargingRules.filter((a) => row.charging_rule_list.split(",").includes(String(a.charging_rule_id)));
+
+  return (
+    <React.Fragment>
+      <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
+        <TableCell>
+          <IconButton
+            aria-label="expand row"
+            size="small"
+            onClick={() => setOpen(!open)}
+          >
+            {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+          </IconButton>
+        </TableCell>
+        <TableCell component="th" scope="row">
+          {row.apn_id}
+        </TableCell>
+        <TableCell component="th" scope="row">
+          {row.apn}
+        </TableCell>
+        <TableCell align="right">{ipVersion[row.ip_version]}</TableCell>
+        <TableCell align="right">{row.qci}</TableCell>
+        <TableCell align="right">{row.sgw_address}</TableCell>
+        <TableCell align="right">{row.pgw_address}</TableCell>
+        <TableCell><DeleteDialog id={row.apn_id} callback={deleteCallback} /></TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
+          <Collapse in={open} timeout="auto" unmountOnExit>
+            <Box sx={{ margin: 1 }}>
+              <Typography variant="h6" gutterBottom component="div">
+                Details
+              </Typography>
+              <Table size="small" aria-label="purchases">
+                <TableHead>
+                  <TableRow>
+                    <TableCell>AMBR DL</TableCell>
+                    <TableCell>AMBR UL</TableCell>
+                    <TableCell>Charging Characteristics</TableCell>
+                    <TableCell>ARP Priority</TableCell>
+                    <TableCell>ARP Preemption Vuln.</TableCell>
+                    <TableCell>ARP Preemption Capa.</TableCell>
+                    <TableCell>Last modified</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                    <TableRow key="arp_preemption_capability">
+                      <TableCell>{row.apn_ambr_dl}</TableCell>
+                      <TableCell>{row.apn_ambr_ul}</TableCell>
+                      <TableCell>{row.charging_characteristics}</TableCell>
+                      <TableCell>{row.arp_priority}</TableCell>
+                      <TableCell>{(row.arp_preemption_vulnerability?'Yes':'No')}</TableCell>
+                      <TableCell>{(row.arp_preemption_capability?'Yes':'No')}</TableCell>
+                      <TableCell>{row.last_modified}</TableCell>
+                    </TableRow>
+                </TableBody>
+              </Table>
+            </Box>
+            <Box sx={{ margin: 1 }}>
+              <Typography variant="h6" gutterBottom component="div">
+                Charging Rules
+              </Typography>
+              <Table size="small" aria-label="purchases">
+                <TableHead>
+                  <TableRow>
+                    <TableCell>Name</TableCell>
+                    <TableCell>QCI</TableCell>
+                    <TableCell>MBR DL</TableCell>
+                    <TableCell>MBR UL</TableCell>
+                    <TableCell>Precedence</TableCell>
+                    <TableCell>arp_priority</TableCell>
+                    <TableCell>arp_preemption_vulnerability</TableCell>
+                    <TableCell>arp_preemption_capability</TableCell>
+                    <TableCell>Last Modified</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {rules.map((chRow) => 
+                    <TableRow>
+                      <TableCell>{chRow.rule_name}</TableCell>
+                      <TableCell>{chRow.qci}</TableCell>
+                      <TableCell>{chRow.mbr_dl} / {chRow.gbr_dl}</TableCell>
+                      <TableCell>{chRow.mbr_ul} / {chRow.gbr_ul}</TableCell>
+                      <TableCell>{chRow.precedence}</TableCell>
+                      <TableCell>{chRow.arp_priority}</TableCell>
+                      <TableCell>{(chRow.arp_preemption_vulnerability?'Yes':'No')}</TableCell>
+                      <TableCell>{(chRow.arp_preemption_capability?'Yes':'No')}</TableCell>
+                      <TableCell>{chRow.last_modified}</TableCell>
+                    </TableRow>
+                  )}
+                </TableBody>
+              </Table>
+            </Box>
+          </Collapse>
+        </TableCell>
+      </TableRow>
+    </React.Fragment>
+  );
+}
+
+export default ApnItem;
