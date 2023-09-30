@@ -19,8 +19,8 @@ const ChargingRuleItem = (props: { row: ReturnType<typeof Object>, deleteCallbac
         <TableCell>{row.gbr_dl}</TableCell>
         <TableCell>{row.gbr_ul}</TableCell>
         <TableCell>{row.arp_priority}</TableCell>
-        <TableCell>{row.arp_preemption_capability}</TableCell>
-        <TableCell>{row.arp_preemption_vulnerability}</TableCell>
+        <TableCell>{(row.arp_preemption_capability?'Yes':'No')}</TableCell>
+        <TableCell>{(row.arp_preemption_vulnerability?'Yes':'No')}</TableCell>
         <TableCell>{row.precedence}</TableCell>
         <TableCell>{row.rating_group}</TableCell>
         <TableCell>{row.last_modified}</TableCell>

@@ -11,14 +11,10 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { useSearchParams } from "react-router-dom";
 
 const Tft = () => {
   const [items, setItems] = useState([]);
   const [openAdd, setOpenAdd] = useState(false);
-  const [searchParams] = useSearchParams();
-
-  const tftSearch = searchParams.get('tft');
 
   React.useEffect(() => {
     TftApi.getAll().then((data => {
@@ -58,7 +54,6 @@ const Tft = () => {
                   <Table aria-label="collapsible table">
                     <TableHead>
                       <TableRow>
-                        <TableCell/>
                         <TableCell>Group</TableCell>
                         <TableCell>Rule</TableCell>
                         <TableCell>Direction</TableCell>
