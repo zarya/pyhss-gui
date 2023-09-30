@@ -10,7 +10,7 @@ class TftApi {
   }
 
   create(data) {
-    return http.post("/tft", data);
+    return http.put("/tft/", data);
   }
 
   update(id, data) {

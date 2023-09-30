@@ -38,6 +38,16 @@ export const MENU: IMenuItem[] = [
     name: i18n.t('menusidebar.label.imssubscriber'),
     icon: 'fas fa-wrench nav-icon',
     path: '/imssubscriber'
+  },
+  {
+    name: i18n.t('menusidebar.label.tft'),
+    icon: 'fas fa-wrench nav-icon',
+    path: '/tft'
+  },
+  {
+    name: i18n.t('menusidebar.label.chargingrule'),
+    icon: 'fas fa-wrench nav-icon',
+    path: '/chargingrule'
   }
 ];
 

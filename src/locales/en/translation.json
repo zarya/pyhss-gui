@@ -81,7 +81,9 @@
       "auc": "AUCs",
       "subscriber":"Subscribers",
       "imssubscriber":"IMS Subscribers",
-      "mainMenu": "Main Menu"
+      "mainMenu": "Main Menu",
+      "tft": "TFTs",
+      "chargingrule": "Charging Rules"
     }
   },
   "footer": {

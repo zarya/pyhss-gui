@@ -100,7 +100,7 @@ const SubscriberAddItem = (props: { open: ReturnType<typeof Boolean>, handleClos
           <InputLabel id="enabled_label">Enable</InputLabel>
           <Select
             labelId="enabled_label"
-            value={state.arp_preemption_vulnerability}
+            value={state.enabled}
             label="enabled"
             onChange={handleChange}
             name="enabled"

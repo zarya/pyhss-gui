@@ -10,7 +10,7 @@ class ChargingRuleApi {
   }
 
   create(data) {
-    return http.post("/charging_rule", data);
+    return http.put("/charging_rule/", data);
   }
 
   update(id, data) {

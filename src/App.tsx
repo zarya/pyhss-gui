@@ -13,6 +13,9 @@ import Auc from '@pages/Auc';
 import Apn from '@pages/Apn';
 import Subscriber from '@pages/Subscriber';
 import IMSSubscriber from '@pages/IMSSubscriber';
+import Tft from '@pages/Tft';
+import ChargingRule from '@pages/ChargingRule';
+
 import AddWizard from '@pages/AddWizard';
 
 import PublicRoute from './routes/PublicRoute';
@@ -74,6 +77,8 @@ const App = () => {
             <Route path="/auc" element={<Auc />} />
             <Route path="/subscriber" element={<Subscriber />} />
             <Route path="/imssubscriber" element={<IMSSubscriber />} />
+            <Route path="/tft" element={<Tft />} />
+            <Route path="/chargingrule" element={<ChargingRule />} />
             <Route path="/addwizard" element={<AddWizard />} />
             <Route path="/" element={<Dashboard />} />
           </Route>

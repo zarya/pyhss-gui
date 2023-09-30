@@ -6,7 +6,8 @@ import ImsSubscriberApi from './apis/ImsSubscriberApi';
 import OamApi from './apis/OamApi';
 import ChargingRuleApi from './apis/ChargingRuleApi';
 import AucApi from './apis/AucApi';
+import TftApi from './apis/TftApi';
 
-export {ApnApi, SubscriberApi, ImsSubscriberApi, OamApi, ChargingRuleApi, AucApi};
+export {ApnApi, SubscriberApi, ImsSubscriberApi, OamApi, ChargingRuleApi, AucApi, TftApi};
 
 
