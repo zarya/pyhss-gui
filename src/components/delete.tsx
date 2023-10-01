@@ -33,7 +33,7 @@ const DeleteDialog = (props: { id: ReturnType<typeof Number>, callback: ReturnTy
 
   return (
     <React.Fragment>
-     <Button onClick={handleOpen}>Delete</Button>
+     <Button onClick={handleOpen}><i class="fas fa-trash"></i></Button>
      <Modal
        open={open}
        onClose={handleClose}

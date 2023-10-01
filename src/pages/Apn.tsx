@@ -11,6 +11,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import i18n from '@app/utils/i18n';
   
 const apnTemplate = {
   "apn": "",
@@ -85,12 +86,12 @@ const Apn = () => {
                     <TableHead>
                       <TableRow>
                         <TableCell/>
-                        <TableCell>ID</TableCell>
-                        <TableCell>APN</TableCell>
-                        <TableCell>IP Version</TableCell>
-                        <TableCell>QCI</TableCell>
-                        <TableCell>SGW</TableCell>
-                        <TableCell>PGW</TableCell>
+                        <TableCell>{i18n.t('apn.tablehead.id')}</TableCell>
+                        <TableCell>{i18n.t('apn.tablehead.apn')}</TableCell>
+                        <TableCell>{i18n.t('apn.tablehead.ipVersion')}</TableCell>
+                        <TableCell>{i18n.t('apn.tablehead.qci')}</TableCell>
+                        <TableCell>{i18n.t('apn.tablehead.sgw')}</TableCell>
+                        <TableCell>{i18n.t('apn.tablehead.pgw')}</TableCell>
                         <TableCell/>
                       </TableRow>
                     </TableHead>
@@ -105,7 +106,7 @@ const Apn = () => {
           </div>
         </div>
         <SpeedDial
-          ariaLabel="Add"
+          ariaLabel={i18n.t('generic.add')}
           sx={{ position: 'absolute', bottom: 80, right: 16 }}
           icon={<SpeedDialIcon />}
           onClick={() => handleAdd()}

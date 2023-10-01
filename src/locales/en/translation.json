@@ -98,5 +98,23 @@
   },
   "measurement": {
     "quantityUnit": "{{quantity}} {{unit}}"
+  },
+  "generic": {
+    "add": "Add",
+    "save": "Save",
+    "yes": "Yes",
+    "no": "No",
+    "edit": "Edit",
+    "lastModified": "Last Modified"
+  },
+  "apn": {
+    "tablehead": {
+      "id": "ID",
+      "apn": "APN",
+      "ipVersion": "IP Version",
+      "qci": "QCI",
+      "sgw": "SGW",
+      "pgw": "PGW"
+    }
   }
 }

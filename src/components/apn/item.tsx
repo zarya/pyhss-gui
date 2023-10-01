@@ -11,6 +11,7 @@ import TableRow from '@mui/material/TableRow';
 import Typography from '@mui/material/Typography';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import i18n from '@app/utils/i18n';
 import {DeleteDialog, NetworkBandwidthFormatter} from "@components";
 
 const ApnItem = (props: { row: ReturnType<typeof Object>, chargingRules: ReturnType<typeof Object>, deleteCallback: ReturnType<typeof any>, openEditCallback: ReturnType<typeof any> }) => {
@@ -43,12 +44,12 @@ const ApnItem = (props: { row: ReturnType<typeof Object>, chargingRules: ReturnT
         <TableCell>{row.sgw_address}</TableCell>
         <TableCell>{row.pgw_address}</TableCell>
         <TableCell>
-          <Button onClick={() => openEditCallback(row)}>Edit</Button>
+          <Button onClick={() => openEditCallback(row)}><i class="fas fa-edit"></i></Button>
+          <DeleteDialog id={row.apn_id} callback={deleteCallback} />
         </TableCell>
-        <TableCell><DeleteDialog id={row.apn_id} callback={deleteCallback} /></TableCell>
       </TableRow>
       <TableRow>
-        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
+        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={8}>
           <Collapse in={open} timeout="auto" unmountOnExit>
             <Box sx={{ margin: 1 }}>
               <Typography variant="h6" gutterBottom component="div">
@@ -59,11 +60,11 @@ const ApnItem = (props: { row: ReturnType<typeof Object>, chargingRules: ReturnT
                   <TableRow>
                     <TableCell>AMBR DL</TableCell>
                     <TableCell>AMBR UL</TableCell>
-                    <TableCell>Charging Characteristics</TableCell>
-                    <TableCell>ARP Priority</TableCell>
-                    <TableCell>ARP Preemption Vuln.</TableCell>
-                    <TableCell>ARP Preemption Capa.</TableCell>
-                    <TableCell>Last modified</TableCell>
+                    <TableCell>{i18n.t('apn.tablehead.chargingCharacteristics')}</TableCell>
+                    <TableCell>{i18n.t('apn.tablehead.arpPriority')}</TableCell>
+                    <TableCell>{i18n.t('apn.tablehead.arpPreemptionVulnerability')}</TableCell>
+                    <TableCell>{i18n.t('apn.tablehead.arpPreemptionCapability')}</TableCell>
+                    <TableCell>{i18n.t('generic.lastModified')}</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -90,11 +91,11 @@ const ApnItem = (props: { row: ReturnType<typeof Object>, chargingRules: ReturnT
                     <TableCell>QCI</TableCell>
                     <TableCell>MBR/GBR DL</TableCell>
                     <TableCell>MBR/GBR UL</TableCell>
-                    <TableCell>Precedence</TableCell>
-                    <TableCell>arp_priority</TableCell>
-                    <TableCell>arp_preemption_vulnerability</TableCell>
-                    <TableCell>arp_preemption_capability</TableCell>
-                    <TableCell>Last Modified</TableCell>
+                    <TableCell>{i18n.t('apn.tablehead.precedence')}</TableCell>
+                    <TableCell>{i18n.t('apn.tablehead.arpPriority')}</TableCell>
+                    <TableCell>{i18n.t('apn.tablehead.arpPreemptionVulnerability')}</TableCell>
+                    <TableCell>{i18n.t('apn.tablehead.arpPreemptionCapability')}</TableCell>
+                    <TableCell>{i18n.t('generic.lastModified')}</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
