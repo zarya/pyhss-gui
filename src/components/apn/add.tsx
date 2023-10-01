@@ -230,9 +230,9 @@ const ApnAddItem = (props: { open: ReturnType<typeof Boolean>, handleClose: Retu
                   name="arp_priority"
                   aria-describedby="arp_priority-helper-text"
                 >
-                  {Array.from(Array(16), (e, i) => (<MenuItem key={i+1+e} value={i+1}>{i+1}</MenuItem>))}
+                  {Array.from(Array(15), (e, i) => (<MenuItem key={i+1+e} value={i+1}>{i+1}</MenuItem>))}
                 </Select>
-                <FormHelperText id="arp_priority-helper-text">Defines the relative importance of the service. The priority level ranges from 1 to 16, where a higher value indicates higher priority.</FormHelperText>
+                <FormHelperText id="arp_priority-helper-text">Allocation and Retention Policy - Bearer priority level</FormHelperText>
               </FormControl>
             </Grid>
             <Grid item xs={4}>

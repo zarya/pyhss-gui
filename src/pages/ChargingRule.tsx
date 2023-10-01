@@ -12,9 +12,26 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 
+const charging_ruleTemplate = {
+  "rule_name": "",
+  "qci": 0,
+  "arp_priority": 0,
+  "arp_preemption_capability": false,
+  "arp_preemption_vulnerability": false,
+  "mbr_dl": 0,
+  "mbr_ul": 0,
+  "gbr_dl": 0,
+  "gbr_ul": 0,
+  "tft_group_id": 0,
+  "precedence": 0,
+  "rating_group": 0
+}
+
 const ChargingRule = () => {
   const [items, setItems] = useState([]);
   const [openAdd, setOpenAdd] = useState(false);
+  const [dialogData, setDialogData] = useState(charging_ruleTemplate);
+  const [editMode, setEditMode] = useState(false);
 
   React.useEffect(() => {
     ChargingRuleApi.getAll().then((data => {
@@ -41,6 +58,11 @@ const ChargingRule = () => {
   const handleAddClose = () => {
     setOpenAdd(false);
     refresh();
+  }
+  const openEdit = (row) => {
+    setEditMode(true);
+    setDialogData(row);
+    setOpenAdd(true);
   }
 
   return (
@@ -72,7 +94,7 @@ const ChargingRule = () => {
                     </TableHead>
                     <TableBody>
                       {items.map((row) => (
-                        <ChargingRuleItem key={row.tft_id} row={row} deleteCallback={handleDelete}/>
+                        <ChargingRuleItem key={row.tft_id} row={row} deleteCallback={handleDelete} openEditCallback={openEdit} />
                       ))}
                     </TableBody>
                   </Table>
@@ -87,7 +109,7 @@ const ChargingRule = () => {
           onClick={() => handleAdd()}
           open={openAdd}
         />
-        <ChargingRuleAddItem open={openAdd} handleClose={handleAddClose} />
+        <ChargingRuleAddItem open={openAdd} handleClose={handleAddClose} data={dialogData} edit={editMode} />
       </section>
     </div>
   );

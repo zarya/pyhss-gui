@@ -1,10 +1,11 @@
 import React from 'react';
 import TableCell from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
+import Button from '@mui/material/Button';
 import { DeleteDialog, NetworkBandwidthFormatter } from '@components';
 
-const ChargingRuleItem = (props: { row: ReturnType<typeof Object>, deleteCallback: ReturnType<typeof any> }) => {
-  const { row, deleteCallback } = props;
+const ChargingRuleItem = (props: { row: ReturnType<typeof Object>, deleteCallback: ReturnType<typeof any>, openEditCallback: ReturnType<typeof any> }) => {
+  const { row, deleteCallback, openEditCallback } = props;
 
   return (
     <React.Fragment>
@@ -24,7 +25,10 @@ const ChargingRuleItem = (props: { row: ReturnType<typeof Object>, deleteCallbac
         <TableCell>{row.precedence}</TableCell>
         <TableCell>{row.rating_group}</TableCell>
         <TableCell>{row.last_modified}</TableCell>
-        <TableCell><DeleteDialog id={row.charging_rule_id} callback={deleteCallback}/></TableCell>
+        <TableCell>
+          <Button onClick={() => openEditCallback(row)}><i className="fas fa-edit"></i></Button>
+          <DeleteDialog id={row.charging_rule_id} callback={deleteCallback}/>
+        </TableCell>
       </TableRow>
     </React.Fragment>
   );
