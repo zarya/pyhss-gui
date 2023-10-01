@@ -44,7 +44,7 @@ const ApnItem = (props: { row: ReturnType<typeof Object>, chargingRules: ReturnT
         <TableCell>{row.sgw_address}</TableCell>
         <TableCell>{row.pgw_address}</TableCell>
         <TableCell>
-          <Button onClick={() => openEditCallback(row)}><i class="fas fa-edit"></i></Button>
+          <Button onClick={() => openEditCallback(row)}><i className="fas fa-edit"></i></Button>
           <DeleteDialog id={row.apn_id} callback={deleteCallback} />
         </TableCell>
       </TableRow>

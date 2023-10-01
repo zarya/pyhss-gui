@@ -101,6 +101,7 @@
   },
   "generic": {
     "add": "Add",
+    "cancel": "Cancel",
     "save": "Save",
     "yes": "Yes",
     "no": "No",
@@ -114,7 +115,12 @@
       "ipVersion": "IP Version",
       "qci": "QCI",
       "sgw": "SGW",
-      "pgw": "PGW"
+      "pgw": "PGW",
+      "chargingCharacteristics": "Charging Characteristics",
+      "arpPriority": "ARP Priority",
+      "arpPreemptionVulnerability": "ARP Preemption Vulnerability",
+      "arpPreemptionCapability": "ARP Preemption Capability",
+      "precedence": "Precedence"
     }
   }
 }

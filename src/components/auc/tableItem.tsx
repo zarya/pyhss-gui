@@ -37,12 +37,12 @@ const AucItem = (props: { row: ReturnType<typeof Object>, single: ReturnType<typ
         <TableCell>{row.sim_vendor}</TableCell>
         <TableCell>{(row.esim?'Yes':'No')}</TableCell>
         <TableCell>
-          <Button onClick={() => openEditCallback(row)}>Edit</Button>
+          <Button onClick={() => openEditCallback(row)}><i className="fas fa-edit"></i></Button>
+          <DeleteDialog id={row.auc_id} callback={deleteCallback}/>
         </TableCell>
-        <TableCell><DeleteDialog id={row.auc_id} callback={deleteCallback}/></TableCell>
       </TableRow>
       <TableRow>
-        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
+        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={7}>
           <Collapse in={open} timeout="auto" unmountOnExit>
             <Box sx={{ margin: 1 }}>
               <Typography variant="h6" gutterBottom component="div">

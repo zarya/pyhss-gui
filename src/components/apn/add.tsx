@@ -160,25 +160,33 @@ const ApnAddItem = (props: { open: ReturnType<typeof Boolean>, handleClose: Retu
             </Grid>
             <Grid item xs={12}><h3>Charging</h3></Grid>
             <Grid item xs={6}>
-              <TextField
+              <FormControl fullWidth>
+                <TextField
+                  required
                   style={{ width: "100%" }}
-                id="outlined-required"
-                label="charging_characteristics"
-                onChange={handleChange}
-                value={state.charging_characteristics}
-                name="charging_characteristics"
-              />
+                  id="outlined-required"
+                  label="Charging Characteristics"
+                  onChange={handleChange}
+                  value={state.charging_characteristics}
+                  name="charging_characteristics"
+                  aria-describedby="charging_characteristics-helper"
+                />
+                <FormHelperText id="charging_characteristics-helper">Charging characteristics</FormHelperText>
+              </FormControl>
             </Grid>
             <Grid item xs={6}>
-              <TextField
+              <FormControl fullWidth>
+                <TextField
                   style={{ width: "100%" }}
-                required
-                id="outlined-required"
-                label="charging_rule_list"
-                onChange={handleChange}
-                value={state.charging_rule_list}
-                name="charging_rule_list"
-              />
+                  id="outlined-required"
+                  label="Charging rule list"
+                  onChange={handleChange}
+                  value={state.charging_rule_list}
+                  name="charging_rule_list"
+                  aria-describedby="charging_rule_list-helper"
+                />
+                <FormHelperText id="charging_rule_list-helper">Comma seperated list of charging rules</FormHelperText>
+              </FormControl>
             </Grid>
             <Grid item xs={12}><h3>Bandwidth</h3></Grid>
             <Grid item xs={6}>
@@ -186,7 +194,7 @@ const ApnAddItem = (props: { open: ReturnType<typeof Boolean>, handleClose: Retu
                 <TextField
                   style={{ width: "100%" }}
                   required
-                  label="apn_ambr_ul"
+                  label="AMBR Upload"
                   onChange={handleChange}
                   value={state.apn_ambr_ul}
                   name="apn_ambr_ul"
@@ -201,7 +209,7 @@ const ApnAddItem = (props: { open: ReturnType<typeof Boolean>, handleClose: Retu
                   style={{ width: "100%" }}
                   required
                   id="outlined-required"
-                  label="apn_ambr_dl"
+                  label="AMBR Download"
                   onChange={handleChange}
                   value={state.apn_ambr_dl}
                   name="apn_ambr_dl"
@@ -212,23 +220,24 @@ const ApnAddItem = (props: { open: ReturnType<typeof Boolean>, handleClose: Retu
             </Grid>
             <Grid item xs={12}><h3>Arp</h3></Grid>
             <Grid item xs={4}>
-              <FormControl fullWidth>
-                <TextField
-                  style={{ width: "99%" }}
-                  required
-                  id="outlined-required"
+              <FormControl fullWidth style={{ marginTop: 8 }}>
+                <InputLabel id="arp_priority_label">Priority</InputLabel>
+                <Select
+                  labelId="arp_priority_label"
+                  value={state.arp_priority}
                   label="arp_priority"
                   onChange={handleChange}
-                  value={state.arp_priority}
                   name="arp_priority"
                   aria-describedby="arp_priority-helper-text"
-                />
-                <FormHelperText id="arp_priority-helper-text">arp_priority</FormHelperText>
+                >
+                  {Array.from(Array(16), (e, i) => (<MenuItem key={i+1+e} value={i+1}>{i+1}</MenuItem>))}
+                </Select>
+                <FormHelperText id="arp_priority-helper-text">Defines the relative importance of the service. The priority level ranges from 1 to 16, where a higher value indicates higher priority.</FormHelperText>
               </FormControl>
             </Grid>
             <Grid item xs={4}>
               <FormControl fullWidth style={{ marginTop: 8 }}>
-                <InputLabel id="arp_preemption_capability_label">arp_preemption_capability</InputLabel>
+                <InputLabel id="arp_preemption_capability_label">Preemption capability</InputLabel>
                 <Select
                   labelId="arp_preemption_capability_label"
                   value={state.arp_preemption_capability}
@@ -240,12 +249,12 @@ const ApnAddItem = (props: { open: ReturnType<typeof Boolean>, handleClose: Retu
                   <MenuItem value={true}>{i18n.t('generic.yes')}</MenuItem>
                   <MenuItem value={false}>{i18n.t('generic.no')}</MenuItem>
                 </Select>
-                <FormHelperText id="arp_preemption_capability-helper-text">arp_priority</FormHelperText>
+                <FormHelperText id="arp_preemption_capability-helper-text">Defines whether the service can be preempted by a higher-priority service</FormHelperText>
               </FormControl>
             </Grid>
             <Grid item xs={4}>
               <FormControl fullWidth style={{ marginTop: 8 }}>
-                <InputLabel id="arp_preemption_vulnerability_label">arp_preemption_vulnerability</InputLabel>
+                <InputLabel id="arp_preemption_vulnerability_label">Preemption vulnerability</InputLabel>
                 <Select
                   labelId="arp_preemption_vulnerability_label"
                   value={state.arp_preemption_vulnerability}
@@ -257,12 +266,14 @@ const ApnAddItem = (props: { open: ReturnType<typeof Boolean>, handleClose: Retu
                   <MenuItem value={true}>{i18n.t('generic.yes')}</MenuItem>
                   <MenuItem value={false}>{i18n.t('generic.no')}</MenuItem>
                 </Select>
-                <FormHelperText id="arp_preemption_vulnerability-helper-text">arp_priority</FormHelperText>
+                <FormHelperText id="arp_preemption_vulnerability-helper-text">Defines whether a bearer is applicable for such dropping by a preemption capable bearer with a higher priority value.</FormHelperText>
               </FormControl>
             </Grid>
           </Grid>
          </Box>
-         <Button onClick={() => handleSave()}>{i18n.t('generic.save')}</Button>
+         <Button variant="contained" onClick={() => handleSave()}>{i18n.t('generic.save')}&nbsp;<i class="fas fa-save"></i></Button>
+          &nbsp;
+         <Button variant="contained" onClick={() => handleLocalClose()}>{i18n.t('generic.cancel')}</Button>
        </Box>
      </Modal>
 

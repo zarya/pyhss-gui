@@ -14,8 +14,6 @@ import Paper from '@mui/material/Paper';
 import { useSearchParams } from "react-router-dom";
 
 const aucTemplate = {
-  "ki": "",
-  "opc": "",
   "amf": "",
   "iccid": "",
   "imsi": "",
