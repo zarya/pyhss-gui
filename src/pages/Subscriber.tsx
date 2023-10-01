@@ -13,8 +13,26 @@ import TextField from '@mui/material/TextField';
 import SpeedDial from '@mui/material/SpeedDial';
 import SpeedDialIcon from '@mui/material/SpeedDialIcon';
 
+const subscriberTemplate = {
+  "imsi": "",
+  "enabled": true,
+  "auc_id": 0,
+  "default_apn": 0,
+  "apn_list": "",
+  "msisdn": "",
+  "ue_ambr_dl": 0,
+  "ue_ambr_ul": 0,
+  "nam": 0,
+  "subscribed_rau_tau_timer": 600,
+  "serving_mme": "",
+  "serving_mme_realm": "",
+  "serving_mme_peer": ""
+}
+
 const Subscriber = () => {
+  const [dialogData, setDialogData] = React.useState(subscriberTemplate);
   const [openAdd, setOpenAdd] = React.useState(false);
+  const [editMode, setEditMode] = React.useState(false);
   const [subscribers, setSubscribers] = React.useState([]);
   const [search, setSearch] = React.useState("");
 
@@ -46,7 +64,13 @@ const Subscriber = () => {
   }
   const handleAddClose = () => {
     setOpenAdd(false);
+    setDialogData(subscriberTemplate);
     refresh();
+  }
+  const openEdit = (row) => {
+    setEditMode(true);
+    setDialogData(row);
+    setOpenAdd(true);
   }
 
   return (
@@ -81,7 +105,7 @@ const Subscriber = () => {
                           else if (row.imsi.includes(search)) return row; 
                           else if (row.msisdn.includes(search)) return row; 
                         }).map((row) => (
-                        <SubscriberItem key={row.subscriber_id} row={row} deleteCallback={handleDelete}/>
+                        <SubscriberItem key={row.subscriber_id} row={row} deleteCallback={handleDelete} openEditCallback={openEdit}/>
                       ))}
                     </TableBody>
                   </Table>
@@ -96,7 +120,7 @@ const Subscriber = () => {
           onClick={() => handleAdd()}
           open={openAdd}
         />
-        <SubscriberAddItem open={openAdd} handleClose={handleAddClose} />
+        <SubscriberAddItem open={openAdd} handleClose={handleAddClose} data={dialogData} edit={editMode} />
       </section>
     </div>
   );

@@ -271,7 +271,7 @@ const ApnAddItem = (props: { open: ReturnType<typeof Boolean>, handleClose: Retu
             </Grid>
           </Grid>
          </Box>
-         <Button variant="contained" onClick={() => handleSave()}>{i18n.t('generic.save')}&nbsp;<i class="fas fa-save"></i></Button>
+         <Button variant="contained" onClick={() => handleSave()}>{i18n.t('generic.save')}&nbsp;<i className="fas fa-save"></i></Button>
           &nbsp;
          <Button variant="contained" onClick={() => handleLocalClose()}>{i18n.t('generic.cancel')}</Button>
        </Box>

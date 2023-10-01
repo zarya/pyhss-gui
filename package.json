@@ -45,13 +45,14 @@
     "@testing-library/user-event": "14.4.3",
     "@vitejs/plugin-react": "^4.0.0",
     "axios": "^1.5.1",
+    "crypto-js": "^4.1.1",
     "formik": "2.2.9",
     "i18next": "22.4.15",
     "i18next-browser-languagedetector": "7.0.1",
     "luxon": "3.3.0",
     "oidc-client-ts": "2.2.2",
     "react": "0.0.0-experimental-c8369527e-20230420",
-    "react-bootstrap": "1.6.1", 
+    "react-bootstrap": "1.6.1",
     "react-dom": "0.0.0-experimental-c8369527e-20230420",
     "react-i18next": "12.2.0",
     "react-redux": "8.0.5",
@@ -67,6 +68,7 @@
     "yup": "1.1.1"
   },
   "devDependencies": {
+    "@types/crypto-js": "^4.1.2",
     "@types/jest": "29.5.1",
     "@types/luxon": "3.3.0",
     "@types/node": "18.16.0",

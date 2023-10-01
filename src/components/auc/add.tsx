@@ -11,6 +11,8 @@ import MenuItem from '@mui/material/MenuItem';
 import Grid from '@mui/material/Grid';
 import i18n from '@app/utils/i18n';
 
+import CryptoJS from 'crypto-js';
+
 import {AucApi} from '../../services/pyhss';
 
 const style = {
@@ -29,6 +31,7 @@ const style = {
 const AucAdditem = (props: { open: ReturnType<typeof Boolean>, handleClose: ReturnType<typeof any>, data: ReturnType<typeof Object>, edit: ReturnType<typeof Boolean> }) => {
   const { open, handleClose, data, edit } = props;
   const [state, setState] = React.useState(data);
+  const [forceKeys, setForceKeys] = React.useState(false);
 
   React.useEffect(() => {
       setState(data);
@@ -42,19 +45,75 @@ const AucAdditem = (props: { open: ReturnType<typeof Boolean>, handleClose: Retu
     }));
   };
 
+  const hexToBytes = (hex: string) => {
+    for (var bytes = [], c = 0; c < hex.length; c += 2)
+    bytes.push(parseInt(hex.slice(c, c+2), 16));
+    return bytes;
+  }
+  const bytesToHex = (bytes: Uint8Array) => {
+    for (var hex = [], i = 0; i < bytes.length; i++) {
+        var current = bytes[i] < 0 ? bytes[i] + 256 : bytes[i];
+        hex.push((current >>> 4).toString(16));
+        hex.push((current & 0xF).toString(16));
+    }
+    return hex.join("");
+  }
+
+  const handleOPGenerate = (ki: string, op: string) => {
+    const opBytes = CryptoJS.enc.Hex.parse(op);
+    const kiBytes = CryptoJS.enc.Hex.parse(ki);
+    const iv = CryptoJS.enc.Hex.parse("00000000000000000000000000000000");
+    var ciphertext = CryptoJS.AES.encrypt(opBytes, kiBytes, { iv: iv });
+
+    const encryptedOp = hexToBytes(ciphertext.ciphertext.toString());
+    const preOp = hexToBytes(op);
+    const opc = new Uint8Array(preOp.length);
+    for (let i = 0; i < preOp.length; i++) {
+        opc[i] = encryptedOp[i] ^ preOp[i];
+    }
+    return bytesToHex(opc);
+  }
+
+  const handleForceKeys = () => {
+    setForceKeys(true);
+  }
+
   const handleSave = () => {
     if (edit) {
-      AucApi.update(data.auc_id, state).then((data) => {
-        handleClose();
-      })
+      const aucSaveTemplate = {
+        "amf": state.amf,
+        "iccid": state.iccid,
+        "imsi": state.imsi,
+        "batch_name": state.batch_name,
+        "sim_vendor": state.sim_vendor,
+        "esim": state.esim,
+        "lpa": state.lpa,
+        "pin1": state.pin1,
+        "pin2": state.pin2,
+        "puk1": state.puk1,
+        "puk2": state.puk2,
+        "misc1": state.misc1,
+        "misc2": state.misc2,
+        "misc3": state.misc3,
+        "misc4": state.misc4 
+      }
+      if (!forceKeys)
+        AucApi.update(data.auc_id, aucSaveTemplate).then((data) => {
+          handleLocalClose();
+        })
+      else
+        AucApi.update(data.auc_id, state).then((data) => {
+          handleLocalClose();
+        })
     }else{
       AucApi.create(state).then((data) => {
-        handleClose();
+        handleLocalClose();
       })
     }
   }
 
   const handleLocalClose = () => {
+    setForceKeys(false);
     handleClose();
   }
 
@@ -67,7 +126,11 @@ const AucAdditem = (props: { open: ReturnType<typeof Boolean>, handleClose: Retu
        aria-describedby="modal-modal-description"
      >
        <Box sx={style}>
-        <h3>Add</h3>
+
+<Button variant="contained" onClick={() => console.log(handleOPGenerate("780E6AC95A2E43449C15BDCDD0450982","D7DECB1F50404CC29ECBF989FE73AFC5"))}>test</Button>
+
+        <h3>{(edit?'Edit':'Add')}</h3>
+        {edit && !forceKeys && <Button onClick={handleForceKeys}>Set Keys</Button>}
         <Box
           component="form"
           sx={{
@@ -92,7 +155,7 @@ const AucAdditem = (props: { open: ReturnType<typeof Boolean>, handleClose: Retu
                 <FormHelperText id="imsi-helper-text">IMSI/Sim Number</FormHelperText>
               </FormControl>
             </Grid>
-            {!edit && <Grid item xs={3}>
+            {(!edit || forceKeys) && <Grid item xs={3}>
               <FormControl fullWidth>
                 <TextField
                   style={{width: '99%'}}
@@ -106,7 +169,7 @@ const AucAdditem = (props: { open: ReturnType<typeof Boolean>, handleClose: Retu
                 <FormHelperText id="ki-helper">Ki key</FormHelperText>
               </FormControl>
             </Grid>}
-            {!edit && <Grid item xs={3}>
+            {(!edit || forceKeys) && <Grid item xs={3}>
               <FormControl fullWidth>
                 <TextField
                   style={{width: '99%'}}
@@ -134,7 +197,7 @@ const AucAdditem = (props: { open: ReturnType<typeof Boolean>, handleClose: Retu
                 <FormHelperText id="iccid-helper">ICCID</FormHelperText>
               </FormControl>
             </Grid>
-            <Grid item xs={4}>
+            <Grid item xs={2}>
               <FormControl fullWidth style={{ marginTop: 8 }}>
                 <InputLabel id="esim_label">eSim</InputLabel>
                 <Select
@@ -258,6 +321,58 @@ const AucAdditem = (props: { open: ReturnType<typeof Boolean>, handleClose: Retu
                 <FormHelperText id="puk2-helper">PUK 2</FormHelperText>
               </FormControl>
             </Grid>
+            {(!edit || forceKeys) && <Grid item xs={3}>
+              <FormControl fullWidth>
+                <TextField
+                  style={{width: '99%'}}
+                  label="KID"
+                  onChange={handleChange}
+                  value={state.kid}
+                  name="kid"
+                  aria-describedby="kid-helper"
+                />
+                <FormHelperText id="kid-helper">KID</FormHelperText>
+              </FormControl>
+            </Grid>}
+            {(!edit || forceKeys) && <Grid item xs={3}>
+              <FormControl fullWidth>
+                <TextField
+                  style={{width: '99%'}}
+                  label="PSK"
+                  onChange={handleChange}
+                  value={state.psk}
+                  name="psk"
+                  aria-describedby="psk-helper"
+                />
+                <FormHelperText id="psk-helper">PSK</FormHelperText>
+              </FormControl>
+            </Grid>}
+            {(!edit || forceKeys) && <Grid item xs={3}>
+              <FormControl fullWidth>
+                <TextField
+                  style={{width: '99%'}}
+                  label="DES"
+                  onChange={handleChange}
+                  value={state.des}
+                  name="des"
+                  aria-describedby="des-helper"
+                />
+                <FormHelperText id="des-helper">DES</FormHelperText>
+              </FormControl>
+            </Grid>}
+            {(!edit || forceKeys) && <Grid item xs={3}>
+              <FormControl fullWidth>
+                <TextField
+                  style={{width: '99%'}}
+                  label="ADM 1"
+                  onChange={handleChange}
+                  value={state.adm1}
+                  name="adm1"
+                  aria-describedby="adm1-helper"
+                />
+                <FormHelperText id="adm1-helper">ADM 1</FormHelperText>
+              </FormControl>
+            </Grid>}
             <Grid item xs={12}><h3>Misc</h3></Grid>
             <Grid item xs={3}>
               <FormControl fullWidth>

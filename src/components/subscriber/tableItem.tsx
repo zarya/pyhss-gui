@@ -14,8 +14,8 @@ import {NavLink} from 'react-router-dom';
 import Button from '@mui/material/Button';
 import { DeleteDialog } from '@components';
 
-const SubscriberItem = (props: { row: ReturnType<typeof Object>, deleteCallback: ReturnType<typeof any> }) => {
-  const { row, deleteCallback } = props;
+const SubscriberItem = (props: { row: ReturnType<typeof Object>, deleteCallback: ReturnType<typeof any>, openEditCallback: ReturnType<typeof any> }) => {
+  const { row, deleteCallback, openEditCallback } = props;
   const [open, setOpen] = React.useState(false);
 
   return (
@@ -40,7 +40,10 @@ const SubscriberItem = (props: { row: ReturnType<typeof Object>, deleteCallback:
         <TableCell>{row.ue_ambr_dl}</TableCell>
         <TableCell>{row.ue_ambr_ul}</TableCell>
         <TableCell>{row.subscribed_rau_tau_timer}</TableCell>
-        <TableCell><DeleteDialog id={row.subscriber_id} callback={deleteCallback}/></TableCell>
+        <TableCell>
+          <Button onClick={() => openEditCallback(row)}><i className="fas fa-edit"></i></Button>
+          <DeleteDialog id={row.subscriber_id} callback={deleteCallback}/>
+        </TableCell>
       </TableRow>
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
