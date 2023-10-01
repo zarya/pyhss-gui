@@ -57,6 +57,7 @@ const ChargingRule = () => {
   }
   const handleAddClose = () => {
     setOpenAdd(false);
+    setDialogData(charging_ruleTemplate);
     refresh();
   }
   const openEdit = (row) => {
