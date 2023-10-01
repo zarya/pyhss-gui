@@ -5,7 +5,7 @@ export const authLogin = (password: string, api: string) => {
   return new Promise(async (res, rej) => {
     localStorage.setItem('token',password);
     AuthApi.login().then((data) => {
-      if (data.data.id) {
+      if (data.data.result === "OK") {
           localStorage.setItem(
               'authentication',
               JSON.stringify({ profile: { email: 'admin@example.com' } })

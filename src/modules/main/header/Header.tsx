@@ -4,6 +4,7 @@ import {useTranslation} from 'react-i18next';
 import {useDispatch, useSelector} from 'react-redux';
 import {toggleControlSidebar, toggleSidebarMenu} from '@app/store/reducers/ui';
 import UserDropdown from '@app/modules/main/header/user-dropdown/UserDropdown';
+import LanguagesDropdown from '@app/modules/main/header/languages-dropdown/LanguagesDropdown';
 
 const Header = () => {
   const [t] = useTranslation();
@@ -41,6 +42,7 @@ const Header = () => {
         </li>
       </ul>
       <ul className="navbar-nav ml-auto">
+        <LanguagesDropdown />
         <UserDropdown />
         <li className="nav-item">
           <button

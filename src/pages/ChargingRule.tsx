@@ -78,6 +78,7 @@ const ChargingRule = () => {
                     <TableHead>
                       <TableRow>
                         <TableCell>Name</TableCell>
+                        <TableCell>ID</TableCell>
                         <TableCell>QCI</TableCell>
                         <TableCell>TFT Group</TableCell>
                         <TableCell>mbr_dl</TableCell>

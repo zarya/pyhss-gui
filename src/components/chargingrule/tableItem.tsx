@@ -13,6 +13,7 @@ const ChargingRuleItem = (props: { row: ReturnType<typeof Object>, deleteCallbac
         <TableCell component="th" scope="row">
           {row.rule_name}
         </TableCell>
+        <TableCell>{row.charging_rule_id}</TableCell>
         <TableCell>{row.qci}</TableCell>
         <TableCell>{row.tft_group_id}</TableCell>
         <TableCell><NetworkBandwidthFormatter data={row.mbr_dl} /></TableCell>

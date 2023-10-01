@@ -2,7 +2,7 @@ import http from "./http-common";
 
 class AuthApi {
   login() {
-    return http.get("/apn/list");
+    return http.get("/oam/ping");
   }
 
 }
