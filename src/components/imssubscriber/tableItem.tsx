@@ -44,7 +44,23 @@ const ImsSubscriberItem = (props: { row: ReturnType<typeof Object>, deleteCallba
               <Typography variant="h6" gutterBottom component="div">
                 Details
               </Typography>
-              <Table size="small" aria-label="purchases">
+              <Table size="small" aria-label="PCSCF and SCSCF">
+                <TableHead>
+                  <TableRow>
+                    <TableCell>PCSCF</TableCell>
+                    <TableCell>Realm</TableCell>
+                    <TableCell>Peer</TableCell>
+                    <TableCell>Timestamp</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                    <TableRow>
+                      <TableCell>{row.pcscf}</TableCell>
+                      <TableCell>{row.pcscf_realm}</TableCell>
+                      <TableCell>{row.pcscf_peer}</TableCell>
+                      <TableCell>{row.pcscf_timestamp}</TableCell>
+                    </TableRow>
+                </TableBody>
                 <TableHead>
                   <TableRow>
                     <TableCell>SCSCF</TableCell>

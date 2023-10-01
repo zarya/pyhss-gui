@@ -24,6 +24,9 @@ const imsSubscriberTemplate = {
   "imsi": "",
   "ifc_path": "default_ifc.xml",
   "sh_profile": "default_sh_user_data.xml",
+  "pcscf": "",
+  "pcscf_realm": "",
+  "pcscf_peer": "",
   "scscf": "",
   "scscf_realm": "",
   "scscf_peer": ""
