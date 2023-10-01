@@ -12,9 +12,17 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 
+const tftTemplate = {
+  "tft_group_id": 1,
+  "tft_string": "",
+  "direction": 0
+}
+
 const Tft = () => {
   const [items, setItems] = useState([]);
   const [openAdd, setOpenAdd] = useState(false);
+  const [dialogData, setDialogData] = useState(tftTemplate);
+  const [editMode, setEditMode] = useState(false);
 
   React.useEffect(() => {
     TftApi.getAll().then((data => {
@@ -42,6 +50,11 @@ const Tft = () => {
     setOpenAdd(false);
     refresh();
   }
+  const openEdit = (row) => {
+    setEditMode(true);
+    setDialogData(row);
+    setOpenAdd(true);
+  }
 
   return (
     <div>
@@ -62,7 +75,7 @@ const Tft = () => {
                     </TableHead>
                     <TableBody>
                       {items.map((row) => (
-                        <TftItem key={row.tft_id} row={row} deleteCallback={handleDelete}/>
+                        <TftItem key={row.tft_id} row={row} deleteCallback={handleDelete} openEditCallback={openEdit} />
                       ))}
                     </TableBody>
                   </Table>
@@ -77,7 +90,7 @@ const Tft = () => {
           onClick={() => handleAdd()}
           open={openAdd}
         />
-        <TftAddItem open={openAdd} handleClose={handleAddClose} />
+        <TftAddItem open={openAdd} handleClose={handleAddClose}  data={dialogData} edit={editMode} />
       </section>
     </div>
   );
