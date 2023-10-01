@@ -1,5 +1,6 @@
 import React from 'react';
 import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
 import Collapse from '@mui/material/Collapse';
 import IconButton from '@mui/material/IconButton';
 import Table from '@mui/material/Table';
@@ -12,8 +13,8 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import { DeleteDialog } from '@components';
 
-const AucItem = (props: { row: ReturnType<typeof Object>, single: ReturnType<typeof Boolean>, deleteCallback: ReturnType<typeof any> }) => {
-  const { row, single, deleteCallback } = props;
+const AucItem = (props: { row: ReturnType<typeof Object>, single: ReturnType<typeof Boolean>, deleteCallback: ReturnType<typeof any>, openEditCallback: ReturnType<typeof any> }) => {
+  const { row, single, deleteCallback, openEditCallback } = props;
   const [open, setOpen] = React.useState(single);
 
   return (
@@ -35,6 +36,9 @@ const AucItem = (props: { row: ReturnType<typeof Object>, single: ReturnType<typ
         <TableCell>{row.iccid}</TableCell>
         <TableCell>{row.sim_vendor}</TableCell>
         <TableCell>{(row.esim?'Yes':'No')}</TableCell>
+        <TableCell>
+          <Button onClick={() => openEditCallback(row)}>Edit</Button>
+        </TableCell>
         <TableCell><DeleteDialog id={row.auc_id} callback={deleteCallback}/></TableCell>
       </TableRow>
       <TableRow>

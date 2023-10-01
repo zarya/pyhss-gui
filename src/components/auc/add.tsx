@@ -3,6 +3,8 @@ import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import FormControl from '@mui/material/FormControl';
+import FormHelperText from '@mui/material/FormHelperText';
 
 import {AucApi} from '../../services/pyhss';
 
@@ -18,33 +20,15 @@ const style = {
   p: 4,
 };
 
-const uacTemplate = {
-  "ki": "",
-  "opc": "",
-  "amf": "",
-  "iccid": "",
-  "imsi": "",
-  "batch_name": "",
-  "sim_vendor": "",
-  "esim": false,
-  "lpa": "",
-  "pin1": "",
-  "pin2": "",
-  "puk1": "",
-  "puk2": "",
-  "kid": "",
-  "psk": "",
-  "des": "",
-  "adm1": "",
-  "misc1": "",
-  "misc2": "",
-  "misc3": "",
-  "misc4": ""
-}
 
-const AucAddItem = (props: { open: ReturnType<typeof Boolean>, handleClose: ReturnType<typeof any> }) => {
-  const { open, handleClose } = props;
-  const [state, setState] = React.useState(uacTemplate);
+const AucAddItem = (props: { open: ReturnType<typeof Boolean>, handleClose: ReturnType<typeof any>, data: ReturnType<typeof Object>, edit: ReturnType<typeof Boolean> }) => {
+  const { open, handleClose, data, edit } = props;
+  const [state, setState] = React.useState(data);
+
+  React.useEffect(() => {
+      setState(data);
+  }, [data])
+
   const handleChange = e => {
     const { name, value } = e.target;
     setState(prevState => ({
@@ -54,16 +38,19 @@ const AucAddItem = (props: { open: ReturnType<typeof Boolean>, handleClose: Retu
   };
 
   const handleSave = () => {
-    AucApi.create(state).then((data) => {
-      console.log(state, data);
-      setState(uacTemplate);
-      handleClose();
-    })
+    if (edit) {
+      AucApi.update(data.auc_id, state).then((data) => {
+        handleClose();
+      })
+    }else{
+      AucApi.create(state).then((data) => {
+        handleClose();
+      })
+    }
   }
 
   const handleLocalClose = () => {
     handleClose();
-    setState(uacTemplate);
   }
 
   return (
@@ -84,6 +71,7 @@ const AucAddItem = (props: { open: ReturnType<typeof Boolean>, handleClose: Retu
           noValidate
           autoComplete="off"
         >
+          <FormControl>
           <TextField
             required
             id="outlined-required"
@@ -91,7 +79,10 @@ const AucAddItem = (props: { open: ReturnType<typeof Boolean>, handleClose: Retu
             onChange={handleChange}
             value={state.imsi}
             name="imsi"
+            aria-describedby="imsi-helper-text"
           />
+          <FormHelperText id="imsi-helper-text">IMSI/Sim Number</FormHelperText>
+          </FormControl>
           <TextField
             required
             id="outlined-required"

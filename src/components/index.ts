@@ -17,6 +17,7 @@ import AddImsSubscriberWizard from './addwizard/imssubscriber';
 import ChargingRuleItem from './chargingrule/tableItem';
 import ChargingRuleAddItem from './chargingrule/add';
 import DeleteDialog from './delete';
+import NetworkBandwidthFormatter from './Formatter';
 
 export {
     ContentHeader,
@@ -37,5 +38,6 @@ export {
     ChargingRuleAddItem,
     AddAucWizard,
     AddSubscriberWizard,
-    AddImsSubscriberWizard
+    AddImsSubscriberWizard,
+    NetworkBandwidthFormatter,
 };

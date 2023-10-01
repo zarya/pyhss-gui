@@ -11,10 +11,27 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+  
+const apnTemplate = {
+  "apn": "",
+  "ip_version": 0,
+  "pgw_address": "",
+  "sgw_address": "",
+  "charging_characteristics": "",
+  "apn_ambr_dl": 0,
+  "apn_ambr_ul": 0,
+  "qci": 0,
+  "arp_priority": 0,
+  "arp_preemption_capability": false,
+  "arp_preemption_vulnerability": false,
+  "charging_rule_list": ""
+}
 
 const Apn = () => {
   const [apns, setAPNS] = useState([]);
+  const [dialogData, setDialogData] = useState(apnTemplate);
   const [openAdd, setOpenAdd] = useState(false);
+  const [editMode, setEditMode] = useState(false);
   const [chargingRules, setChargingRules] = useState([]);
 
   React.useEffect(() => {
@@ -42,11 +59,18 @@ const Apn = () => {
   }
 
   const handleAdd = () => {
+    setEditMode(false);
     setOpenAdd(true);
   }
   const handleAddClose = () => {
     setOpenAdd(false);
+    setDialogData(apnTemplate);
     refresh();
+  }
+  const openEdit = (row) => {
+    setEditMode(true);
+    setDialogData(row);
+    setOpenAdd(true);
   }
 
   return (
@@ -63,15 +87,16 @@ const Apn = () => {
                         <TableCell/>
                         <TableCell>ID</TableCell>
                         <TableCell>APN</TableCell>
-                        <TableCell align="right">IP Version</TableCell>
-                        <TableCell align="right">QCI</TableCell>
-                        <TableCell align="right">SGW</TableCell>
-                        <TableCell align="right">PGW</TableCell>
+                        <TableCell>IP Version</TableCell>
+                        <TableCell>QCI</TableCell>
+                        <TableCell>SGW</TableCell>
+                        <TableCell>PGW</TableCell>
+                        <TableCell/>
                       </TableRow>
                     </TableHead>
                     <TableBody>
                       {apns.map((row) => (
-                        <ApnItem key={row.apn_id} row={row} chargingRules={chargingRules} deleteCallback={handleDelete} />
+                        <ApnItem key={row.apn_id} row={row} chargingRules={chargingRules} deleteCallback={handleDelete} openEditCallback={openEdit} />
                       ))}
                     </TableBody>
                   </Table>
@@ -86,7 +111,7 @@ const Apn = () => {
           onClick={() => handleAdd()}
           open={openAdd}
         />
-        <ApnAddItem open={openAdd} handleClose={handleAddClose} />
+        <ApnAddItem open={openAdd} handleClose={handleAddClose} data={dialogData} edit={editMode} />
       </section>
     </div>
   );

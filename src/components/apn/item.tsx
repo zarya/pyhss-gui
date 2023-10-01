@@ -2,6 +2,7 @@ import React from 'react';
 import Box from '@mui/material/Box';
 import Collapse from '@mui/material/Collapse';
 import IconButton from '@mui/material/IconButton';
+import Button from '@mui/material/Button';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -10,10 +11,10 @@ import TableRow from '@mui/material/TableRow';
 import Typography from '@mui/material/Typography';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import {DeleteDialog} from "@components";
+import {DeleteDialog, NetworkBandwidthFormatter} from "@components";
 
-const ApnItem = (props: { row: ReturnType<typeof Object>, chargingRules: ReturnType<typeof Object>, deleteCallback: ReturnType<typeof any> }) => {
-  const { row, chargingRules, deleteCallback } = props;
+const ApnItem = (props: { row: ReturnType<typeof Object>, chargingRules: ReturnType<typeof Object>, deleteCallback: ReturnType<typeof any>, openEditCallback: ReturnType<typeof any> }) => {
+  const { row, chargingRules, deleteCallback, openEditCallback } = props;
   const [open, setOpen] = React.useState(false);
 
   const ipVersion = ['ipv4','ipv6','ipv4+6', 'ipv4 or ipv6'];
@@ -37,10 +38,13 @@ const ApnItem = (props: { row: ReturnType<typeof Object>, chargingRules: ReturnT
         <TableCell component="th" scope="row">
           {row.apn}
         </TableCell>
-        <TableCell align="right">{ipVersion[row.ip_version]}</TableCell>
-        <TableCell align="right">{row.qci}</TableCell>
-        <TableCell align="right">{row.sgw_address}</TableCell>
-        <TableCell align="right">{row.pgw_address}</TableCell>
+        <TableCell>{ipVersion[row.ip_version]}</TableCell>
+        <TableCell>{row.qci}</TableCell>
+        <TableCell>{row.sgw_address}</TableCell>
+        <TableCell>{row.pgw_address}</TableCell>
+        <TableCell>
+          <Button onClick={() => openEditCallback(row)}>Edit</Button>
+        </TableCell>
         <TableCell><DeleteDialog id={row.apn_id} callback={deleteCallback} /></TableCell>
       </TableRow>
       <TableRow>
@@ -64,8 +68,8 @@ const ApnItem = (props: { row: ReturnType<typeof Object>, chargingRules: ReturnT
                 </TableHead>
                 <TableBody>
                     <TableRow key="arp_preemption_capability">
-                      <TableCell>{row.apn_ambr_dl}</TableCell>
-                      <TableCell>{row.apn_ambr_ul}</TableCell>
+                      <TableCell><NetworkBandwidthFormatter data={row.apn_ambr_dl} /></TableCell>
+                      <TableCell><NetworkBandwidthFormatter data={row.apn_ambr_ul} /></TableCell>
                       <TableCell>{row.charging_characteristics}</TableCell>
                       <TableCell>{row.arp_priority}</TableCell>
                       <TableCell>{(row.arp_preemption_vulnerability?'Yes':'No')}</TableCell>
@@ -84,8 +88,8 @@ const ApnItem = (props: { row: ReturnType<typeof Object>, chargingRules: ReturnT
                   <TableRow>
                     <TableCell>Name</TableCell>
                     <TableCell>QCI</TableCell>
-                    <TableCell>MBR DL</TableCell>
-                    <TableCell>MBR UL</TableCell>
+                    <TableCell>MBR/GBR DL</TableCell>
+                    <TableCell>MBR/GBR UL</TableCell>
                     <TableCell>Precedence</TableCell>
                     <TableCell>arp_priority</TableCell>
                     <TableCell>arp_preemption_vulnerability</TableCell>
@@ -95,11 +99,11 @@ const ApnItem = (props: { row: ReturnType<typeof Object>, chargingRules: ReturnT
                 </TableHead>
                 <TableBody>
                   {rules.map((chRow) => 
-                    <TableRow>
+                    <TableRow key={chRow.charging_rule_id}>
                       <TableCell>{chRow.rule_name}</TableCell>
                       <TableCell>{chRow.qci}</TableCell>
-                      <TableCell>{chRow.mbr_dl} / {chRow.gbr_dl}</TableCell>
-                      <TableCell>{chRow.mbr_ul} / {chRow.gbr_ul}</TableCell>
+                      <TableCell style={{whiteSpace: 'nowrap'}}><NetworkBandwidthFormatter data={chRow.mbr_dl} /> / <NetworkBandwidthFormatter data={chRow.gbr_dl} /></TableCell>
+                      <TableCell style={{whiteSpace: 'nowrap'}}><NetworkBandwidthFormatter data={chRow.mbr_ul} /> / <NetworkBandwidthFormatter data={chRow.gbr_ul} /></TableCell>
                       <TableCell>{chRow.precedence}</TableCell>
                       <TableCell>{chRow.arp_priority}</TableCell>
                       <TableCell>{(chRow.arp_preemption_vulnerability?'Yes':'No')}</TableCell>
