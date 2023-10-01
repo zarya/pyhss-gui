@@ -14,7 +14,23 @@ import TextField from '@mui/material/TextField';
 import SpeedDial from '@mui/material/SpeedDial';
 import SpeedDialIcon from '@mui/material/SpeedDialIcon';
 
+const imsSubscriberTemplate = {
+  "msisdn": "",
+  "msisdn_list": "",
+  "imsi": "",
+  "ifc_path": "default_ifc.xml",
+  "sh_profile": "default_sh_user_data.xml",
+  "pcscf": "",
+  "pcscf_realm": "",
+  "pcscf_peer": "",
+  "scscf": "",
+  "scscf_realm": "",
+  "scscf_peer": ""
+}
+
 const IMSSubscriber = () => {
+  const [dialogData, setDialogData] = React.useState(imsSubscriberTemplate);
+  const [editMode, setEditMode] = React.useState(false);
   const [openAdd, setOpenAdd] = React.useState(false);
   const [subscribers, setSubscribers] = React.useState([]);
   const [search, setSearch] = React.useState("");
@@ -46,7 +62,13 @@ const IMSSubscriber = () => {
   }
   const handleAddClose = () => {
     setOpenAdd(false);
+    setDialogData(imsSubscriberTemplate)
     refresh();
+  }
+  const openEdit = (row) => {
+    setEditMode(true);
+    setDialogData(row);
+    setOpenAdd(true);
   }
 
   return (
@@ -78,7 +100,7 @@ const IMSSubscriber = () => {
                           else if (row.imsi.includes(search)) return row;
                           else if (row.msisdn.includes(search)) return row;
                         }).map((row) => (
-                        <ImsSubscriberItem key={row.ims_subscriber_id} row={row} deleteCallback={handleDelete} />
+                        <ImsSubscriberItem key={row.ims_subscriber_id} row={row} deleteCallback={handleDelete} openEditCallback={openEdit} />
                       ))}
                     </TableBody>
                   </Table>
@@ -93,7 +115,7 @@ const IMSSubscriber = () => {
           onClick={() => handleAdd()}
           open={openAdd}
         />
-        <ImsSubscriberAddItem open={openAdd} handleClose={handleAddClose} />
+        <ImsSubscriberAddItem open={openAdd} handleClose={handleAddClose} data={dialogData} edit={editMode} />
       </section>
     </div>
   );

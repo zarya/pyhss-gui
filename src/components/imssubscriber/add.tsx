@@ -3,7 +3,7 @@ import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-
+import i18n from '@app/utils/i18n';
 import {ImsSubscriberApi} from '../../services/pyhss';
 
 const style = {
@@ -18,23 +18,14 @@ const style = {
   p: 4,
 };
 
-const imsSubscriberTemplate = {
-  "msisdn": "",
-  "msisdn_list": "",
-  "imsi": "",
-  "ifc_path": "default_ifc.xml",
-  "sh_profile": "default_sh_user_data.xml",
-  "pcscf": "",
-  "pcscf_realm": "",
-  "pcscf_peer": "",
-  "scscf": "",
-  "scscf_realm": "",
-  "scscf_peer": ""
-}
+const ImsSubscriberAddItem = (props: { open: ReturnType<typeof Boolean>, handleClose: ReturnType<typeof any>, data: ReturnType<typeof Object>, edit: ReturnType<typeof Boolean> }) => {
+  const { open, handleClose, data, edit } = props;
+  const [state, setState] = React.useState(data);
 
-const ImsSubscriberAddItem = (props: { open: ReturnType<typeof Boolean>, handleClose: ReturnType<typeof any> }) => {
-  const { open, handleClose } = props;
-  const [state, setState] = React.useState(imsSubscriberTemplate);
+  React.useEffect(() => {
+      setState(data);
+  }, [data])
+
   const handleChange = e => {
     const { name, value } = e.target;
     setState(prevState => ({
@@ -44,16 +35,19 @@ const ImsSubscriberAddItem = (props: { open: ReturnType<typeof Boolean>, handleC
   };
 
   const handleSave = () => {
-    ImsSubscriberApi.create(state).then((data) => {
-      console.log(state, data);
-      setState(imsSubscriberTemplate);
-      handleClose();
-    })
+    if (edit) {
+      ImsSubscriberApi.update(data.ims_subscriber_id, state).then((data) => {
+        handleLocalClose();
+      })
+    } else {
+      ImsSubscriberApi.create(state).then((data) => {
+        handleLocalClose();
+      })
+    }
   }
 
   const handleLocalClose = () => {
     handleClose();
-    setState(imsSubscriberTemplate);
   }
 
   return (
@@ -65,7 +59,7 @@ const ImsSubscriberAddItem = (props: { open: ReturnType<typeof Boolean>, handleC
        aria-describedby="modal-modal-description"
      >
        <Box sx={style}>
-        <h3>Add</h3>
+        <h3>{(edit?i18n.t('generic.edit'):i18n.t('generic.add'))} IMS Subscriber</h3>
         <Box
           component="form"
           sx={{
@@ -115,7 +109,9 @@ const ImsSubscriberAddItem = (props: { open: ReturnType<typeof Boolean>, handleC
             name="sh_profile"
           />
          </Box>
-         <Button onClick={() => handleSave()}>Save</Button>
+         <Button variant="contained" onClick={() => handleSave()}>{i18n.t('generic.save')}&nbsp;<i className="fas fa-save"></i></Button>
+          &nbsp;
+         <Button variant="contained" onClick={() => handleLocalClose()}>{i18n.t('generic.cancel')}</Button>
        </Box>
      </Modal>
 

@@ -2,6 +2,7 @@ import React from 'react';
 import Box from '@mui/material/Box';
 import Collapse from '@mui/material/Collapse';
 import IconButton from '@mui/material/IconButton';
+import Button from '@mui/material/Button';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -12,8 +13,8 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import { DeleteDialog } from '@components';
 
-const ImsSubscriberItem = (props: { row: ReturnType<typeof Object>, deleteCallback: ReturnType<typeof any> }) => {
-  const { row, deleteCallback } = props;
+const ImsSubscriberItem = (props: { row: ReturnType<typeof Object>, deleteCallback: ReturnType<typeof any>, openEditCallback: ReturnType<typeof any> }) => {
+  const { row, deleteCallback, openEditCallback } = props;
   const [open, setOpen] = React.useState(false);
 
   return (
@@ -35,7 +36,10 @@ const ImsSubscriberItem = (props: { row: ReturnType<typeof Object>, deleteCallba
         <TableCell>{row.ifc_path}</TableCell>
         <TableCell>{row.sh_profile}</TableCell>
         <TableCell>{row.last_modified}</TableCell>
-        <TableCell><DeleteDialog id={row.ims_subscriber_id} callback={deleteCallback}/></TableCell>
+        <TableCell>
+          <Button onClick={() => openEditCallback(row)}><i className="fas fa-edit"></i></Button>
+          <DeleteDialog id={row.ims_subscriber_id} callback={deleteCallback}/>
+        </TableCell>
       </TableRow>
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
