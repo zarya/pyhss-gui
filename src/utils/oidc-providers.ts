@@ -1,17 +1,21 @@
-import { UserManager, UserManagerSettings } from 'oidc-client-ts';
 import { sleep } from './helpers';
+import {AuthApi} from '../services/pyhss';
 
-export const authLogin = (password: string) => {
+export const authLogin = (password: string, api: string) => {
   return new Promise(async (res, rej) => {
-    await sleep(500);
-    if (password === 'admin') {
-      localStorage.setItem(
-        'authentication',
-        JSON.stringify({ profile: { email: 'admin@example.com' } })
-      );
-      return res({ profile: { email: 'admin@example.com' } });
-    }
-    return rej({ message: 'Credentials are wrong!' });
+    localStorage.setItem('token',password);
+    AuthApi.login().then((data) => {
+      if (data.data.id) {
+          localStorage.setItem(
+              'authentication',
+              JSON.stringify({ profile: { email: 'admin@example.com' } })
+          );
+          localStorage.setItem('api',api);
+          return res({ profile: { email: 'admin@example.com' } });
+      } else {
+        return rej({ message: 'Credentials are wrong!' });
+      }
+    })
   });
 };
 

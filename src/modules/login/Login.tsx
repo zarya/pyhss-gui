@@ -21,11 +21,11 @@ const Login = () => {
   const navigate = useNavigate();
   const [t] = useTranslation();
 
-  const login = async (password: string) => {
+  const login = async (password: string, api: string) => {
     try {
       setAuthLoading(true);
 
-      const response = await authLogin(password);
+      const response = await authLogin(password, api);
       dispatch(setAuthentication(response as any));
       toast.success('Login is succeed!');
       setAuthLoading(false);
@@ -39,6 +39,7 @@ const Login = () => {
 
   const { handleChange, values, handleSubmit, touched, errors } = useFormik({
     initialValues: {
+      api: 'http://localhost:8080',
       password: '',
     },
     validationSchema: Yup.object({
@@ -48,7 +49,7 @@ const Login = () => {
         .required('Required'),
     }),
     onSubmit: (values) => {
-      login(values.password);
+      login(values.password, values.api);
     },
   });
 
@@ -67,6 +68,29 @@ const Login = () => {
           <p className="login-box-msg">{t<string>('login.label.signIn')}</p>
           <form onSubmit={handleSubmit}>
             <div className="mb-3">
+              <InputGroup className="mb-3">
+                <Form.Control
+                  id="api"
+                  name="api"
+                  type="input"
+                  placeholder="API Url"
+                  onChange={handleChange}
+                  value={values.api}
+                  isValid={touched.api && !errors.api}
+                  isInvalid={touched.api && !!errors.api}
+                />
+                {touched.api && errors.api ? (
+                  <Form.Control.Feedback type="invalid">
+                    {errors.api}
+                  </Form.Control.Feedback>
+                ) : (
+                  <InputGroup.Append>
+                    <InputGroup.Text>
+                      <i className="fas fa-sitemap" />
+                    </InputGroup.Text>
+                  </InputGroup.Append>
+                )}
+              </InputGroup>
               <InputGroup className="mb-3">
                 <Form.Control
                   id="password"

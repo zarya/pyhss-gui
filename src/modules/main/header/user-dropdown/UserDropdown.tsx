@@ -118,6 +118,8 @@ const UserDropdown = () => {
     dispatch(setAuthentication(undefined));
     navigate('/login');
     localStorage.removeItem('authentication');
+    localStorage.removeItem('api');
+    localStorage.removeItem('token');
   };
 
   const navigateToProfile = (event: any) => {

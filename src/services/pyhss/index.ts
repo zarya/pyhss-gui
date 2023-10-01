@@ -7,7 +7,8 @@ import OamApi from './apis/OamApi';
 import ChargingRuleApi from './apis/ChargingRuleApi';
 import AucApi from './apis/AucApi';
 import TftApi from './apis/TftApi';
+import AuthApi from './Auth';
 
-export {ApnApi, SubscriberApi, ImsSubscriberApi, OamApi, ChargingRuleApi, AucApi, TftApi};
+export {ApnApi, SubscriberApi, ImsSubscriberApi, OamApi, ChargingRuleApi, AucApi, TftApi, AuthApi};
 
 
