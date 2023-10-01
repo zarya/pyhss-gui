@@ -80,6 +80,7 @@ const ApnItem = (props: { row: ReturnType<typeof Object>, chargingRules: ReturnT
                 </TableBody>
               </Table>
             </Box>
+            {rules.length > 0 && 
             <Box sx={{ margin: 1 }}>
               <Typography variant="h6" gutterBottom component="div">
                 Charging Rules
@@ -115,6 +116,7 @@ const ApnItem = (props: { row: ReturnType<typeof Object>, chargingRules: ReturnT
                 </TableBody>
               </Table>
             </Box>
+            }
           </Collapse>
         </TableCell>
       </TableRow>
