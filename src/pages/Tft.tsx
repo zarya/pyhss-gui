@@ -70,6 +70,7 @@ const Tft = () => {
                         <TableCell>Group</TableCell>
                         <TableCell>Rule</TableCell>
                         <TableCell>Direction</TableCell>
+                        <TableCell>Last Updated</TableCell>
                         <TableCell/>
                       </TableRow>
                     </TableHead>
