@@ -19,6 +19,12 @@ import StepLabel from '@mui/material/StepLabel';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import CircularProgress from '@mui/material/CircularProgress';
+import {
+  Table,
+  TableRow,
+  TableCell,
+  TableBody,
+} from '@mui/material';
 
 const steps = ['Add AUC', 'Add Subscriber', 'Add IMS Subscriber', 'Validate'];
 const subscriberTemplate = {
@@ -239,7 +245,44 @@ const AddWizard = () => {
           {activeStep === 0 && <AucAddItem forceKeys={true} edit={false} state={auc} onChange={handleChangeAuc} />} 
           {activeStep === 1 && <SubscriberAddItem state={subscriber} onChange={handleChangeSubscriber} />} 
           {activeStep === 2 && <ImsSubscriberAddItem state={imsSubscriber} onChange={handleChangeImsSubscriber} />} 
-          {activeStep === 3 && <span>Finish</span>} 
+          {activeStep === 3 && <span>
+            <Table>
+              <TableBody>
+                <TableRow>
+                  <TableCell component="th" scope="row">
+                    IMSI
+                  </TableCell>
+                  <TableCell>
+                    {auc.imsi}
+                  </TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell component="th" scope="row">
+                    Ki 
+                  </TableCell>
+                  <TableCell>
+                    {auc.ki}
+                  </TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell component="th" scope="row">
+                    OPc
+                  </TableCell>
+                  <TableCell>
+                    {auc.opc}
+                  </TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell component="th" scope="row">
+                    MSISDN 
+                  </TableCell>
+                  <TableCell>
+                    {subscriber.msisdn}
+                  </TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
+          </span>} 
           <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
             <Button
               color="inherit"
