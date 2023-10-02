@@ -67,9 +67,6 @@ const ApnAddItem = (props: { open: ReturnType<typeof Boolean>, handleClose: Retu
         <h3>{(edit?i18n.t('generic.edit'):i18n.t('generic.add'))} APN</h3>
         <Box
           component="form"
-          sx={{
-            '& .MuiTextField-root': { m: 1, width: '25ch' },
-          }}
           noValidate
           autoComplete="off"
         >

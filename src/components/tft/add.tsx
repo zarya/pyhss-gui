@@ -68,9 +68,6 @@ const TftAddItem = (props: { open: ReturnType<typeof Boolean>, handleClose: Retu
         <h3>{(edit?i18n.t('generic.edit'):i18n.t('generic.add'))}</h3>
         <Box
           component="form"
-          sx={{
-            '& .MuiTextField-root': { m: 1, width: '25ch' },
-          }}
           noValidate
           autoComplete="off"
         >
@@ -119,10 +116,10 @@ const TftAddItem = (props: { open: ReturnType<typeof Boolean>, handleClose: Retu
                   name="direction"
                   aria-describedby="direction-helper"
                 >
-                  <MenuItem value={0}>0</MenuItem>
-                  <MenuItem value={1}>1</MenuItem>
-                  <MenuItem value={2}>2</MenuItem>
-                  <MenuItem value={3}>3</MenuItem>
+                  <MenuItem value={0}>Unspecified</MenuItem>
+                  <MenuItem value={1}>Downlink</MenuItem>
+                  <MenuItem value={2}>Uplink</MenuItem>
+                  <MenuItem value={3}>Bidirectional</MenuItem>
                 </Select>
                 <FormHelperText id="direction-helper">Defines traffic direction</FormHelperText>
               </FormControl>

@@ -14,7 +14,7 @@ const SelectField = (props: {
 }) => {
   const {value, onChange, helper, label, id, children} = props;
   return (
-    <FormControl fullWidth style={{ marginLeft: 8, marginTop: 8 }}>
+    <FormControl fullWidth>
       <InputLabel id={`${id}_label`}>{label}</InputLabel>
       <Select                      
         labelId={`${id}_label`}

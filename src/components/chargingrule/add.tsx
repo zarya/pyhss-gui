@@ -70,9 +70,6 @@ const ChargingRuleAddItem = (props: { open: ReturnType<typeof Boolean>, handleCl
         <h3>Add</h3>
         <Box
           component="form"
-          sx={{
-            '& .MuiTextField-root': { m: 1, width: '25ch' },
-          }}
           noValidate
           autoComplete="off"
         >

@@ -5,13 +5,15 @@ import ApnItem from './apn/item';
 import ApnAddItem from './apn/add';
 import SubscriberItem from './subscriber/tableItem';
 import SubscriberAddItem from './subscriber/add';
+import SubscriberAddModal from './subscriber/addModal';
 import ImsSubscriberItem from './imssubscriber/tableItem'
 import ImsSubscriberAddItem from './imssubscriber/add'
+import ImsSubscriberAddModal from './imssubscriber/addModal'
 import AucItem from './auc/tableItem';
 import AucAddItem from './auc/add';
+import AucAddModal from './auc/addModal';
 import TftItem from './tft/tableItem';
 import TftAddItem from './tft/add';
-import AddAucWizard from './addwizard/auc';
 import AddSubscriberWizard from './addwizard/subscriber';
 import AddImsSubscriberWizard from './addwizard/imssubscriber';
 import ChargingRuleItem from './chargingrule/tableItem';
@@ -34,15 +36,17 @@ export {
     ApnAddItem,
     SubscriberItem,
     SubscriberAddItem,
+    SubscriberAddModal,
     ImsSubscriberItem,
     ImsSubscriberAddItem,
+    ImsSubscriberAddModal,
     AucItem,
     AucAddItem,
+    AucAddModal,
     TftItem,
     TftAddItem,
     ChargingRuleItem,
     ChargingRuleAddItem,
-    AddAucWizard,
     AddSubscriberWizard,
     AddImsSubscriberWizard,
     NetworkBandwidthFormatter,

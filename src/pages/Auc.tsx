@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, {useState} from 'react';
-import {ContentHeader, AucItem, AucAddItem} from '@components';
+import {ContentHeader, AucItem, AucAddModal} from '@components';
 import {AucApi} from "../services/pyhss"
 import SpeedDial from '@mui/material/SpeedDial';
 import SpeedDialIcon from '@mui/material/SpeedDialIcon';
@@ -130,7 +130,7 @@ const Auc = () => {
           onClick={() => handleAdd()}
           open={openAdd}
         />
-        <AucAddItem open={openAdd} handleClose={handleAddClose} data={dialogData} edit={editMode} />
+        <AucAddModal open={openAdd} handleClose={handleAddClose} data={dialogData} edit={editMode} />
       </section>
     </div>
   );

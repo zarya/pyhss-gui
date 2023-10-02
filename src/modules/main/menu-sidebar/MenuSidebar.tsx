@@ -48,6 +48,11 @@ export const MENU: IMenuItem[] = [
     name: i18n.t('menusidebar.label.chargingrule'),
     icon: 'fas fa-search-dollar nav-icon',
     path: '/chargingrule'
+  },
+  {
+    name: "Subscriber wizard",
+    icon: 'fas fa-magic nav-icon',
+    path: '/addwizard'
   }
 ];
 

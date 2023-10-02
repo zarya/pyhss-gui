@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
-import {ContentHeader, SubscriberItem, SubscriberAddItem} from '@components';
+import {ContentHeader, SubscriberItem, SubscriberAddModal} from '@components';
 import {SubscriberApi} from "../services/pyhss";
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -120,7 +120,7 @@ const Subscriber = () => {
           onClick={() => handleAdd()}
           open={openAdd}
         />
-        <SubscriberAddItem open={openAdd} handleClose={handleAddClose} data={dialogData} edit={editMode} />
+        <SubscriberAddModal open={openAdd} handleClose={handleAddClose} data={dialogData} edit={editMode} />
       </section>
     </div>
   );

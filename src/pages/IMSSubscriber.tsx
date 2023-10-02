@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
-import {ContentHeader, ImsSubscriberItem, ImsSubscriberAddItem} from '@components';
+import {ContentHeader, ImsSubscriberItem, ImsSubscriberAddModal} from '@components';
 import {ImsSubscriberApi} from "../services/pyhss";
 
 import Table from '@mui/material/Table';
@@ -115,7 +115,7 @@ const IMSSubscriber = () => {
           onClick={() => handleAdd()}
           open={openAdd}
         />
-        <ImsSubscriberAddItem open={openAdd} handleClose={handleAddClose} data={dialogData} edit={editMode} />
+        <ImsSubscriberAddModal open={openAdd} handleClose={handleAddClose} data={dialogData} edit={editMode} />
       </section>
     </div>
   );
