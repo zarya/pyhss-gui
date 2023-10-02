@@ -10,6 +10,7 @@ import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import Grid from '@mui/material/Grid';
 import i18n from '@app/utils/i18n';
+import {InputField, SelectField, SaveButtons} from '@components';
 
 import CryptoJS from 'crypto-js';
 
@@ -119,321 +120,202 @@ const AucAdditem = (props: { open: ReturnType<typeof Boolean>, handleClose: Retu
 
   return (
     <React.Fragment>
-     <Modal
+      <Modal
        open={open}
        onClose={handleLocalClose}
        aria-labelledby="modal-modal-title"
        aria-describedby="modal-modal-description"
-     >
-       <Box sx={style}>
-
-<Button variant="contained" onClick={() => console.log(handleOPGenerate("780E6AC95A2E43449C15BDCDD0450982","D7DECB1F50404CC29ECBF989FE73AFC5"))}>test</Button>
-
-        <h3>{(edit?'Edit':'Add')}</h3>
-        {edit && !forceKeys && <Button onClick={handleForceKeys}>Set Keys</Button>}
-        <Box
-          component="form"
-          sx={{
-            '& .MuiTextField-root': { m: 1, width: '25ch' },
-          }}
-          noValidate
-          autoComplete="off"
-        >
-          <Grid container spacing={1} rowSpacing={1}>
-            <Grid item xs={3}>
-              <FormControl fullWidth>
-                <TextField
-                  style={{width: '99%'}}
-                  required
-                  id="outlined-required"
-                  label="IMSI"
-                  onChange={handleChange}
+      >
+        <Box sx={style}>
+          <Button variant="contained" onClick={() => console.log(handleOPGenerate("780E6AC95A2E43449C15BDCDD0450982","D7DECB1F50404CC29ECBF989FE73AFC5"))}>test</Button>
+          <h3>{(edit?'Edit':'Add')}</h3>
+          {edit && !forceKeys && <Button onClick={handleForceKeys}>Set Keys</Button>}
+          <Box
+            component="form"
+            sx={{'& .MuiTextField-root': { m: 1, width: '25ch' }}}
+            noValidate
+            autoComplete="off"
+          >
+            <Grid container spacing={1} rowSpacing={1}>
+              <Grid item xs={3}>
+                <InputField
                   value={state.imsi}
-                  name="imsi"
-                  aria-describedby="imsi-helper-text"
-                />
-                <FormHelperText id="imsi-helper-text">IMSI/Sim Number</FormHelperText>
-              </FormControl>
-            </Grid>
-            {(!edit || forceKeys) && <Grid item xs={3}>
-              <FormControl fullWidth>
-                <TextField
-                  style={{width: '99%'}}
-                  required
-                  label="Ki"
                   onChange={handleChange}
+                  id="imsi"
+                  label="IMSI"
+                >International mobile subscriber identity</InputField>
+              </Grid>
+              {(!edit || forceKeys) && <Grid item xs={3}>
+                <InputField
                   value={state.ki}
-                  name="ki"
-                  aria-describedby="ki-helper"
-                />
-                <FormHelperText id="ki-helper">Ki key</FormHelperText>
-              </FormControl>
-            </Grid>}
-            {(!edit || forceKeys) && <Grid item xs={3}>
-              <FormControl fullWidth>
-                <TextField
-                  style={{width: '99%'}}
-                  required
-                  label="Opc"
                   onChange={handleChange}
+                  id="ki"
+                  label="Ki"
+                >Secret</InputField>
+              </Grid>}
+              {(!edit || forceKeys) && <Grid item xs={3}>
+                <InputField
                   value={state.opc}
-                  name="opc"
-                  aria-describedby="opc-helper"
-                />
-                <FormHelperText id="opc-helper">Opc key</FormHelperText>
-              </FormControl>
-            </Grid>}
-            <Grid item xs={3}>
-              <FormControl fullWidth>
-                <TextField
-                  style={{width: '99%'}}
-                  required
-                  label="ICCID"
                   onChange={handleChange}
+                  id="opc"
+                  label="OPc"
+                >Operator key</InputField>
+              </Grid>}
+              <Grid item xs={3}>
+                <InputField
                   value={state.iccid}
-                  name="iccid"
-                  aria-describedby="iccid-helper"
-                />
-                <FormHelperText id="iccid-helper">ICCID</FormHelperText>
-              </FormControl>
-            </Grid>
-            <Grid item xs={2}>
-              <FormControl fullWidth style={{ marginTop: 8 }}>
-                <InputLabel id="esim_label">eSim</InputLabel>
-                <Select
-                  labelId="esim_label"
-                  value={state.esim}
-                  label="eSim"
                   onChange={handleChange}
-                  name="esim"
-                  aria-describedby="esim-helper-text"
+                  id="iccid"
+                  label="ICCID"
+                >ICCID</InputField>
+              </Grid>
+              <Grid item xs={2}>
+                <SelectField
+                  value={state.esim}
+                  onChange={handleChange}
+                  id="esim"
+                  label="eSIM"
+                  helper="Is this a eSIM?"
                 >
                   <MenuItem value={true}>{i18n.t('generic.yes')}</MenuItem>
                   <MenuItem value={false}>{i18n.t('generic.no')}</MenuItem>
-                </Select>
-                <FormHelperText id="esim-helper-text">Is this a eSim?</FormHelperText>
-              </FormControl>
-            </Grid>
-
-            <Grid item xs={3}>
-              <FormControl fullWidth>
-                <TextField
-                  style={{width: '99%'}}
-                  label="Vendor"
-                  onChange={handleChange}
+                </SelectField>
+              </Grid>
+              <Grid item xs={3}>
+                <InputField
                   value={state.sim_vendor}
-                  name="sim_vendor"
-                  aria-describedby="vendor-helper"
-                />
-                <FormHelperText id="vendor-helper">Vendor</FormHelperText>
-              </FormControl>
-            </Grid>
-            <Grid item xs={3}>
-              <FormControl fullWidth>
-                <TextField
-                  style={{width: '99%'}}
-                  label="Batch"
                   onChange={handleChange}
+                  id="sim_vendor"
+                  label="Vendor"
+                >SIM Vendor</InputField>
+              </Grid>
+              <Grid item xs={3}>
+                <InputField
                   value={state.batch_name}
-                  name="batch_name"
-                  aria-describedby="batch-helper"
-                />
-                <FormHelperText id="batch-helper">Batch</FormHelperText>
-              </FormControl>
-            </Grid>
-            <Grid item xs={3}>
-              <FormControl fullWidth>
-                <TextField
-                  style={{width: '99%'}}
-                  label="LPA"
                   onChange={handleChange}
-                  value={state.lpa}
-                  name="lpa"
-                  aria-describedby="lpa-helper"
-                />
-                <FormHelperText id="lpa-helper">LPA</FormHelperText>
-              </FormControl>
-            </Grid>
-            <Grid item xs={3}>
-              <FormControl fullWidth>
-                <TextField
-                  style={{width: '99%'}}
-                  required
-                  label="AMF"
-                  onChange={handleChange}
+                  id="batch_name"
+                  label="Batch"
+                >Batch name</InputField>
+              </Grid>
+              <Grid item xs={3}>
+                <InputField
                   value={state.amf}
-                  name="amf"
-                  aria-describedby="amf-helper"
-                />
-                <FormHelperText id="amf-helper">AMF</FormHelperText>
-              </FormControl>
-            </Grid>
-            <Grid item xs={12}><h3>User info</h3></Grid>
-            <Grid item xs={3}>
-              <FormControl fullWidth>
-                <TextField
-                  style={{width: '99%'}}
-                  label="PIN 1"
                   onChange={handleChange}
+                  id="amf"
+                  label="AMF"
+                >Access and Mobility Management Function</InputField>
+              </Grid>
+              {state.esim === true && <Grid item xs={5}>
+                <InputField
+                  value={state.lpa}
+                  onChange={handleChange}
+                  id="lpa"
+                  label="LPA"
+                >LPA URL for activating eSIM</InputField>
+              </Grid>}
+              <Grid item xs={12}><h3>User info</h3></Grid>
+              <Grid item xs={3}>
+                <InputField
                   value={state.pin1}
-                  name="pin1"
-                  aria-describedby="pin1-helper"
-                />
-                <FormHelperText id="pin1-helper">PIN 1</FormHelperText>
-              </FormControl>
-            </Grid>
-            <Grid item xs={3}>
-              <FormControl fullWidth>
-                <TextField
-                  style={{width: '99%'}}
-                  label="PUK 1"
                   onChange={handleChange}
+                  id="pin1"
+                  label="PIN 1"
+                >User PIN 1</InputField>
+              </Grid>
+              <Grid item xs={3}>
+                <InputField
                   value={state.puk1}
-                  name="puk1"
-                  aria-describedby="puk1-helper"
-                />
-                <FormHelperText id="puk1-helper">PUK 1</FormHelperText>
-              </FormControl>
-            </Grid>
-            <Grid item xs={3}>
-              <FormControl fullWidth>
-                <TextField
-                  style={{width: '99%'}}
-                  label="PIN 2"
                   onChange={handleChange}
+                  id="puk1"
+                  label="PUK 1"
+                >User PUK 1</InputField>
+              </Grid>
+              <Grid item xs={3}>
+                <InputField
                   value={state.pin2}
-                  name="pin2"
-                  aria-describedby="pin2-helper"
-                />
-                <FormHelperText id="pin2-helper">PIN 2</FormHelperText>
-              </FormControl>
-            </Grid>
-            <Grid item xs={3}>
-              <FormControl fullWidth>
-                <TextField
-                  style={{width: '99%'}}
-                  label="PUK 2"
                   onChange={handleChange}
+                  id="pin2"
+                  label="PIN 2"
+                >User PIN 2</InputField>
+              </Grid>
+              <Grid item xs={3}>
+                <InputField
                   value={state.puk2}
-                  name="puk2"
-                  aria-describedby="puk2-helper"
-                />
-                <FormHelperText id="puk2-helper">PUK 2</FormHelperText>
-              </FormControl>
-            </Grid>
-            {(!edit || forceKeys) && <Grid item xs={3}>
-              <FormControl fullWidth>
-                <TextField
-                  style={{width: '99%'}}
-                  label="KID"
                   onChange={handleChange}
+                  id="puk2"
+                  label="PUK 2"
+                >User PUK 2</InputField>
+              </Grid>
+              {(!edit || forceKeys) && <Grid item xs={3}>
+                <InputField
                   value={state.kid}
-                  name="kid"
-                  aria-describedby="kid-helper"
-                />
-                <FormHelperText id="kid-helper">KID</FormHelperText>
-              </FormControl>
-            </Grid>}
-            {(!edit || forceKeys) && <Grid item xs={3}>
-              <FormControl fullWidth>
-                <TextField
-                  style={{width: '99%'}}
-                  label="PSK"
                   onChange={handleChange}
+                  id="kid"
+                  label="KID"
+                >KID</InputField>
+              </Grid>}
+              {(!edit || forceKeys) && <Grid item xs={3}>
+                <InputField
                   value={state.psk}
-                  name="psk"
-                  aria-describedby="psk-helper"
-                />
-                <FormHelperText id="psk-helper">PSK</FormHelperText>
-              </FormControl>
-            </Grid>}
-            {(!edit || forceKeys) && <Grid item xs={3}>
-              <FormControl fullWidth>
-                <TextField
-                  style={{width: '99%'}}
-                  label="DES"
                   onChange={handleChange}
+                  id="psk"
+                  label="PSK"
+                >PSK</InputField>
+              </Grid>}
+              {(!edit || forceKeys) && <Grid item xs={3}>
+                <InputField
                   value={state.des}
-                  name="des"
-                  aria-describedby="des-helper"
-                />
-                <FormHelperText id="des-helper">DES</FormHelperText>
-              </FormControl>
-            </Grid>}
-            {(!edit || forceKeys) && <Grid item xs={3}>
-              <FormControl fullWidth>
-                <TextField
-                  style={{width: '99%'}}
-                  label="ADM 1"
                   onChange={handleChange}
+                  id="des"
+                  label="DES"
+                >DES</InputField>
+              </Grid>}
+              {(!edit || forceKeys) && <Grid item xs={3}>
+                <InputField
                   value={state.adm1}
-                  name="adm1"
-                  aria-describedby="adm1-helper"
-                />
-                <FormHelperText id="adm1-helper">ADM 1</FormHelperText>
-              </FormControl>
-            </Grid>}
-            <Grid item xs={12}><h3>Misc</h3></Grid>
-            <Grid item xs={3}>
-              <FormControl fullWidth>
-                <TextField
-                  style={{width: '99%'}}
-                  label="misc1"
                   onChange={handleChange}
+                  id="adm1"
+                  label="ADM1"
+                >ADM1</InputField>
+              </Grid>}
+              <Grid item xs={12}><h3>Misc</h3></Grid>
+              <Grid item xs={3}>
+                <InputField
                   value={state.misc1}
-                  name="misc1"
-                  aria-describedby="misc1-helper"
-                />
-                <FormHelperText id="misc1-helper">MISC 1</FormHelperText>
-              </FormControl>
-            </Grid>
-            <Grid item xs={3}>
-              <FormControl fullWidth>
-                <TextField
-                  style={{width: '99%'}}
-                  label="misc2"
                   onChange={handleChange}
+                  id="misc1"
+                  label="misc1"
+                >misc1</InputField>
+              </Grid>
+              <Grid item xs={3}>
+                <InputField
                   value={state.misc2}
-                  name="misc2"
-                  aria-describedby="misc2-helper"
-                />
-                <FormHelperText id="misc2-helper">MISC 2</FormHelperText>
-              </FormControl>
-            </Grid>
-            <Grid item xs={3}>
-              <FormControl fullWidth>
-                <TextField
-                  style={{width: '99%'}}
-                  label="misc3"
                   onChange={handleChange}
+                  id="misc2"
+                  label="misc2"
+                >misc2</InputField>
+              </Grid>
+              <Grid item xs={3}>
+                <InputField
                   value={state.misc3}
-                  name="misc3"
-                  aria-describedby="misc3-helper"
-                />
-                <FormHelperText id="misc3-helper">MISC 3</FormHelperText>
-              </FormControl>
-            </Grid>
-            <Grid item xs={3}>
-              <FormControl fullWidth>
-                <TextField
-                  style={{width: '99%'}}
-                  label="misc4"
                   onChange={handleChange}
+                  id="misc3"
+                  label="misc3"
+                >misc3</InputField>
+              </Grid>
+              <Grid item xs={3}>
+                <InputField
                   value={state.misc4}
-                  name="misc4"
-                  aria-describedby="misc4-helper"
-                />
-                <FormHelperText id="misc4-helper">MISC 4</FormHelperText>
-              </FormControl>
+                  onChange={handleChange}
+                  id="misc4"
+                  label="misc4"
+                >misc4</InputField>
+              </Grid>
             </Grid>
-          </Grid>
-         </Box>
-         <Button variant="contained" onClick={() => handleSave()}>{i18n.t('generic.save')}&nbsp;<i className="fas fa-save"></i></Button>
-          &nbsp;
-         <Button variant="contained" onClick={() => handleLocalClose()}>{i18n.t('generic.cancel')}</Button>
-       </Box>
-     </Modal>
-
+          </Box>
+          <SaveButtons onClickClose={handleLocalClose} onClickSave={handleSave} />
+        </Box>
+      </Modal>
     </React.Fragment>
   );
 }
