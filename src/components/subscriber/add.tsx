@@ -76,22 +76,22 @@ const SubscriberAddItem = (props: { onChange: ReturnType<typeof any>, state: Ret
                 label="APN list"
               >List of APN ids comma seperated</InputField>
             </Grid>
-            <Grid item xs={12}><h3>Bandwidth</h3></Grid>
+            <Grid item xs={12}><h3>QoS</h3></Grid>
             <Grid item xs={6}>
               <InputField
                 value={state.ue_ambr_ul}
                 onChange={onChange}
                 id="ue_ambr_ul"
-                label="AMBR Upload"
-              >Upload bandwidth: <NetworkBandwidthFormatter data={state.ue_ambr_ul} /></InputField>
+                label="AMBR ul"
+              >Agregated Maximum Bit Rate upload: <NetworkBandwidthFormatter data={state.ue_ambr_ul} /></InputField>
             </Grid>
             <Grid item xs={6}>
               <InputField
                 value={state.ue_ambr_dl}
                 onChange={onChange}
                 id="ue_ambr_dl"
-                label="AMBR Download"
-              >Download bandwidth: <NetworkBandwidthFormatter data={state.ue_ambr_dl} /></InputField>
+                label="AMBR dl"
+              >Agregated Maximum Bit Rate download: <NetworkBandwidthFormatter data={state.ue_ambr_dl} /></InputField>
             </Grid>
             <Grid item xs={12}><h3>Timers</h3></Grid>
             <Grid item xs={4}>
@@ -99,7 +99,7 @@ const SubscriberAddItem = (props: { onChange: ReturnType<typeof any>, state: Ret
                 value={state.subscribed_rau_tau_timer}
                 onChange={onChange}
                 id="subscribed_rau_tau_timer"
-                label="subscribed_rau_tau_timer"
+                label="RAU TAU Timer"
               >Periodic Tracking Area Update timer</InputField>
             </Grid>
           </Grid>

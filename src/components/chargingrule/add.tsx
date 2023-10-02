@@ -89,22 +89,6 @@ const ChargingRuleAddItem = (props: { open: ReturnType<typeof Boolean>, handleCl
                <FormHelperText id="rule_name-helper">Name of the rule</FormHelperText>
              </FormControl>
             </Grid>
-           <Grid item xs={2}>
-             <FormControl fullWidth style={{ marginTop: 8 }}>
-               <InputLabel id="qci_label">QCI</InputLabel>
-               <Select
-                 labelId="qci_label"
-                 value={state.qci}
-                 label="qci"
-                 onChange={handleChange}
-                 name="qci"
-                 aria-describedby="qci-helper-text"
-               >
-                 {Array.from(Array(9), (e, i) => (<MenuItem key={i+1+e} value={i+1}>{i+1}</MenuItem>))}
-               </Select>
-             <FormHelperText id="qci-helper-text">QCI Value</FormHelperText>
-             </FormControl>
-           </Grid>
             <Grid item xs={2}>
               <FormControl fullWidth>
                 <TextField
@@ -150,20 +134,36 @@ const ChargingRuleAddItem = (props: { open: ReturnType<typeof Boolean>, handleCl
                <FormHelperText id="precedence-helper">Precedence of this rule, allows rule to override or be overridden by a higher priority rule</FormHelperText>
              </FormControl>
            </Grid>
-            <Grid item xs={12}><h3>Bandwidth</h3></Grid>
+            <Grid item xs={12}><h3>QoS</h3></Grid>
+           <Grid item xs={2}>
+             <FormControl fullWidth style={{ marginTop: 8 }}>
+               <InputLabel id="qci_label">QCI</InputLabel>
+               <Select
+                 labelId="qci_label"
+                 value={state.qci}
+                 label="qci"
+                 onChange={handleChange}
+                 name="qci"
+                 aria-describedby="qci-helper-text"
+               >
+                 {Array.from(Array(9), (e, i) => (<MenuItem key={i+1+e} value={i+1}>{i+1}</MenuItem>))}
+               </Select>
+             <FormHelperText id="qci-helper-text">QCI Value</FormHelperText>
+             </FormControl>
+           </Grid>
             <Grid item xs={3}>
               <FormControl fullWidth>
                 <TextField
                   style={{width: '99%'}}
                   required
                   id="outlined-required"
-                  label="mbr_dl"
+                  label="MBR dl"
                   onChange={handleChange}
                   value={state.mbr_dl}
                   name="mbr_dl"
                   aria-describedby="mbr_dl-helper"
                />
-               <FormHelperText id="mbr_dl-helper">Download bandwidth: <NetworkBandwidthFormatter data={state.mbr_dl} /></FormHelperText>
+               <FormHelperText id="mbr_dl-helper">Maximum Bit Rate download bandwidth: <NetworkBandwidthFormatter data={state.mbr_dl} /></FormHelperText>
              </FormControl>
             </Grid>
             <Grid item xs={3}>
@@ -172,13 +172,13 @@ const ChargingRuleAddItem = (props: { open: ReturnType<typeof Boolean>, handleCl
                   style={{width: '99%'}}
                   required
                   id="outlined-required"
-                  label="mbr_ul"
+                  label="MBR ul"
                   onChange={handleChange}
                   value={state.mbr_ul}
                   name="mbr_ul"
                   aria-describedby="mbr_ul-helper"
                />
-               <FormHelperText id="mbr_ul-helper">Upload bandwidth: <NetworkBandwidthFormatter data={state.mbr_ul} /></FormHelperText>
+               <FormHelperText id="mbr_ul-helper">Maximum Bit Rate upload: <NetworkBandwidthFormatter data={state.mbr_ul} /></FormHelperText>
              </FormControl>
             </Grid>
             <Grid item xs={3}>
@@ -187,13 +187,13 @@ const ChargingRuleAddItem = (props: { open: ReturnType<typeof Boolean>, handleCl
                   style={{width: '99%'}}
                   required
                   id="outlined-required"
-                  label="gbr_dl"
+                  label="GBR download"
                   onChange={handleChange}
                   value={state.gbr_dl}
                   name="gbr_dl"
                  aria-describedby="gbr_dl-helper"
                />
-               <FormHelperText id="gbr_dl-helper">Download bandwidth: <NetworkBandwidthFormatter data={state.gbr_dl} /></FormHelperText>
+               <FormHelperText id="gbr_dl-helper">Guaranteed Bit Rate download: <NetworkBandwidthFormatter data={state.gbr_dl} /></FormHelperText>
              </FormControl>
             </Grid>
             <Grid item xs={3}>
@@ -202,16 +202,16 @@ const ChargingRuleAddItem = (props: { open: ReturnType<typeof Boolean>, handleCl
                   style={{width: '99%'}}
                   required
                   id="outlined-required"
-                  label="gbr_ul"
+                  label="GBR ul"
                   onChange={handleChange}
                   value={state.gbr_ul}
                   name="gbr_ul"
                  aria-describedby="gbr_ul-helper"
                />
-               <FormHelperText id="gbr_ul-helper">Upload bandwidth: <NetworkBandwidthFormatter data={state.gbr_ul} /></FormHelperText>
+               <FormHelperText id="gbr_ul-helper">Guaranteed Bit Rate upload: <NetworkBandwidthFormatter data={state.gbr_ul} /></FormHelperText>
              </FormControl>
             </Grid>
-            <Grid item xs={12}><h3>ARP</h3></Grid>
+            <Grid item xs={12}><h4>Allocation and Retention Priority (ARP)</h4></Grid>
             <Grid item xs={3}>
               <FormControl fullWidth style={{ marginTop: 8 }}>
                 <InputLabel id="arp_priority_label">Priority</InputLabel>

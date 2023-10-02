@@ -81,17 +81,6 @@ const ApnAddItem = (props: { open: ReturnType<typeof Boolean>, handleClose: Retu
             </Grid>
             <Grid item xs={4}>
               <SelectField
-                value={state.qci}
-                onChange={handleChange}
-                id="qci"
-                label="QCI"
-                helper="QoS Class Identifier"
-              >
-                {Array.from(Array(9), (e, i) => (<MenuItem key={i+1+e} value={i+1}>{i+1}</MenuItem>))}
-              </SelectField>
-            </Grid>
-            <Grid item xs={4}>
-              <SelectField
                 value={state.ip_version}
                 onChange={handleChange}
                 id="ip_version"
@@ -146,24 +135,35 @@ const ApnAddItem = (props: { open: ReturnType<typeof Boolean>, handleClose: Retu
                 Comma seperated list of charging rules
               </InputField>
             </Grid>
-            <Grid item xs={12}><h3>Bandwidth</h3></Grid>
-            <Grid item xs={6}>
+            <Grid item xs={12}><h3>QoS</h3></Grid>
+            <Grid item xs={3}>
+              <SelectField
+                value={state.qci}
+                onChange={handleChange}
+                id="qci"
+                label="QCI"
+                helper="QoS Class Identifier"
+              >
+                {Array.from(Array(9), (e, i) => (<MenuItem key={i+1+e} value={i+1}>{i+1}</MenuItem>))}
+              </SelectField>
+            </Grid>
+            <Grid item xs={4}>
               <InputField
                 value={state.apn_ambr_ul}
                 onChange={handleChange}
                 id="apn_ambr_ul"
-                label="AMBR Upload"
-              >Upload bandwidth: <NetworkBandwidthFormatter data={state.apn_ambr_ul} /></InputField>
+                label="AMBR ul"
+              >Agregated Maximum Bit Rate upload: <NetworkBandwidthFormatter data={state.apn_ambr_ul} /></InputField>
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={4}>
               <InputField
                 value={state.apn_ambr_dl}
                 onChange={handleChange}
                 id="apn_ambr_dl"
-                label="AMBR Download"
-              >Download bandwidth: <NetworkBandwidthFormatter data={state.apn_ambr_dl} /></InputField>
+                label="AMBR dl"
+              >Agregated Maximum Bit Rate download: <NetworkBandwidthFormatter data={state.apn_ambr_dl} /></InputField>
             </Grid>
-            <Grid item xs={12}><h3>Arp</h3></Grid>
+            <Grid item xs={12}><h4>Allocation and Retention Priority (ARP)</h4></Grid>
             <Grid item xs={4}>
               <SelectField
                 value={state.arp_priority}
