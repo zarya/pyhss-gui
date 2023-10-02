@@ -3,15 +3,15 @@ import {AuthApi} from '../services/pyhss';
 
 export const authLogin = (password: string, api: string) => {
   return new Promise(async (res, rej) => {
-    localStorage.setItem('token',password);
-    AuthApi.login().then((data) => {
+    AuthApi.login(api,password).then((data) => {
       if (data.data.result === "OK") {
           localStorage.setItem(
               'authentication',
-              JSON.stringify({ profile: { email: 'admin@example.com' } })
+              JSON.stringify({ profile: { api: api } })
           );
           localStorage.setItem('api',api);
-          return res({ profile: { email: 'admin@example.com' } });
+          localStorage.setItem('token',password);
+          return res({ profile: { email: 'admin@example.com', api: api } });
       } else {
         return rej({ message: 'Credentials are wrong!' });
       }

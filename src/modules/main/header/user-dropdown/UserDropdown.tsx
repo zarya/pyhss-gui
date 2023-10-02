@@ -150,36 +150,10 @@ const UserDropdown = () => {
             rounded
           />
           <p>
-            {authentication.profile.email}
-            <small>
-              <span>Member since </span>
-              <span>
-                {/* {DateTime.fromISO(user.createdAt).toFormat('dd LLL yyyy')} */}
-              </span>
-            </small>
+            {authentication.profile.api}
           </p>
         </UserHeader>
-        <UserBody>
-          <div className="row">
-            <div className="col-4 text-center">
-              <Link to="/">{t<string>('header.user.followers')}</Link>
-            </div>
-            <div className="col-4 text-center">
-              <Link to="/">{t<string>('header.user.sales')}</Link>
-            </div>
-            <div className="col-4 text-center">
-              <Link to="/">{t<string>('header.user.friends')}</Link>
-            </div>
-          </div>
-        </UserBody>
         <UserFooter>
-          <button
-            type="button"
-            className="btn btn-default btn-flat"
-            onClick={navigateToProfile}
-          >
-            {t<string>('header.user.profile')}
-          </button>
           <button
             type="button"
             className="btn btn-default btn-flat float-right"
