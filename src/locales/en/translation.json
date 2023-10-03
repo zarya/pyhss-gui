@@ -122,5 +122,14 @@
       "arpPreemptionCapability": "ARP Preemption Capability",
       "precedence": "Precedence"
     }
+  },
+  "inputFields": {
+    "desc": {
+        "imsi":"International mobile subscriber identity",
+        "msisdn": "MSISDN",
+        "msisdn_list": "Comma seperated list of msisdn",
+        "ifc_path": "Initial Filter Criteria path",
+        "sh_profile": "SH Profile"
+    }
   }
 }

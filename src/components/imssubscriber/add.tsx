@@ -1,5 +1,8 @@
 import React from 'react';
-import TextField from '@mui/material/TextField';
+
+import {InputField} from '@components';
+import Grid from '@mui/material/Grid';
+
 import i18n from '@app/utils/i18n';
 
 const ImsSubscriberAddItem = (props: { onChange: ReturnType<typeof any>, state: ReturnType<typeof any> }) => {
@@ -10,46 +13,48 @@ const ImsSubscriberAddItem = (props: { onChange: ReturnType<typeof any>, state: 
 
   return (
     <React.Fragment>
-          <TextField
-            required
-            id="outlined-required"
+      <Grid container rowSpacing={1} spacing={1}>
+        <Grid item xs={4}>
+          <InputField
+            value={state.IMSI}
+            onChange={onChange}
+            id="imsi"
             label="IMSI"
-            onChange={onChange}
-            value={state.imsi}
-            name="imsi"
-          />
-          <TextField
-            required
-            id="outlined-required"
-            label="MSISDN"
-            onChange={onChange}
+          >{i18n.t('inputFields.desc.imsi')}</InputField>
+        </Grid>
+        <Grid item xs={4}>
+          <InputField
             value={state.msisdn}
-            name="msisdn"
-          />
-          <TextField
-            required
-            id="outlined-required"
-            label="MSISDN list"
             onChange={onChange}
+            id="msisdn"
+            label="MSISDN"
+          >{i18n.t('inputFields.desc.msisdn')}</InputField>
+        </Grid>
+        <Grid item xs={4}>
+          <InputField
             value={state.msisdn_list}
-            name="msisdn_list"
-          />
-          <TextField
-            required
-            id="outlined-required"
-            label="ifc_path"
             onChange={onChange}
+            id="msisdn_list"
+            label="MSISDN List"
+          >{i18n.t('inputFields.desc.msisdn_list')}</InputField>
+        </Grid>
+        <Grid item xs={4}>
+          <InputField
             value={state.ifc_path}
-            name="ifc_path"
-          />
-          <TextField
-            required
-            id="outlined-required"
-            label="sh_profile"
             onChange={onChange}
+            id="ifc_path"
+            label="ifc_path"
+          >{i18n.t('inputFields.desc.ifc_path')}</InputField>
+        </Grid>
+        <Grid item xs={4}>
+          <InputField
             value={state.sh_profile}
-            name="sh_profile"
-          />
+            onChange={onChange}
+            id="sh_profile"
+            label="SH Profile"
+          >{i18n.t('inputFields.desc.sh_profile')}</InputField>
+        </Grid>
+      </Grid>
     </React.Fragment>
   );
 }

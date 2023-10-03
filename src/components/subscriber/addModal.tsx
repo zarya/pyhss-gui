@@ -29,6 +29,7 @@ const SubscriberAddModal = (props: { open: ReturnType<typeof Boolean>, handleClo
 
   const handleChange = e => {
     const { name, value } = e.target;
+    console.log(name,value);
     setState(prevState => ({
         ...prevState,
         [name]: value

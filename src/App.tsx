@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import CssBaseline from '@mui/material/CssBaseline';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import Main from '@modules/main/Main';
@@ -25,7 +28,17 @@ import {
   getAuthStatus,
 } from './utils/oidc-providers';
 
-declare const FB: any;
+const darkTheme = createTheme({
+  palette: {
+    mode: 'dark',
+  },
+});
+
+const lightTheme = createTheme({
+  palette: {
+    mode: 'light',
+  },
+});
 
 const App = () => {
   const windowSize = useWindowSize();
@@ -61,12 +74,18 @@ const App = () => {
     }
   }, [windowSize]);
 
+  const darkMode = useSelector(
+    (state: any) => state.ui.darkMode
+  );
+
   if (isAppLoading) {
     return <p>Loading</p>;
   }
 
   return (
+  <ThemeProvider theme={(darkMode?darkTheme:lightTheme)}>
     <BrowserRouter>
+      <CssBaseline />
       <Routes>
         <Route path="/login" element={<PublicRoute />}>
           <Route path="/login" element={<Login />} />
@@ -95,6 +114,7 @@ const App = () => {
         pauseOnHover
       />
     </BrowserRouter>
+  </ThemeProvider>
   );
 };
 

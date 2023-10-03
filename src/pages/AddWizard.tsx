@@ -24,6 +24,10 @@ import {
   TableRow,
   TableCell,
   TableBody,
+  Card,
+  CardContent,
+  CardActions,
+  CardActionArea,
 } from '@mui/material';
 
 const steps = ['Add AUC', 'Add Subscriber', 'Add IMS Subscriber', 'Validate'];
@@ -241,7 +245,11 @@ const AddWizard = () => {
         </React.Fragment>
       ) : (
         <React.Fragment>
-          <Typography sx={{ mt: 2, mb: 1 }}>Step {activeStep + 1}</Typography>
+          <Card sx={{ minWidth: 275 }}>
+          <CardActionArea>
+          <Typography sx={{ mt: 2, mb: 1 }} variant="h5">Step {activeStep + 1} {steps[activeStep]}</Typography>
+          </CardActionArea>
+          <CardContent>
           {activeStep === 0 && <AucAddItem forceKeys={true} edit={false} state={auc} onChange={handleChangeAuc} />} 
           {activeStep === 1 && <SubscriberAddItem state={subscriber} onChange={handleChangeSubscriber} />} 
           {activeStep === 2 && <ImsSubscriberAddItem state={imsSubscriber} onChange={handleChangeImsSubscriber} />} 
@@ -282,26 +290,28 @@ const AddWizard = () => {
                 </TableRow>
               </TableBody>
             </Table>
-          </span>} 
-          <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
-            <Button
-              color="inherit"
-              disabled={activeStep === 0}
-              onClick={handleBack}
-              sx={{ mr: 1 }}
-            >
-              Back
-            </Button>
-            <Box sx={{ flex: '1 1 auto' }} />
-            {isStepOptional(activeStep) && (
-              <Button color="inherit" onClick={handleSkip} sx={{ mr: 1 }}>
-                Skip
+          </span>}
+          </CardContent>
+            <CardActions sx={{justifyContent: "flex-end"}}> 
+              <Button
+                color="inherit"
+                disabled={activeStep === 0}
+                onClick={handleBack}
+                sx={{ mr: 1 }}
+                variant="outlined"
+              >
+                Back
               </Button>
-            )}
-            <Button onClick={handleNext}>
-              {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
-            </Button>
-          </Box>
+              {isStepOptional(activeStep) && (
+                <Button variant="outlined" onClick={handleSkip} sx={{ mr: 1 }} color="secondary">
+                  Skip
+                </Button>
+              )}
+              <Button onClick={handleNext} variant="contained">
+                {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+              </Button>
+            </CardActions> 
+          </Card>
         </React.Fragment>
       )}
     </Box>

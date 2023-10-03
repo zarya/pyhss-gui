@@ -1,12 +1,24 @@
 import React from 'react';
-import MenuItem from '@mui/material/MenuItem';
 import Grid from '@mui/material/Grid';
+import MenuItem from '@mui/material/MenuItem';
+import TextField from '@mui/material/TextField';
+import Autocomplete from '@mui/material/Autocomplete';
+
 import i18n from '@app/utils/i18n';
 import {NetworkBandwidthFormatter, InputField, SelectField} from '@components';
+import {AucApi} from '../../services/pyhss';
 
 const SubscriberAddItem = (props: { onChange: ReturnType<typeof any>, state: ReturnType<typeof any> }) => {
-
   const { onChange, state  } = props;
+  const [auc, setAuc] = React.useState([]);
+  const [aucLoading, setAucLoading] = React.useState(true);
+
+  React.useEffect(() => {
+    AucApi.getAll().then((data => {
+      setAuc(data.data);
+      setAucLoading(false);
+    }));
+  }, []);
 
   return (
     <React.Fragment>
@@ -20,12 +32,21 @@ const SubscriberAddItem = (props: { onChange: ReturnType<typeof any>, state: Ret
               >International mobile subscriber identity</InputField>
             </Grid>
             <Grid item xs={2}>
-              <InputField
-                value={state.auc_id}
-                onChange={onChange}
-                id="AUC ID"
-                label="auc_id"
-              >AUC ID</InputField>
+              <Autocomplete
+                loading={aucLoading}
+                onChange={(_event, value) => {
+                  if (value > 0) {
+                    const auc_id=auc.find(a => a.imsi === value).auc_id;
+                    const returnData = {
+                      target: {name: 'auc_id', value: auc_id}
+                    }
+                    onChange(returnData);
+                  }
+                }}
+                value={state.imsi}
+                options={auc.map((option) => option.imsi)}
+                renderInput={(params) => <TextField {...params} label="AUC" />}
+              />
             </Grid>
             <Grid item xs={3}>
               <InputField
