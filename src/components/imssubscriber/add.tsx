@@ -9,14 +9,12 @@ const ImsSubscriberAddItem = (props: { onChange: ReturnType<typeof any>, state: 
 
   const { onChange, state } = props;
 
-  console.log(state);
-
   return (
     <React.Fragment>
       <Grid container rowSpacing={1} spacing={1}>
         <Grid item xs={4}>
           <InputField
-            value={state.IMSI}
+            value={state.imsi}
             onChange={onChange}
             id="imsi"
             label="IMSI"
