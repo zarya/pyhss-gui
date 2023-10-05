@@ -8,6 +8,31 @@ import {InputField, SelectField} from '@components';
 const AucAddItem = (props: { onChange: ReturnType<typeof any>, state: ReturnType<typeof any>, forceKeys: ReturnType<typeof Boolean>, edit: ReturnType<typeof Boolean> }) => {
 
   const { onChange, state, forceKeys, edit } = props;
+  const [errors, setErrors ] = React.useState({'imsi':''})
+
+  const setError = (name,value) => {
+    setErrors(prevState => ({
+        ...prevState,
+        [name]: value
+    }));
+  }
+
+  const onValidate = (field) => {
+    if (field==='imsi' && state.imsi.length < 15)
+      setError('imsi','To short!');
+    else if (field==='imsi')
+      setError('imsi','');
+
+    if (field==='ki' && state.ki === '' && (!edit || forceKeys))
+      setError('ki','To short!');
+    else if (field==='ki')
+      setError('ki','');
+  }
+
+  const onChangeLocal = (e) => {
+    onValidate(e.target.name);
+    onChange(e);
+  }
 
   return (
     <React.Fragment>
@@ -15,42 +40,46 @@ const AucAddItem = (props: { onChange: ReturnType<typeof any>, state: ReturnType
               <Grid item xs={3}>
                 <InputField
                   value={state.imsi}
-                  onChange={onChange}
+                  onChange={onChangeLocal}
                   id="imsi"
                   label="IMSI"
-                >International mobile subscriber identity</InputField>
+                  error={errors.imsi}
+                  required
+                >{i18n.t('inputFields.desc.imsi')}</InputField>
               </Grid>
               {(!edit || forceKeys) && <Grid item xs={3}>
                 <InputField
                   value={state.ki}
-                  onChange={onChange}
+                  onChange={onChangeLocal}
                   id="ki"
                   label="Ki"
-                >Secret</InputField>
+                  required
+                >{i18n.t('inputFields.desc.ki')}</InputField>
               </Grid>}
               {(!edit || forceKeys) && <Grid item xs={3}>
                 <InputField
+                  required
                   value={state.opc}
-                  onChange={onChange}
+                  onChange={onChangeLocal}
                   id="opc"
                   label="OPc"
-                >Operator key</InputField>
+                >{i18n.t('inputFields.desc.opc')}</InputField>
               </Grid>}
               <Grid item xs={3}>
                 <InputField
                   value={state.iccid}
-                  onChange={onChange}
+                  onChange={onChangeLocal}
                   id="iccid"
                   label="ICCID"
-                >ICCID</InputField>
+                >{i18n.t('inputFields.desc.iccid')}</InputField>
               </Grid>
               <Grid item xs={2}>
                 <SelectField
                   value={state.esim}
-                  onChange={onChange}
+                  onChange={onChangeLocal}
                   id="esim"
                   label="eSIM"
-                  helper="Is this a eSIM?"
+                  helper={i18n.t('inputFields.desc.esim')}
                 >
                   <MenuItem value={true}>{i18n.t('generic.yes')}</MenuItem>
                   <MenuItem value={false}>{i18n.t('generic.no')}</MenuItem>
@@ -59,15 +88,15 @@ const AucAddItem = (props: { onChange: ReturnType<typeof any>, state: ReturnType
               <Grid item xs={3}>
                 <InputField
                   value={state.sim_vendor}
-                  onChange={onChange}
+                  onChange={onChangeLocal}
                   id="sim_vendor"
                   label="Vendor"
-                >SIM Vendor</InputField>
+                >{i18n.t('inputFields.desc.sim_vendor')}</InputField>
               </Grid>
               <Grid item xs={3}>
                 <InputField
                   value={state.batch_name}
-                  onChange={onChange}
+                  onChange={onChangeLocal}
                   id="batch_name"
                   label="Batch"
                 >Batch name</InputField>
@@ -75,116 +104,116 @@ const AucAddItem = (props: { onChange: ReturnType<typeof any>, state: ReturnType
               <Grid item xs={3}>
                 <InputField
                   value={state.amf}
-                  onChange={onChange}
+                  onChange={onChangeLocal}
                   id="amf"
                   label="AMF"
-                >Access and Mobility Management Function</InputField>
+                >{i18n.t('inputFields.desc.amf')}</InputField>
               </Grid>
               {state.esim === true && <Grid item xs={5}>
                 <InputField
                   value={state.lpa}
-                  onChange={onChange}
+                  onChange={onChangeLocal}
                   id="lpa"
                   label="LPA"
-                >LPA URL for activating eSIM</InputField>
+                >{i18n.t('inputFields.desc.lpa')}</InputField>
               </Grid>}
               <Grid item xs={12}><h3>User info</h3></Grid>
               <Grid item xs={3}>
                 <InputField
                   value={state.pin1}
-                  onChange={onChange}
+                  onChange={onChangeLocal}
                   id="pin1"
                   label="PIN 1"
-                >User PIN 1</InputField>
+                >{i18n.t('inputFields.desc.pin1')}</InputField>
               </Grid>
               <Grid item xs={3}>
                 <InputField
                   value={state.puk1}
-                  onChange={onChange}
+                  onChange={onChangeLocal}
                   id="puk1"
                   label="PUK 1"
-                >User PUK 1</InputField>
+                >{i18n.t('inputFields.desc.puk1')}</InputField>
               </Grid>
               <Grid item xs={3}>
                 <InputField
                   value={state.pin2}
-                  onChange={onChange}
+                  onChange={onChangeLocal}
                   id="pin2"
                   label="PIN 2"
-                >User PIN 2</InputField>
+                >{i18n.t('inputFields.desc.pin2')}</InputField>
               </Grid>
               <Grid item xs={3}>
                 <InputField
                   value={state.puk2}
-                  onChange={onChange}
+                  onChange={onChangeLocal}
                   id="puk2"
                   label="PUK 2"
-                >User PUK 2</InputField>
+                >{i18n.t('inputFields.desc.puk2')}</InputField>
               </Grid>
               {(!edit || forceKeys) && <Grid item xs={3}>
                 <InputField
                   value={state.kid}
-                  onChange={onChange}
+                  onChange={onChangeLocal}
                   id="kid"
                   label="KID"
-                >KID</InputField>
+                >{i18n.t('inputFields.desc.kid')}</InputField>
               </Grid>}
               {(!edit || forceKeys) && <Grid item xs={3}>
                 <InputField
                   value={state.psk}
-                  onChange={onChange}
+                  onChange={onChangeLocal}
                   id="psk"
                   label="PSK"
-                >PSK</InputField>
+                >{i18n.t('inputFields.desc.psk')}</InputField>
               </Grid>}
               {(!edit || forceKeys) && <Grid item xs={3}>
                 <InputField
                   value={state.des}
-                  onChange={onChange}
+                  onChange={onChangeLocal}
                   id="des"
                   label="DES"
-                >DES</InputField>
+                >{i18n.t('inputFields.desc.des')}</InputField>
               </Grid>}
               {(!edit || forceKeys) && <Grid item xs={3}>
                 <InputField
                   value={state.adm1}
-                  onChange={onChange}
+                  onChange={onChangeLocal}
                   id="adm1"
                   label="ADM1"
-                >ADM1</InputField>
+                >{i18n.t('inputFields.desc.adm1')}</InputField>
               </Grid>}
               <Grid item xs={12}><h3>Misc</h3></Grid>
               <Grid item xs={3}>
                 <InputField
                   value={state.misc1}
-                  onChange={onChange}
+                  onChange={onChangeLocal}
                   id="misc1"
                   label="misc1"
-                >misc1</InputField>
+                >{i18n.t('inputFields.desc.misc1')}</InputField>
               </Grid>
               <Grid item xs={3}>
                 <InputField
                   value={state.misc2}
-                  onChange={onChange}
+                  onChange={onChangeLocal}
                   id="misc2"
                   label="misc2"
-                >misc2</InputField>
+                >{i18n.t('inputFields.desc.misc2')}</InputField>
               </Grid>
               <Grid item xs={3}>
                 <InputField
                   value={state.misc3}
-                  onChange={onChange}
+                  onChange={onChangeLocal}
                   id="misc3"
                   label="misc3"
-                >misc3</InputField>
+                >{i18n.t('inputFields.desc.misc3')}</InputField>
               </Grid>
               <Grid item xs={3}>
                 <InputField
                   value={state.misc4}
-                  onChange={onChange}
+                  onChange={onChangeLocal}
                   id="misc4"
                   label="misc4"
-                >misc4</InputField>
+                >{i18n.t('inputFields.desc.misc4')}</InputField>
               </Grid>
             </Grid>
     </React.Fragment>

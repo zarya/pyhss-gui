@@ -129,7 +129,27 @@
         "msisdn": "MSISDN",
         "msisdn_list": "Comma seperated list of msisdn",
         "ifc_path": "Initial Filter Criteria path",
-        "sh_profile": "SH Profile"
+        "sh_profile": "SH Profile",
+        "ki": "Ki",
+        "opc": "oPC",
+        "esim": "is this a eSim?",
+        "iccid": "ICCID",
+        "sim_vendor": "Sim vendor",
+        "amf": "Access and Mobility Management Function",
+        "lpa": "LPA URL for activating eSIM",
+        "pin1":"User PIN 1",
+        "puk1":"User PUK 1",
+        "pin2":"User PIN 2",
+        "puk2":"User PUK 2",
+        "psk": "PSK",
+        "kid": "KID",
+        "des": "DES",
+        "adm": "ADM",
+        "misc1":"Misc 1",
+        "misc2":"Misc 2",
+        "misc3":"Misc 3",
+        "misc4":"Misc 4",
+        "nam": "Network Access Mode [3GPP TS. 123 008 2.1.1.2]"
     }
   }
 }

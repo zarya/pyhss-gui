@@ -10,13 +10,16 @@ const SelectField = (props: {
   value: ReturnType<typeof String>,
   label: ReturnType<typeof String>,
   helper: ReturnType<typeof String>,
-  onChange: ReturnType<typeof Function>
+  onChange: ReturnType<typeof Function>,
+  error: ReturnType<typeof Boolean>,
+  errorMsg: ReturnType<typeof String>
 }) => {
-  const {value, onChange, helper, label, id, children} = props;
+  const {value, onChange, helper, label, id, children, error, errorMsg} = props;
   return (
     <FormControl fullWidth>
       <InputLabel id={`${id}_label`}>{label}</InputLabel>
-      <Select                      
+      <Select
+        error={error} 
         labelId={`${id}_label`}
         value={value}
         onChange={onChange}
@@ -25,7 +28,7 @@ const SelectField = (props: {
       >
         {children}
       </Select>
-      <FormHelperText id={`${id}}-helper`}>{helper}</FormHelperText>
+      <FormHelperText id={`${id}}-helper`}>{(error?errorMsg:helper)}</FormHelperText>
     </FormControl>
 
   )

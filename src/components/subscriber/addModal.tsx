@@ -41,12 +41,25 @@ const SubscriberAddModal = (props: { open: ReturnType<typeof Boolean>, handleClo
   }
 
   const handleSave = () => {
+    const item = {
+      "imsi": state.imsi,
+      "enabled": state.enabled,
+      "auc_id": state.auc_id,
+      "default_apn": state.default_apn,
+      "apn_list": state.apn_list,
+      "msisdn": state.msisdn,
+      "ue_ambr_dl": state.ue_ambr_dl,
+      "ue_ambr_ul": state.ue_ambr_ul, 
+      "nam": state.nam,
+      "subscribed_rau_tau_timer": state.subscribed_rau_tau_timer 
+    };
+
     if (edit) {
-      SubscriberApi.update(data.subscriber_id, state).then((data) => {
+      SubscriberApi.update(data.subscriber_id, item).then((data) => {
         handleLocalClose();
       });
     } else {
-      SubscriberApi.create(state).then((data) => {
+      SubscriberApi.create(item).then((data) => {
         handleLocalClose();
       });
     }

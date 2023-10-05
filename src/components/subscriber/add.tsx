@@ -25,11 +25,12 @@ const SubscriberAddItem = (props: { onChange: ReturnType<typeof any>, state: Ret
           <Grid container rowSpacing={1} spacing={1}>
             <Grid item xs={4}>
               <InputField
+                required
                 value={state.imsi}
                 onChange={onChange}
                 id="imsi"
                 label="IMSI"
-              >International mobile subscriber identity</InputField>
+              >{i18n.t('inputFields.desc.imsi')}</InputField>
             </Grid>
             <Grid item xs={2}>
               <Autocomplete
@@ -50,11 +51,12 @@ const SubscriberAddItem = (props: { onChange: ReturnType<typeof any>, state: Ret
             </Grid>
             <Grid item xs={3}>
               <InputField
+                required
                 value={state.msisdn}
                 onChange={onChange}
                 id="msisdn"
                 label="MSISDN"
-              >MSISDN</InputField>
+              >{i18n.t('inputFields.desc.msisdn')}</InputField>
             </Grid>
             <Grid item xs={3}>
               <SelectField
@@ -74,7 +76,7 @@ const SubscriberAddItem = (props: { onChange: ReturnType<typeof any>, state: Ret
                 onChange={onChange}
                 id="nam"
                 label="NAM"
-                helper="Network Access Mode [3GPP TS. 123 008 2.1.1.2]"
+                helper={i18n.t('inputFields.desc.nam')}
               >
                 <MenuItem value="0">Packet and circuit</MenuItem>
                 <MenuItem value="2">Packet only</MenuItem>
@@ -83,6 +85,7 @@ const SubscriberAddItem = (props: { onChange: ReturnType<typeof any>, state: Ret
             <Grid item xs={12}><h3>APN</h3></Grid>
             <Grid item xs={4}>
               <InputField
+                required
                 value={state.default_apn}
                 onChange={onChange}
                 id="default_apn"
@@ -91,6 +94,7 @@ const SubscriberAddItem = (props: { onChange: ReturnType<typeof any>, state: Ret
             </Grid>
             <Grid item xs={4}>
               <InputField
+                required
                 value={state.apn_list}
                 onChange={onChange}
                 id="apn_list"
@@ -100,6 +104,7 @@ const SubscriberAddItem = (props: { onChange: ReturnType<typeof any>, state: Ret
             <Grid item xs={12}><h3>QoS</h3></Grid>
             <Grid item xs={6}>
               <InputField
+                required
                 value={state.ue_ambr_ul}
                 onChange={onChange}
                 id="ue_ambr_ul"
@@ -108,6 +113,7 @@ const SubscriberAddItem = (props: { onChange: ReturnType<typeof any>, state: Ret
             </Grid>
             <Grid item xs={6}>
               <InputField
+                required
                 value={state.ue_ambr_dl}
                 onChange={onChange}
                 id="ue_ambr_dl"

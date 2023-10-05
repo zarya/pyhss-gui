@@ -74,13 +74,7 @@ const imsSubscriberTemplate = {
   "msisdn_list": "",
   "imsi": "",
   "ifc_path": "default_ifc.xml",
-  "sh_profile": "default_sh_user_data.xml",
-  "pcscf": "",
-  "pcscf_realm": "",
-  "pcscf_peer": "",
-  "scscf": "",
-  "scscf_realm": "",
-  "scscf_peer": ""
+  "sh_profile": "default_sh_user_data.xml"
 }
 
 const AddWizard = () => {
@@ -118,7 +112,7 @@ const AddWizard = () => {
     }
     if (activeStep === 1) {
       setImsSubscriber((prev) => ({
-        ...prev,['msisdn']: subscriber.msisdn,['msisdn_list']: subscriber.msisdn 
+        ...prev, ['msisdn']: subscriber.msisdn, ['msisdn_list']: subscriber.msisdn 
       }));
     }
 
