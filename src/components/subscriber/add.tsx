@@ -13,8 +13,9 @@ onChange: any,
 state: any,
 onError?: ReturnType<typeof Function>,
 wizard?: boolean
+edit?: boolean
 }) => {
-  const { onChange, state, onError=()=>{}, wizard=false  } = props;
+  const { onChange, state, onError=()=>{}, wizard=false, edit=false } = props;
   const [auc, setAuc] = React.useState([]);
   const [aucLoading, setAucLoading] = React.useState(true);
   const [errors, setErrors ] = React.useState({
@@ -111,7 +112,7 @@ wizard?: boolean
                   }
                 }}
                 value={(auc.find(a => a.auc_id === state.auc_id) || {'imsi':''}).imsi}
-                disabled={wizard}
+                disabled={wizard || edit}
                 options={auc.map((option) => option.imsi)}
                 renderInput={(params) => <TextField {...params} label="AUC" />}
               />

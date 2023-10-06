@@ -83,7 +83,7 @@ const SubscriberAddModal = (props: { open: boolean, handleClose: ReturnType<type
           noValidate
           autoComplete="off"
         >
-         <SubscriberAddItem onChange={handleChange} state={state} onError={handleError} />
+         <SubscriberAddItem onChange={handleChange} state={state} onError={handleError} edit={edit} />
          </Box>
          <SaveButtons onClickClose={handleLocalClose} onClickSave={handleSave} disabled={error} />
        </Box>
