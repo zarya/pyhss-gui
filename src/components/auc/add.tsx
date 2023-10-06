@@ -5,33 +5,77 @@ import i18n from '@app/utils/i18n';
 import {InputField, SelectField} from '@components';
 
 
-const AucAddItem = (props: { onChange: ReturnType<typeof any>, state: ReturnType<typeof any>, forceKeys: ReturnType<typeof Boolean>, edit: ReturnType<typeof Boolean> }) => {
+const AucAddItem = (props: { 
+  onChange: any,
+  state: any,
+  forceKeys: boolean, 
+  edit: boolean, 
+  onError?: ReturnType<typeof Function>
+}) => {
 
-  const { onChange, state, forceKeys, edit } = props;
-  const [errors, setErrors ] = React.useState({'imsi':''})
+  const { onChange, state, forceKeys, edit, onError=() => {} } = props;
+  const [errors, setErrors ] = React.useState({'imsi':'','ki':'','iccid':'','opc':''})
 
-  const setError = (name,value) => {
+  React.useEffect(() => {
+    onValidate('imsi', state.imsi);
+    if (!edit) {
+      onValidate('ki', state.ki);
+      onValidate('opc', state.opc);
+    }
+  }, [state]);
+
+  const setError = (name: string,value: string) => {
     setErrors(prevState => ({
         ...prevState,
         [name]: value
     }));
   }
 
-  const onValidate = (field) => {
-    if (field==='imsi' && state.imsi.length < 15)
-      setError('imsi','To short!');
-    else if (field==='imsi')
-      setError('imsi','');
+  const onValidate = (field: string, value: string) => {
+    let error = ""
+    if (field==='imsi' && value === '')
+      error = 'Field is required!';
+    else if (field==='imsi' && !/^\d*$/.test(value))
+      error = 'Only numbers are allowed!';
+    else if (field==='imsi' && value.length < 15)
+      error = 'To short!';
 
-    if (field==='ki' && state.ki === '' && (!edit || forceKeys))
-      setError('ki','To short!');
-    else if (field==='ki')
-      setError('ki','');
+    if (field==='iccid' && !/^\d*$/.test(value))
+      error = 'Only numbers are allowed!';
+    else if (field==='iccid' && value.length > 0 && value.length < 19)
+      error = 'To short!';
+
+    if (!edit || forceKeys) {
+      if (field==='ki' && value === '')
+        error = 'Field is required!';
+      else if (field==='ki' && !/^[0-9A-Fa-f]*$/.test(value))
+        error = 'Only HEX allowed!';
+      else if (field==='ki' && value.length < 32)
+        error = 'To short!';
+      else if (field==='ki' && value.length > 32)
+        error = 'To long!';
+
+      if (field==='opc' && value === '')
+        error = 'Field is required!';
+      else if (field==='opc' && !/^[0-9A-Fa-f]*$/.test(value))
+        error = 'Only HEX allowed!';
+      else if (field==='opc' && value.length < 32)
+        error = 'To short!';
+      else if (field==='opc' && value.length > 32)
+        error = 'To long!';
+    }
+
+    setError(field, error);
+
+    if (error!=='' || Object.values(errors).filter((a)=>a!=='').length > 0)
+      onError(true);
+    else
+      onError(false);
   }
 
-  const onChangeLocal = (e) => {
-    onValidate(e.target.name);
-    onChange(e);
+  const onChangeLocal = (name: string, value: string) => {
+    onValidate(name, value);
+    onChange(name, value);
   }
 
   return (
@@ -44,21 +88,20 @@ const AucAddItem = (props: { onChange: ReturnType<typeof any>, state: ReturnType
                   id="imsi"
                   label="IMSI"
                   error={errors.imsi}
-                  required
                 >{i18n.t('inputFields.desc.imsi')}</InputField>
               </Grid>
               {(!edit || forceKeys) && <Grid item xs={3}>
                 <InputField
                   value={state.ki}
+                  error={errors.ki}
                   onChange={onChangeLocal}
                   id="ki"
                   label="Ki"
-                  required
                 >{i18n.t('inputFields.desc.ki')}</InputField>
               </Grid>}
               {(!edit || forceKeys) && <Grid item xs={3}>
                 <InputField
-                  required
+                  error={errors.opc}
                   value={state.opc}
                   onChange={onChangeLocal}
                   id="opc"
@@ -68,6 +111,7 @@ const AucAddItem = (props: { onChange: ReturnType<typeof any>, state: ReturnType
               <Grid item xs={3}>
                 <InputField
                   value={state.iccid}
+                  error={errors.iccid}
                   onChange={onChangeLocal}
                   id="iccid"
                   label="ICCID"

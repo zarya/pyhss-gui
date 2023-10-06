@@ -22,18 +22,18 @@ const style = {
 };
 
 
-const AucAddModal = (props: { open: ReturnType<typeof Boolean>, handleClose: ReturnType<typeof any>, data: ReturnType<typeof Object>, edit: ReturnType<typeof Boolean> }) => {
+const AucAddModal = (props: { open: boolean, handleClose: any, data: object, edit: boolean }) => {
   const { open, handleClose, data, edit } = props;
   const [state, setState] = React.useState(data);
+  const [error, setError] = React.useState(true);
   const [forceKeys, setForceKeys] = React.useState(false);
 
   React.useEffect(() => {
       setState(data);
   }, [data])
 
-  const handleChange = e => {
-    const { name, value } = e.target;
-    setState(prevState => ({
+  const handleChange = (name:string, value:string) => {
+    setState((prevState) => ({
         ...prevState,
         [name]: value
     }));
@@ -111,6 +111,10 @@ const AucAddModal = (props: { open: ReturnType<typeof Boolean>, handleClose: Ret
     handleClose();
   }
 
+  const handleError = (e: boolean) => {
+    setError(e);
+  }
+
   return (
     <React.Fragment>
       <Modal
@@ -128,9 +132,9 @@ const AucAddModal = (props: { open: ReturnType<typeof Boolean>, handleClose: Ret
             noValidate
             autoComplete="off"
           >
-            <AucAddItem onChange={handleChange} state={state} forceKeys={forceKeys} edit={edit} />
+            <AucAddItem onChange={handleChange} state={state} forceKeys={forceKeys} edit={edit} onError={handleError}/>
           </Box>
-          <SaveButtons onClickClose={handleLocalClose} onClickSave={handleSave} />
+          <SaveButtons onClickClose={handleLocalClose} onClickSave={handleSave} disabled={error}/>
         </Box>
       </Modal>
     </React.Fragment>

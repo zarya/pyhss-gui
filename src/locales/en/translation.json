@@ -133,7 +133,7 @@
         "ki": "Ki",
         "opc": "oPC",
         "esim": "is this a eSim?",
-        "iccid": "ICCID",
+        "iccid": "Integrated Circuit Card Identifier",
         "sim_vendor": "Sim vendor",
         "amf": "Access and Mobility Management Function",
         "lpa": "LPA URL for activating eSIM",

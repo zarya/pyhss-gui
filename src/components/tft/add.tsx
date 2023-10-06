@@ -1,15 +1,10 @@
 import React from 'react';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
-import FormControl from '@mui/material/FormControl';
-import InputLabel from '@mui/material/InputLabel';
 import Grid from '@mui/material/Grid';
-import FormHelperText from '@mui/material/FormHelperText';
-import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 
+import {SelectField, SaveButtons, InputField} from '@components';
 import i18n from '@app/utils/i18n';
 
 import {TftApi} from '../../services/pyhss';
@@ -26,14 +21,20 @@ const style = {
   p: 4,
 };
 
-const TftAddItem = (props: { open: ReturnType<typeof Boolean>, handleClose: ReturnType<typeof any>, data: ReturnType<typeof Object>, edit: ReturnType<typeof Boolean> }) => {
+const TftAddItem = (props: {
+  open: boolean,
+  handleClose: ReturnType<typeof any>,
+  data: ReturnType<typeof Object>,
+  edit: boolean
+}) => {
   const { open, handleClose, data, edit } = props;
   const [state, setState] = React.useState(data);
+
   React.useEffect(() => {
     setState(data);
   }, [data])
-  const handleChange = e => {
-    const { name, value } = e.target;
+
+  const handleChange = (name: string, value: string) => {
     setState(prevState => ({
       ...prevState,
       [name]: value
@@ -73,62 +74,40 @@ const TftAddItem = (props: { open: ReturnType<typeof Boolean>, handleClose: Retu
         >
           <Grid container rowSpacing={1} spacing={1}>
             <Grid item xs={3}>
-              <FormControl fullWidth>
-                <TextField
-                  style={{width: '99%'}}
-                  fullWidth
-                  required
-                  label="Group"
-                  id="tft_group_id"
-                  onChange={handleChange}
-                  value={state.tft_group_id}
-                  name="tft_group_id"
-                  aria-describedby="tft_group_id-helper"
-                />
-                <FormHelperText id="tft_group_id-helper">TFT Group</FormHelperText>
-              </FormControl>
+              <InputField
+                required
+                label="Group"
+                id="tft_group_id"
+                onChange={handleChange}
+                value={state.tft_group_id}
+              >TFT Group</InputField>
             </Grid>
             <Grid item xs={9}>
-              <FormControl fullWidth>
-                <TextField
-                  style={{width: '99%'}}
-                  fullWidth
-                  required
-                  label="Rule"
-                  id="tft_string"
-                  onChange={handleChange}
-                  value={state.tft_string}
-                  name="tft_string"
-                  aria-describedby="tft_string-helper"
-                />
-                <FormHelperText id="apn-helper">Rule</FormHelperText>
-              </FormControl>
+              <InputField
+                required
+                label="Rule"
+                id="tft_string"
+                onChange={handleChange}
+                value={state.tft_string}
+              >Rule</InputField>
             </Grid>
-
             <Grid item xs={12}>
-              <FormControl fullWidth style={{ marginTop: 8 }}>
-                <InputLabel id="direction_label">Direction</InputLabel>
-                <Select
-                  labelId="direction_label"
-                  value={state.direction}
-                  label="direction"
-                  onChange={handleChange}
-                  name="direction"
-                  aria-describedby="direction-helper"
-                >
-                  <MenuItem value={0}>Unspecified</MenuItem>
-                  <MenuItem value={1}>Downlink</MenuItem>
-                  <MenuItem value={2}>Uplink</MenuItem>
-                  <MenuItem value={3}>Bidirectional</MenuItem>
-                </Select>
-                <FormHelperText id="direction-helper">Defines traffic direction</FormHelperText>
-              </FormControl>
+              <SelectField
+                value={state.direction}
+                onChange={handleChange}
+                id="direction"
+                label="Direction"
+                helper="Defines traffic direction"
+              >
+                <MenuItem value={0}>Unspecified</MenuItem>
+                <MenuItem value={1}>Downlink</MenuItem>
+                <MenuItem value={2}>Uplink</MenuItem>
+                <MenuItem value={3}>Bidirectional</MenuItem>
+              </SelectField>
             </Grid>
           </Grid>
          </Box>
-        <Button variant="contained" onClick={() => handleSave()}>{i18n.t('generic.save')}&nbsp;<i className="fas fa-save"></i></Button>
-         &nbsp;
-        <Button variant="contained" onClick={() => handleLocalClose()}>{i18n.t('generic.cancel')}</Button>
+        <SaveButtons onClickClose={handleLocalClose} onClickSave={handleSave} />
        </Box>
      </Modal>
 

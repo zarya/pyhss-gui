@@ -34,8 +34,7 @@ const ChargingRuleAddItem = (props: { open: ReturnType<typeof Boolean>, handleCl
       setState(data);
   }, [data])
 
-  const handleChange = e => {
-    const { name, value } = e.target;
+  const handleChange = (name: string, value: string) => {
     setState(prevState => ({
         ...prevState,
         [name]: value

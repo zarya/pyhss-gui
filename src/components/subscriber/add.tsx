@@ -8,52 +8,119 @@ import i18n from '@app/utils/i18n';
 import {NetworkBandwidthFormatter, InputField, SelectField} from '@components';
 import {AucApi} from '../../services/pyhss';
 
-const SubscriberAddItem = (props: { onChange: ReturnType<typeof any>, state: ReturnType<typeof any> }) => {
-  const { onChange, state  } = props;
+const SubscriberAddItem = (props: {
+onChange: any, 
+state: any,
+onError?: ReturnType<typeof Function>,
+wizard?: boolean
+}) => {
+  const { onChange, state, onError=()=>{}, wizard=false  } = props;
   const [auc, setAuc] = React.useState([]);
   const [aucLoading, setAucLoading] = React.useState(true);
+  const [errors, setErrors ] = React.useState({
+    'imsi':'',
+    'msisdn':'',
+    'default_apn':'',
+    'apn_list': '',
+    'ue_ambr_ul': '',
+    'ue_ambr_dl': ''
+  })
 
   React.useEffect(() => {
+    onValidate('imsi', state.imsi)
+    onValidate('msisdn', state.msisdn)
+    onValidate('default_apn', state.default_apn)
+    onValidate('apn_list', state.apn_list)
+    onValidate('ue_ambr_ul', state.ue_ambr_ul)
+    onValidate('ue_ambr_dl', state.ue_ambr_dl)
     AucApi.getAll().then((data => {
       setAuc(data.data);
       setAucLoading(false);
     }));
-  }, []);
+  }, [state]);
+
+  const setError = (name: string,value: string) => {
+    setErrors(prevState => ({
+        ...prevState,
+        [name]: value
+    }));
+  }
+
+  const onValidate = (field: string, value: string) => {
+    let error = ""
+    if (field==='imsi' && value === '')
+      error = 'Field is required!';
+    else if (field==='imsi' && !/^\d*$/.test(value))
+      error = 'Only numbers are allowed!';
+    else if (field==='imsi' && value.length < 15)
+      error = 'To short!';
+
+    if (field==='msisdn' && value === '')
+      error = 'Field is required!';
+    else if (field==='msisdn' && !/^\d*$/.test(value))
+      error = 'Only numbers are allowed!';
+    
+    if (field==='default_apn' && String(value) === '0')
+      error = 'Field is required!';
+    else if (field==='default_apn' && !/^\d*$/.test(value))
+      error = 'Only numbers are allowed!';
+
+    if (field==='apn_list' && value === '')
+      error = 'Field is required!';
+    else if (field==='apn_list' && !/^[1-8]*(,[1-8]*)*$/.test(value))
+      error = 'Only comma seperated numbers are allowed!';
+
+    if (field==='ue_ambr_ul' && String(value) === '0')
+      error = 'Field is required!';
+    else if (field==='ue_ambr_ul' && !/^\d*$/.test(value))
+      error = 'Only numbers are allowed!';
+
+    if (field==='ue_ambr_dl' && String(value) === '0')
+      error = 'Field is required!';
+    else if (field==='ue_ambr_dl' && !/^\d*$/.test(value))
+      error = 'Only numbers are allowed!';
+
+    setError(field, error);
+
+    if (error!=='' || Object.values(errors).filter((a)=>a!=='').length > 0)
+      onError(true);
+    else
+      onError(false);
+  }
+
+  const onChangeLocal = (name: string, value: string) => {
+    onValidate(name, value);
+    onChange(name, value);
+  }
+
+  const onChangeAuc = (auc: object) => {
+    onChange('imsi', auc.imsi);
+    onChange('auc_id', auc.auc_id);
+    onValidate('imsi', auc.imsi);
+  }
 
   return (
     <React.Fragment>
           <Grid container rowSpacing={1} spacing={1}>
             <Grid item xs={4}>
-              <InputField
-                required
-                value={state.imsi}
-                onChange={onChange}
-                id="imsi"
-                label="IMSI"
-              >{i18n.t('inputFields.desc.imsi')}</InputField>
-            </Grid>
-            <Grid item xs={2}>
               <Autocomplete
                 loading={aucLoading}
                 onChange={(_event, value) => {
                   if (value > 0) {
-                    const auc_id=auc.find(a => a.imsi === value).auc_id;
-                    const returnData = {
-                      target: {name: 'auc_id', value: auc_id}
-                    }
-                    onChange(returnData);
+                    onChangeAuc(auc.find(a => a.imsi === value));
                   }
                 }}
-                value={state.imsi}
+                value={(auc.find(a => a.auc_id === state.auc_id) || {'imsi':''}).imsi}
+                disabled={wizard}
                 options={auc.map((option) => option.imsi)}
                 renderInput={(params) => <TextField {...params} label="AUC" />}
               />
             </Grid>
             <Grid item xs={3}>
               <InputField
-                required
                 value={state.msisdn}
-                onChange={onChange}
+                error={errors.msisdn}
+                onChange={onChangeLocal}
                 id="msisdn"
                 label="MSISDN"
               >{i18n.t('inputFields.desc.msisdn')}</InputField>
@@ -85,18 +152,18 @@ const SubscriberAddItem = (props: { onChange: ReturnType<typeof any>, state: Ret
             <Grid item xs={12}><h3>APN</h3></Grid>
             <Grid item xs={4}>
               <InputField
-                required
+                error={errors.default_apn}
                 value={state.default_apn}
-                onChange={onChange}
+                onChange={onChangeLocal}
                 id="default_apn"
                 label="Default APN (id)"
               >ID of the default APN</InputField>
             </Grid>
             <Grid item xs={4}>
               <InputField
-                required
+                error={errors.apn_list}
                 value={state.apn_list}
-                onChange={onChange}
+                onChange={onChangeLocal}
                 id="apn_list"
                 label="APN list"
               >List of APN ids comma seperated</InputField>
@@ -104,18 +171,18 @@ const SubscriberAddItem = (props: { onChange: ReturnType<typeof any>, state: Ret
             <Grid item xs={12}><h3>QoS</h3></Grid>
             <Grid item xs={6}>
               <InputField
-                required
                 value={state.ue_ambr_ul}
-                onChange={onChange}
+                error={errors.ue_ambr_ul}
+                onChange={onChangeLocal}
                 id="ue_ambr_ul"
                 label="AMBR ul"
               >Agregated Maximum Bit Rate upload: <NetworkBandwidthFormatter data={state.ue_ambr_ul} /></InputField>
             </Grid>
             <Grid item xs={6}>
               <InputField
-                required
+                error={errors.ue_ambr_dl}
                 value={state.ue_ambr_dl}
-                onChange={onChange}
+                onChange={onChangeLocal}
                 id="ue_ambr_dl"
                 label="AMBR dl"
               >Agregated Maximum Bit Rate download: <NetworkBandwidthFormatter data={state.ue_ambr_dl} /></InputField>

@@ -82,8 +82,9 @@ const Auc = () => {
     setOpenAdd(true);
   }
   const handleAddClose = () => {
-    setOpenAdd(false);
+    console.log('Closing add');
     setDialogData(aucTemplate);
+    setOpenAdd(false);
     refresh();
   }
   const openEdit = (row) => {

@@ -5,27 +5,34 @@ import FormControl from '@mui/material/FormControl';
 
 const InputField = (props: {
   children: React.ReactNode,
-  id: ReturnType<typeof String>,
-  value: ReturnType<typeof String>,
-  label: ReturnType<typeof String>,
+  id: string, 
+  value: string, 
+  label: string, 
   onChange: ReturnType<typeof Function>,
-  error: ReturnType<typeof String>,
-  required: ReturnType<typeof Boolean>
+  error?: string,
+  required?: boolean,
+  disabled?: boolean
 }) => {
-  const {value, onChange, children, label, id, error='', required=false} = props;
+  const {value, onChange, children, label, id, error='', required=false, disabled=false} = props;
 
   const reqT = ((value === ''||String(value) === "0")  && required)
-  const err = (error !== ''||reqT)
+  const err = (error !== '' || reqT)
   const errValue = (reqT?'Field is required!':(err?error:''))
+
+  const onChangeLocal = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const {name, value} = e.target;
+    onChange(name, value);
+  }
 
   return (
     <FormControl fullWidth>
       <TextField
+        disabled={disabled}
         error={err}
         style={{ width: "100%" }}
         required={required}
         label={`${label} ${errValue}`}
-        onChange={onChange}
+        onChange={onChangeLocal}
         value={value}
         name={id}
         aria-describedby={`${id}-helper`}

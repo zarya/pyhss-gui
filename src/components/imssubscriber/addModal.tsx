@@ -1,7 +1,6 @@
 import React from 'react';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 import i18n from '@app/utils/i18n';
 
 import {ImsSubscriberAddItem, SaveButtons} from '@components';
@@ -20,16 +19,21 @@ const style = {
   p: 4,
 };
 
-const ImsSubscriberAddModal = (props: { open: ReturnType<typeof Boolean>, handleClose: ReturnType<typeof any>, data: ReturnType<typeof Object>, edit: ReturnType<typeof Boolean> }) => {
+const ImsSubscriberAddModal = (props: {
+  open: boolean,
+  handleClose: any,
+  data: object,
+  edit: boolean,
+}) => {
   const { open, handleClose, data, edit } = props;
   const [state, setState] = React.useState(data);
+  const [error, setError] = React.useState(true);
 
   React.useEffect(() => {
       setState(data);
   }, [data])
 
-  const handleChange = e => {
-    const { name, value } = e.target;
+  const handleChange = (name: string, value: string) => {
     setState(prevState => ({
         ...prevState,
         [name]: value
@@ -52,6 +56,12 @@ const ImsSubscriberAddModal = (props: { open: ReturnType<typeof Boolean>, handle
     handleClose();
   }
 
+  const handleError = (e: boolean) => {
+    console.log(e);
+    setError(e);
+  }
+
+
   return (
     <React.Fragment>
       <Modal
@@ -67,9 +77,9 @@ const ImsSubscriberAddModal = (props: { open: ReturnType<typeof Boolean>, handle
             noValidate
             autoComplete="off"
           >
-            <ImsSubscriberAddItem onChange={handleChange} state={state} />
+            <ImsSubscriberAddItem onChange={handleChange} state={state} onError={handleError} />
           </Box>
-          <SaveButtons onClickClose={handleLocalClose} onClickSave={handleSave} />
+          <SaveButtons onClickClose={handleLocalClose} onClickSave={handleSave} disabled={error} />
         </Box>
       </Modal>
     </React.Fragment>

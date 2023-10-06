@@ -31,8 +31,7 @@ const ApnAddItem = (props: { open: ReturnType<typeof Boolean>, handleClose: Retu
        setState(data);
    }, [data]) 
   
-  const handleChange = e => {
-    const { name, value } = e.target;
+  const handleChange = (name: string, value: string) => {
     setState(prevState => ({
         ...prevState,
         [name]: value
@@ -152,6 +151,7 @@ const ApnAddItem = (props: { open: ReturnType<typeof Boolean>, handleClose: Retu
             </Grid>
             <Grid item xs={4}>
               <InputField
+                required
                 value={state.apn_ambr_ul}
                 onChange={handleChange}
                 id="apn_ambr_ul"
@@ -160,6 +160,7 @@ const ApnAddItem = (props: { open: ReturnType<typeof Boolean>, handleClose: Retu
             </Grid>
             <Grid item xs={4}>
               <InputField
+                required
                 value={state.apn_ambr_dl}
                 onChange={handleChange}
                 id="apn_ambr_dl"

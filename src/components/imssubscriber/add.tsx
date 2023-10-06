@@ -5,9 +5,67 @@ import Grid from '@mui/material/Grid';
 
 import i18n from '@app/utils/i18n';
 
-const ImsSubscriberAddItem = (props: { onChange: ReturnType<typeof any>, state: ReturnType<typeof any> }) => {
+const ImsSubscriberAddItem = (props: {
+  onChange: any,
+  state: any,
+  wizard?: boolean,
+  onError?: Function
+}) => {
 
-  const { onChange, state } = props;
+  const {
+    onChange,
+    state,
+    wizard=false,
+    onError=()=>{},
+  } = props;
+
+  const [errors, setErrors ] = React.useState({'imsi':'','msisdn':'','msisdn_list':'','ifc_path':'','sh_profile':''})
+
+  React.useEffect(() => {
+    onValidate('imsi', state.imsi);
+    onValidate('msisdn', state.msisdn);
+    onValidate('msisdn_list', state.msisdn_list);
+  }, []);
+
+  const setError = (name: string,value: string) => {
+    setErrors(prevState => ({
+        ...prevState,
+        [name]: value
+    }));
+  }
+
+  const onValidate = (field: string, value: string) => {
+   let error = ""
+   if (field==='imsi' && value === '')
+     error = 'Field is required!';
+   else if (field==='imsi' && !/^\d*$/.test(value))
+     error = 'Only numbers are allowed!';
+   else if (field==='imsi' && value.length < 15)
+     error = 'To short!';
+
+   if (field==='msisdn' && value === '')
+     error = 'Field is required!';
+   else if (field==='msisdn' && !/^\d*$/.test(value))
+     error = 'Only numbers are allowed!';
+
+   if (field==='msisdn_list' && value === '')
+     error = 'Field is required!';
+   else if (field==='msisdn_list' && !/^[0-8]*(,[0-8]*)*$/.test(value))
+     error = 'Only comma seperated numbers are allowed!';
+
+
+   setError(field, error);
+
+   if (error!=='' || Object.values(errors).filter((a)=>a!=='').length > 0)
+     onError(true);
+   else
+     onError(false);
+  }
+
+  const onChangeLocal = (name: string, value: string) => {
+    onValidate(name, value);
+    onChange(name, value);
+  }
 
   return (
     <React.Fragment>
@@ -15,41 +73,51 @@ const ImsSubscriberAddItem = (props: { onChange: ReturnType<typeof any>, state: 
         <Grid item xs={4}>
           <InputField
             value={state.imsi}
-            onChange={onChange}
+            error={errors.imsi}
+            onChange={onChangeLocal}
             id="imsi"
             label="IMSI"
+            disabled={wizard}
           >{i18n.t('inputFields.desc.imsi')}</InputField>
         </Grid>
         <Grid item xs={4}>
           <InputField
             value={state.msisdn}
-            onChange={onChange}
+            error={errors.msisdn}
+            onChange={onChangeLocal}
             id="msisdn"
             label="MSISDN"
+            disabled={wizard}
           >{i18n.t('inputFields.desc.msisdn')}</InputField>
         </Grid>
         <Grid item xs={4}>
           <InputField
             value={state.msisdn_list}
-            onChange={onChange}
+            error={errors.msisdn_list}
+            onChange={onChangeLocal}
             id="msisdn_list"
             label="MSISDN List"
+            required
           >{i18n.t('inputFields.desc.msisdn_list')}</InputField>
         </Grid>
         <Grid item xs={4}>
           <InputField
             value={state.ifc_path}
-            onChange={onChange}
+            error={errors.ifc_path}
+            onChange={onChangeLocal}
             id="ifc_path"
             label="ifc_path"
+            required
           >{i18n.t('inputFields.desc.ifc_path')}</InputField>
         </Grid>
         <Grid item xs={4}>
           <InputField
             value={state.sh_profile}
-            onChange={onChange}
+            error={errors.sh_profile}
+            onChange={onChangeLocal}
             id="sh_profile"
             label="SH Profile"
+            required
           >{i18n.t('inputFields.desc.sh_profile')}</InputField>
         </Grid>
       </Grid>

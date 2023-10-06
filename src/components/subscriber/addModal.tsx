@@ -1,7 +1,6 @@
 import React from 'react';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 import i18n from '@app/utils/i18n';
 import {SubscriberAddItem,SaveButtons} from '@components';
 
@@ -19,17 +18,16 @@ const style = {
   p: 4,
 };
 
-const SubscriberAddModal = (props: { open: ReturnType<typeof Boolean>, handleClose: ReturnType<typeof any>, data: ReturnType<typeof Object>, edit: ReturnType<typeof Boolean> }) => {
+const SubscriberAddModal = (props: { open: boolean, handleClose: ReturnType<typeof any>, data: ReturnType<typeof Object>, edit: boolean }) => {
   const { open, handleClose, data, edit } = props;
   const [state, setState] = React.useState(data);
+  const [error, setError] = React.useState(true);
 
    React.useEffect(() => {
        setState(data);
    }, [data])
 
-  const handleChange = e => {
-    const { name, value } = e.target;
-    console.log(name,value);
+  const handleChange = (name: string, value: string) => {
     setState(prevState => ({
         ...prevState,
         [name]: value
@@ -65,6 +63,10 @@ const SubscriberAddModal = (props: { open: ReturnType<typeof Boolean>, handleClo
     }
   }
 
+  const handleError = (e: boolean) => {
+    setError(e);
+  }
+
 
   return (
     <React.Fragment>
@@ -81,9 +83,9 @@ const SubscriberAddModal = (props: { open: ReturnType<typeof Boolean>, handleClo
           noValidate
           autoComplete="off"
         >
-         <SubscriberAddItem onChange={handleChange} state={state} />
+         <SubscriberAddItem onChange={handleChange} state={state} onError={handleError} />
          </Box>
-         <SaveButtons onClickClose={handleLocalClose} onClickSave={handleSave} />
+         <SaveButtons onClickClose={handleLocalClose} onClickSave={handleSave} disabled={error} />
        </Box>
      </Modal>
 

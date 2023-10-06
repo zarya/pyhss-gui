@@ -78,6 +78,7 @@ const imsSubscriberTemplate = {
 }
 
 const AddWizard = () => {
+  const [error, setError] = React.useState(false);
   const [auc, setAuc] = React.useState(aucTemplate);
   const [subscriber, setSubscriber] = React.useState(subscriberTemplate);
   const [imsSubscriber, setImsSubscriber] = React.useState(imsSubscriberTemplate);
@@ -150,27 +151,28 @@ const AddWizard = () => {
     setImsSubscriber(imsSubscriberTemplate);
   };
 
-  const handleChangeAuc = e => {
-    const { name, value } = e.target;
+  const handleChangeAuc = (name: string, value: string) => {
     setAuc(prevState => ({
         ...prevState,
         [name]: value
     }));
   };
-  const handleChangeSubscriber = e => {
-    const { name, value } = e.target;
+  const handleChangeSubscriber = (name: string, value: string) => {
     setSubscriber(prevState => ({
         ...prevState,
         [name]: value
     }));
   };
-  const handleChangeImsSubscriber = e => {
-    const { name, value } = e.target;
+  const handleChangeImsSubscriber = (name: string, value: string) => {
     setImsSubscriber(prevState => ({
         ...prevState,
         [name]: value
     }));
   };
+
+  const handleErrors = (e: boolean) => {
+    setError(e);
+  }
 
   const handleAdding = () => {
     console.log("Start Adding");
@@ -244,9 +246,9 @@ const AddWizard = () => {
           <Typography sx={{ mt: 2, mb: 1 }} variant="h5">Step {activeStep + 1} {steps[activeStep]}</Typography>
           </CardActionArea>
           <CardContent>
-          {activeStep === 0 && <AucAddItem forceKeys={true} edit={false} state={auc} onChange={handleChangeAuc} />} 
-          {activeStep === 1 && <SubscriberAddItem state={subscriber} onChange={handleChangeSubscriber} />} 
-          {activeStep === 2 && <ImsSubscriberAddItem state={imsSubscriber} onChange={handleChangeImsSubscriber} />} 
+          {activeStep === 0 && <AucAddItem forceKeys={true} edit={false} state={auc} onChange={handleChangeAuc} onError={handleErrors} />} 
+          {activeStep === 1 && <SubscriberAddItem state={subscriber} onChange={handleChangeSubscriber} onError={handleErrors} wizard />} 
+          {activeStep === 2 && <ImsSubscriberAddItem state={imsSubscriber} onChange={handleChangeImsSubscriber} onError={handleErrors} wizard />} 
           {activeStep === 3 && <span>
             <Table>
               <TableBody>
@@ -301,7 +303,7 @@ const AddWizard = () => {
                   Skip
                 </Button>
               )}
-              <Button onClick={handleNext} variant="contained">
+              <Button onClick={handleNext} variant="contained" disabled={error}>
                 {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
               </Button>
             </CardActions> 
