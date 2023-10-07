@@ -6,7 +6,7 @@ import Autocomplete from '@mui/material/Autocomplete';
 
 import i18n from '@app/utils/i18n';
 import {NetworkBandwidthFormatter, InputField, SelectField} from '@components';
-import {AucApi} from '../../services/pyhss';
+import {AucApi, ApnApi} from '../../services/pyhss';
 
 const SubscriberAddItem = (props: {
 onChange: any, 
@@ -17,7 +17,9 @@ edit?: boolean
 }) => {
   const { onChange, state, onError=()=>{}, wizard=false, edit=false } = props;
   const [auc, setAuc] = React.useState([]);
+  const [apn, setApn] = React.useState([]);
   const [aucLoading, setAucLoading] = React.useState(true);
+  const [apnLoading, setApnLoading] = React.useState(true);
   const [errors, setErrors ] = React.useState({
     'imsi':'',
     'msisdn':'',
@@ -37,6 +39,10 @@ edit?: boolean
     AucApi.getAll().then((data => {
       setAuc(data.data);
       setAucLoading(false);
+    }));
+    ApnApi.getAll().then((data => {
+      setApn(data.data);
+      setApnLoading(false);
     }));
   }, [state]);
 
@@ -100,6 +106,18 @@ edit?: boolean
     onValidate('imsi', auc.imsi);
   }
 
+  const onChangeDefaultApn = (apn: object) => {
+    onChangeLocal('default_apn', apn.apn_id)
+    if (state.apn_list === '')
+      onChange('apn_list', '' + apn.apn_id);
+    else
+      onChange('apn_list', state.apn_list + ',' + apn.apn_id)
+  }
+
+  const onChangeApn = (apns) => {
+    onChangeLocal('apn_list',apn.filter((a) => apns.includes(a.apn)).map((a) => a.apn_id).join(','));
+  }
+
   return (
     <React.Fragment>
           <Grid container rowSpacing={1} spacing={1}>
@@ -152,22 +170,31 @@ edit?: boolean
             </Grid>
             <Grid item xs={12}><h3>APN</h3></Grid>
             <Grid item xs={4}>
-              <InputField
-                error={errors.default_apn}
-                value={state.default_apn}
-                onChange={onChangeLocal}
-                id="default_apn"
-                label="Default APN (id)"
-              >ID of the default APN</InputField>
+              <Autocomplete
+                loading={apnLoading}
+                onChange={(_event, value) => {
+                  if (value !== '') {
+                    onChangeDefaultApn(apn.find(a => a.apn === value));
+                  }
+                }}
+                value={(apn.find(a => a.apn_id === state.default_apn) || {'apn':''}).apn}
+                options={apn.map((option) => option.apn)}
+                renderInput={(params) => <TextField {...params} label={`Default APN ${errors.default_apn}`} error={errors.default_apn!==''} />}
+              />
             </Grid>
             <Grid item xs={4}>
-              <InputField
-                error={errors.apn_list}
-                value={state.apn_list}
-                onChange={onChangeLocal}
-                id="apn_list"
-                label="APN list"
-              >List of APN ids comma seperated</InputField>
+              <Autocomplete
+                multiple
+                loading={apnLoading}
+                onChange={(_event, value) => {
+                  if (value.length > 0) {
+                    onChangeApn(value);
+                  }
+                }}
+                value={apn.filter((a) => state.apn_list.split(",").includes(String(a.apn_id))).map((a)=> a.apn)}
+                options={apn.map((option) => option.apn)}
+                renderInput={(params) => <TextField {...params} label={`APNs ${errors.apn_list}`} error={errors.apn_list!==''} />}
+              />
             </Grid>
             <Grid item xs={12}><h3>QoS</h3></Grid>
             <Grid item xs={6}>
