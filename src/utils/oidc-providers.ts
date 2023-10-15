@@ -15,6 +15,8 @@ export const authLogin = (password: string, api: string) => {
       } else {
         return rej({ message: 'Credentials are wrong!' });
       }
+    }).catch(err => {
+        return rej({ message: 'Unable to reach api! OR api token is wrong!'})
     })
   });
 };

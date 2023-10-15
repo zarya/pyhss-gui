@@ -29,8 +29,6 @@ const Login = () => {
       dispatch(setAuthentication(response as any));
       toast.success('Login is succeed!');
       setAuthLoading(false);
-      // dispatch(loginUser(token));
-      // navigate('/');
       window.location.reload();
     } catch (error: any) {
       setAuthLoading(false);
@@ -46,8 +44,7 @@ const Login = () => {
     validationSchema: Yup.object({
       password: Yup.string()
         .min(5, 'Must be 5 characters or more')
-        .max(30, 'Must be 30 characters or less')
-        .required('Required'),
+        .max(30, 'Must be 30 characters or less'),
     }),
     onSubmit: (values) => {
       login(values.password, values.api);
@@ -118,11 +115,6 @@ const Login = () => {
             </div>
 
             <div className="row">
-              <div className="col-8">
-                <PfCheckbox checked={false}>
-                  {t<string>('login.label.rememberMe')}
-                </PfCheckbox>
-              </div>
               <div className="col-4">
                 <PfButton
                   block
