@@ -40,7 +40,9 @@ const AucAddItem = (props: {
     else if (field==='imsi' && value.length < 15)
       error = 'To short!';
 
-    if (field==='iccid' && !/^\d*$/.test(value))
+    if (field==='iccid' && value === '')
+      error = 'Field is required!';
+    else if (field==='iccid' && !/^\d*$/.test(value))
       error = 'Only numbers are allowed!';
     else if (field==='iccid' && value.length > 0 && value.length < 19)
       error = 'To short!';

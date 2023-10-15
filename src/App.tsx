@@ -9,7 +9,7 @@ import Login from '@modules/login/Login';
 import { useWindowSize } from '@app/hooks/useWindowSize';
 import { calculateWindowSize } from '@app/utils/helpers';
 import { useDispatch, useSelector } from 'react-redux';
-import { setWindowSize } from '@app/store/reducers/ui';
+import { setWindowSize, setDarkMode } from '@app/store/reducers/ui';
 
 import Dashboard from '@pages/Dashboard';
 import Auc from '@pages/Auc';
@@ -64,6 +64,7 @@ const App = () => {
   };
 
   useEffect(() => {
+    dispatch(setDarkMode((localStorage.getItem('darkmode')==='yes'?true:false)));
     checkSession();
   }, []);
 

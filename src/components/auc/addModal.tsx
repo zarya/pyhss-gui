@@ -22,8 +22,8 @@ const style = {
 };
 
 
-const AucAddModal = (props: { open: boolean, handleClose: any, data: object, edit: boolean }) => {
-  const { open, handleClose, data, edit } = props;
+const AucAddModal = (props: { open: boolean, handleClose: any, data: object, edit: boolean, onError: Function }) => {
+  const { open, handleClose, data, edit, onError = () => {} } = props;
   const [state, setState] = React.useState(data);
   const [error, setError] = React.useState(true);
   const [forceKeys, setForceKeys] = React.useState(false);
@@ -94,14 +94,21 @@ const AucAddModal = (props: { open: boolean, handleClose: any, data: object, edi
       if (!forceKeys)
         AucApi.update(data.auc_id, aucSaveTemplate).then((data) => {
           handleLocalClose();
+        }).catch(err => {
+          onError(err);
         })
       else
         AucApi.update(data.auc_id, state).then((data) => {
           handleLocalClose();
+        }).catch(err => {
+          onError(err);
         })
     }else{
       AucApi.create(state).then((data) => {
         handleLocalClose();
+      }).catch(err => {
+        console.log(err);
+        onError(err);
       })
     }
   }

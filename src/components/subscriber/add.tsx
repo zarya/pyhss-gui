@@ -132,7 +132,7 @@ edit?: boolean
                 value={(auc.find(a => a.auc_id === state.auc_id) || {'imsi':''}).imsi}
                 disabled={wizard || edit}
                 options={auc.map((option) => option.imsi)}
-                renderInput={(params) => <TextField {...params} label="AUC" />}
+                renderInput={(params) => <TextField {...params} label={`IMSI ${errors.imsi}`} error={errors.imsi!==''} />}
               />
             </Grid>
             <Grid item xs={3}>

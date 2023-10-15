@@ -30,7 +30,8 @@ const Login = () => {
       toast.success('Login is succeed!');
       setAuthLoading(false);
       // dispatch(loginUser(token));
-      navigate('/');
+      // navigate('/');
+      window.location.reload();
     } catch (error: any) {
       setAuthLoading(false);
       toast.error(error.message || 'Failed');
@@ -53,7 +54,7 @@ const Login = () => {
     },
   });
 
-  setWindowClass('hold-transition login-page');
+  setWindowClass('hold-transition login-page' + (localStorage.getItem('darkmode')==='yes'?' dark-mode':''));
 
   return (
     <div className="login-box">

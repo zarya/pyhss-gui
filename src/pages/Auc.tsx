@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, {useState} from 'react';
-import {ContentHeader, AucItem, AucAddModal} from '@components';
+import {ContentHeader, AucItem, AucAddModal, ErrorDialog} from '@components';
 import {AucApi} from "../services/pyhss"
 import SpeedDial from '@mui/material/SpeedDial';
 import SpeedDialIcon from '@mui/material/SpeedDialIcon';
@@ -43,6 +43,7 @@ const Auc = () => {
   const [searchParams] = useSearchParams();
   const [dialogData, setDialogData] = useState(aucTemplate);
   const [editMode, setEditMode] = useState(false);
+  const [error, setError] = useState('');
 
   const aucSearch = searchParams.get('auc');
 
@@ -70,10 +71,13 @@ const Auc = () => {
     }
   }
 
-  const handleDelete = (id) => {
+  const handleDelete = (id: number) => {
     AucApi.delete(id).then((data) => {
       console.log(id, data);
       refresh();
+    }).catch((e)=> {
+      console.log(e);
+      setError(e);
     })
   }
 
@@ -87,12 +91,15 @@ const Auc = () => {
     setOpenAdd(false);
     refresh();
   }
-  const openEdit = (row) => {
+  const openEdit = (row: object) => {
     setEditMode(true);
     setDialogData(row);
     setOpenAdd(true);
   }
 
+  const handleError = (err:string) => {
+    setError(err);
+  }
 
   return (
     <div>
@@ -131,7 +138,8 @@ const Auc = () => {
           onClick={() => handleAdd()}
           open={openAdd}
         />
-        <AucAddModal open={openAdd} handleClose={handleAddClose} data={dialogData} edit={editMode} />
+        <AucAddModal open={openAdd} handleClose={handleAddClose} data={dialogData} edit={editMode} onError={handleError}/>
+        <ErrorDialog error={error} />
       </section>
     </div>
   );

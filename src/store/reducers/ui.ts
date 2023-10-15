@@ -29,9 +29,9 @@ export interface UiState {
 
 const initialState: UiState = {
   screenSize: calculateWindowSize(window.innerWidth),
-  darkMode: false,
+  darkMode: (localStorage.getItem('darkmode')==='yes'?true:false), 
   navbarVariant: 'navbar-light',
-  sidebarSkin: 'sidebar-light-olive',
+  sidebarSkin: (localStorage.getItem('darkmode')==='yes'?'sidebar-dark-olive':'sidebar-light-olive'),
   menuSidebarCollapsed: false,
   controlSidebarCollapsed: true,
   headerBorder: false,
@@ -101,13 +101,27 @@ export const uiSlice = createSlice({
       if (state.darkMode) {
         state.navbarVariant = NAVBAR_DARK_VARIANTS[0].value;
         state.sidebarSkin = "sidebar-dark-olive" 
+        addWindowClass('dark-mode');
+        localStorage.setItem('darkmode', 'yes');
       } else {
         state.navbarVariant = NAVBAR_LIGHT_VARIANTS[0].value;
         state.sidebarSkin = "sidebar-light-olive";
+        localStorage.setItem('darkmode', 'no');
+        removeWindowClass('dark-mode');
       }
+    },
+    setDarkMode: (state, {payload}) => {
+      console.log('setting darkmode', payload);
+      state.darkMode = payload;
       if (state.darkMode) {
+        state.navbarVariant = NAVBAR_DARK_VARIANTS[0].value;
+        state.sidebarSkin = "sidebar-dark-olive" 
         addWindowClass('dark-mode');
+        localStorage.setItem('darkmode', 'yes');
       } else {
+        state.navbarVariant = NAVBAR_LIGHT_VARIANTS[0].value;
+        state.sidebarSkin = "sidebar-light-olive";
+        localStorage.setItem('darkmode', 'no');
         removeWindowClass('dark-mode');
       }
     },
@@ -136,6 +150,7 @@ export const {
   setWindowSize,
   toggleControlSidebar,
   toggleDarkMode,
+  setDarkMode,
   setNavbarVariant,
   setSidebarSkin,
   toggleHeaderBorder,
