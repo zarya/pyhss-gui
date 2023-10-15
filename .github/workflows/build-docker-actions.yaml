@@ -1,0 +1,18 @@
+name: Build and publish
+
+on: 
+  push:
+    branches:
+    - "master"
+
+jobs:
+  build-and-publish-latest:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2.5.0
+    - name: Build and publish "latest" Docker image
+      uses: VaultVulp/gp-docker-action@1.6.0
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        image-name: pyhss-gui 
+        dockerfile: Dockerfile
