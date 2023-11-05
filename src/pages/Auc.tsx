@@ -133,7 +133,7 @@ const Auc = () => {
           </div>
         </div>
         <SpeedDial
-          ariaLabel="Add"
+          ariaLabel={i18n.t('generic.add')}
           sx={{ position: 'absolute', bottom: 80, right: 16 }}
           icon={<SpeedDialIcon />}
           onClick={() => handleAdd()}

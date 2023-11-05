@@ -13,6 +13,7 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import {NavLink} from 'react-router-dom';
 import Button from '@mui/material/Button';
 import { DeleteDialog } from '@components';
+import i18n from '@app/utils/i18n';
 
 const SubscriberItem = (props: { row: ReturnType<typeof Object>, deleteCallback: ReturnType<typeof any>, openEditCallback: ReturnType<typeof any> }) => {
   const { row, deleteCallback, openEditCallback } = props;
@@ -34,7 +35,7 @@ const SubscriberItem = (props: { row: ReturnType<typeof Object>, deleteCallback:
           {row.imsi}
         </TableCell>
         <TableCell><Button component={NavLink} to={`/auc?auc=${row.auc_id}`} variant="outlined">{row.auc_id}</Button></TableCell>
-        <TableCell>{(row.enabled?'Yes':'No')}</TableCell>
+        <TableCell>{(row.enabled?i18n.t('generic.yes'):i18n.t('generic.no'))}</TableCell>
         <TableCell>{row.msisdn}</TableCell>
         <TableCell>{row.apn_list} ({row.default_apn})</TableCell>
         <TableCell>{row.ue_ambr_dl}</TableCell>
@@ -50,15 +51,15 @@ const SubscriberItem = (props: { row: ReturnType<typeof Object>, deleteCallback:
           <Collapse in={open} timeout="auto" unmountOnExit>
             <Box sx={{ margin: 1 }}>
               <Typography variant="h6" gutterBottom component="div">
-                Details
+                {i18n.t('generic.details')}
               </Typography>
-              <Table size="small" aria-label="purchases">
+              <Table size="small">
                 <TableHead>
                   <TableRow>
-                    <TableCell>MME</TableCell>
-                    <TableCell>Realm</TableCell>
-                    <TableCell>Peer</TableCell>
-                    <TableCell>Timestamp</TableCell>
+                    <TableCell>{i18n.t('subscriber.mme')}</TableCell>
+                    <TableCell>{i18n.t('subscriber.realm')}</TableCell>
+                    <TableCell>{i18n.t('subscriber.peer')}</TableCell>
+                    <TableCell>{i18n.t('generic.timestamp')}</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>

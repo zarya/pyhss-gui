@@ -12,6 +12,7 @@ import Typography from '@mui/material/Typography';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import { DeleteDialog } from '@components';
+import i18n from '@app/utils/i18n';
 
 const AucItem = (props: { row: ReturnType<typeof Object>, single: ReturnType<typeof Boolean>, deleteCallback: ReturnType<typeof any>, openEditCallback: ReturnType<typeof any> }) => {
   const { row, single, deleteCallback, openEditCallback } = props;
@@ -35,7 +36,7 @@ const AucItem = (props: { row: ReturnType<typeof Object>, single: ReturnType<typ
         <TableCell>{row.imsi}</TableCell>
         <TableCell>{row.iccid}</TableCell>
         <TableCell>{row.sim_vendor}</TableCell>
-        <TableCell>{(row.esim?'Yes':'No')}</TableCell>
+        <TableCell>{(row.esim?i18n.t('generic.yes'):i18n.t('generic.no'))}</TableCell>
         <TableCell>
           <Button onClick={() => openEditCallback(row)}><i className="fas fa-edit"></i></Button>
           <DeleteDialog id={row.auc_id} callback={deleteCallback}/>
@@ -46,24 +47,24 @@ const AucItem = (props: { row: ReturnType<typeof Object>, single: ReturnType<typ
           <Collapse in={open} timeout="auto" unmountOnExit>
             <Box sx={{ margin: 1 }}>
               <Typography variant="h6" gutterBottom component="div">
-                Details
+                {i18n.t('generic.details')} 
               </Typography>
               <Table size="small" aria-label="purchases">
                 <TableHead>
                   <TableRow>
-                    <TableCell>Batch</TableCell>
-                    <TableCell>LPA</TableCell>
-                    <TableCell>AMF</TableCell>
-                    <TableCell>SQN</TableCell>
-                    <TableCell>PIN1</TableCell>
-                    <TableCell>PUK1</TableCell>
-                    <TableCell>PIN2</TableCell>
-                    <TableCell>PUK2</TableCell>
-                    <TableCell>misc1</TableCell>
-                    <TableCell>misc2</TableCell>
-                    <TableCell>misc3</TableCell>
-                    <TableCell>misc4</TableCell>
-                    <TableCell>Last modified</TableCell>
+                    <TableCell>{i18n.t('inputFields.header.batch')}</TableCell>
+                    <TableCell>{i18n.t('inputFields.header.lpa')}</TableCell>
+                    <TableCell>{i18n.t('inputFields.header.amf')}</TableCell>
+                    <TableCell>{i18n.t('inputFields.header.sqn')}</TableCell>
+                    <TableCell>{i18n.t('inputFields.header.pin1')}</TableCell>
+                    <TableCell>{i18n.t('inputFields.header.puk1')}</TableCell>
+                    <TableCell>{i18n.t('inputFields.header.pin2')}</TableCell>
+                    <TableCell>{i18n.t('inputFields.header.puk2')}</TableCell>
+                    <TableCell>{i18n.t('inputFields.header.misc1')}</TableCell>
+                    <TableCell>{i18n.t('inputFields.header.misc2')}</TableCell>
+                    <TableCell>{i18n.t('inputFields.header.misc3')}</TableCell>
+                    <TableCell>{i18n.t('inputFields.header.misc4')}</TableCell>
+                    <TableCell>{i18n.t('generic.lastModified')}</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>

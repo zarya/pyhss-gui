@@ -52,6 +52,11 @@
       "realm": "Realm",
       "peer": "Peer"
   },
+  "subscriber": {
+    "mme": "MME",
+    "realm": "Realm",
+    "peer": "Peer"
+  },
   "footer": {
     "version": "Version"
   },
@@ -71,7 +76,8 @@
     "moreInfo": "More info",
     "search": "Search",
     "details": "Details",
-    "timestamp": "Timestamp"
+    "timestamp": "Timestamp",
+    "enabled": "Enabled"
   },
   "validator": {
     "toShort": "To short!",
@@ -136,7 +142,8 @@
         "sh_profile": "SH Profile",
         "msisdn_list": "MSISDN list",
         "rauTauTimer": "RAU TAU Timer",
-        "nam": "NAM"
+        "nam": "NAM",
+        "sqn": "SQN"
     },
     "desc": {
         "name": "Name of the entity",
