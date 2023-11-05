@@ -46,6 +46,8 @@ const AucAddItem = (props: {
       error = i18n.t('validator.onlyNumbers'); 
     else if (field==='iccid' && value.length > 0 && value.length < 19)
       error = i18n.t('validator.toShort');
+    else if (field==='iccid' && value.length > 0 && value.length > 19)
+      error = i18n.t('validator.toLong');
 
     if (!edit || forceKeys) {
       if (field==='ki' && value === '')
