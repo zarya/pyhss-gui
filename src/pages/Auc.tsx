@@ -12,6 +12,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { useSearchParams } from "react-router-dom";
+import i18n from '@app/utils/i18n';
 
 const aucTemplate = {
   "ki": "",
@@ -113,11 +114,11 @@ const Auc = () => {
                     <TableHead>
                       <TableRow>
                         <TableCell/>
-                        <TableCell>ID</TableCell>
-                        <TableCell>IMSI</TableCell>
-                        <TableCell>ICCID</TableCell>
-                        <TableCell>Vendor</TableCell>
-                        <TableCell>eSim</TableCell>
+                        <TableCell>{i18n.t('inputFields.header.id')}</TableCell>
+                        <TableCell>{i18n.t('inputFields.header.imsi')}</TableCell>
+                        <TableCell>{i18n.t('inputFields.header.iccid')}</TableCell>
+                        <TableCell>{i18n.t('inputFields.header.simVendor')}</TableCell>
+                        <TableCell>{i18n.t('inputFields.header.esim')}</TableCell>
                         <TableCell/>
                       </TableRow>
                     </TableHead>

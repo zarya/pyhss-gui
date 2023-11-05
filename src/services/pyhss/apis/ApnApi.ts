@@ -5,19 +5,19 @@ class ApnApi {
     return http.get("/apn/list");
   }
 
-  get(id) {
+  get(id: number) {
     return http.get(`/apn/${id}`);
   }
 
-  create(data) {
+  create(data: object) {
     return http.put("/apn/", data);
   }
 
-  update(id, data) {
+  update(id: number, data: object) {
     return http.patch(`/apn/${id}`, data);
   }
 
-  delete(id) {
+  delete(id: number) {
     return http.delete(`/apn/${id}`);
   }
 }

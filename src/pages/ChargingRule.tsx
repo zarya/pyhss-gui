@@ -11,6 +11,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import i18n from '@app/utils/i18n';
 
 const charging_ruleTemplate = {
   "rule_name": "",
@@ -77,20 +78,20 @@ const ChargingRule = () => {
                   <Table aria-label="collapsible table">
                     <TableHead>
                       <TableRow>
-                        <TableCell>Name</TableCell>
-                        <TableCell>ID</TableCell>
-                        <TableCell>QCI</TableCell>
-                        <TableCell>TFT Group</TableCell>
-                        <TableCell>mbr_dl</TableCell>
-                        <TableCell>mbr_ul</TableCell>
-                        <TableCell>gbr_dl</TableCell>
-                        <TableCell>gbr_ul</TableCell>
-                        <TableCell>arp_priority</TableCell>
-                        <TableCell>arp_preemption_capability</TableCell>
-                        <TableCell>arp_preemption_vulnerability</TableCell>
-                        <TableCell>precedence</TableCell>
-                        <TableCell>rating_group</TableCell>
-                        <TableCell>Last Modified</TableCell>
+                        <TableCell>{i18n.t('inputFields.header.name')}</TableCell>
+                        <TableCell>{i18n.t('inputFields.header.id')}</TableCell>
+                        <TableCell>{i18n.t('inputFields.header.qci')}</TableCell>
+                        <TableCell>{i18n.t('inputFields.header.tftGroup')}</TableCell>
+                        <TableCell>{i18n.t('inputFields.header.mbr_dl')}</TableCell>
+                        <TableCell>{i18n.t('inputFields.header.mbr_ul')}</TableCell>
+                        <TableCell>{i18n.t('inputFields.header.gbr_dl')}</TableCell>
+                        <TableCell>{i18n.t('inputFields.header.gbr_ul')}</TableCell>
+                        <TableCell>{i18n.t('inputFields.header.arpPriority')}</TableCell>
+                        <TableCell>{i18n.t('inputFields.header.arpPreemptionCapability')}</TableCell>
+                        <TableCell>{i18n.t('inputFields.header.arpPreemptionVulnerability')}</TableCell>
+                        <TableCell>{i18n.t('inputFields.header.precedence')}</TableCell>
+                        <TableCell>{i18n.t('inputFields.header.ratingGroup')}</TableCell>
+                        <TableCell>{i18n.t('generic.lastModified')}</TableCell>
                         <TableCell/>
                       </TableRow>
                     </TableHead>

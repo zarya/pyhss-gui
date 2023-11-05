@@ -12,6 +12,7 @@ import Typography from '@mui/material/Typography';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import { DeleteDialog } from '@components';
+import i18n from '@app/utils/i18n';
 
 const ImsSubscriberItem = (props: { row: ReturnType<typeof Object>, deleteCallback: ReturnType<typeof any>, openEditCallback: ReturnType<typeof any> }) => {
   const { row, deleteCallback, openEditCallback } = props;
@@ -46,40 +47,40 @@ const ImsSubscriberItem = (props: { row: ReturnType<typeof Object>, deleteCallba
           <Collapse in={open} timeout="auto" unmountOnExit>
             <Box sx={{ margin: 1 }}>
               <Typography variant="h6" gutterBottom component="div">
-                Details
+                {i18n.t('generic.details')} 
               </Typography>
               <Table size="small" aria-label="PCSCF and SCSCF">
                 <TableHead>
                   <TableRow>
-                    <TableCell>PCSCF</TableCell>
-                    <TableCell>Realm</TableCell>
-                    <TableCell>Peer</TableCell>
-                    <TableCell>Timestamp</TableCell>
+                    <TableCell>{i18n.t('ims.pcscf')}</TableCell>
+                    <TableCell>{i18n.t('ims.realm')}</TableCell>
+                    <TableCell>{i18n.t('ims.peer')}</TableCell>
+                    <TableCell>{i18n.t('generic.timestamp')}</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                    <TableRow>
-                      <TableCell>{row.pcscf}</TableCell>
-                      <TableCell>{row.pcscf_realm}</TableCell>
-                      <TableCell>{row.pcscf_peer}</TableCell>
-                      <TableCell>{row.pcscf_timestamp}</TableCell>
-                    </TableRow>
+                  <TableRow>
+                    <TableCell>{row.pcscf}</TableCell>
+                    <TableCell>{row.pcscf_realm}</TableCell>
+                    <TableCell>{row.pcscf_peer}</TableCell>
+                    <TableCell>{row.pcscf_timestamp}</TableCell>
+                  </TableRow>
                 </TableBody>
                 <TableHead>
                   <TableRow>
-                    <TableCell>SCSCF</TableCell>
-                    <TableCell>Realm</TableCell>
-                    <TableCell>Peer</TableCell>
-                    <TableCell>Timestamp</TableCell>
+                    <TableCell>{i18n.t('ims.scscf')}</TableCell>
+                    <TableCell>{i18n.t('ims.realm')}</TableCell>
+                    <TableCell>{i18n.t('ims.peer')}</TableCell>
+                    <TableCell>{i18n.t('generic.timestamp')}</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                    <TableRow>
-                      <TableCell>{row.scscf}</TableCell>
-                      <TableCell>{row.scscf_realm}</TableCell>
-                      <TableCell>{row.scscf_peer}</TableCell>
-                      <TableCell>{row.scscf_timestamp}</TableCell>
-                    </TableRow>
+                  <TableRow>
+                    <TableCell>{row.scscf}</TableCell>
+                    <TableCell>{row.scscf_realm}</TableCell>
+                    <TableCell>{row.scscf_peer}</TableCell>
+                    <TableCell>{row.scscf_timestamp}</TableCell>
+                  </TableRow>
                 </TableBody>
               </Table>
             </Box>

@@ -2,6 +2,7 @@ import {SmallBox} from '@app/components';
 import React from 'react';
 import {ContentHeader} from '@components';
 import {NavLink} from 'react-router-dom';
+import i18n from '@app/utils/i18n';
 
 import {OamApi} from "../services/pyhss";
 
@@ -38,13 +39,13 @@ const Dashboard = () => {
                 <div className="inner">
                   <h3>{subs}</h3>
 
-                  <p>Subscribers Online</p>
+                  <p>{i18n.t('dashboard.subscriberHeader')}</p>
                 </div>
                 <div className="icon">
                   <i className="ion ion-stats-bars" />
                 </div>
                 <NavLink to="/subscriber" className="small-box-footer">
-                  More info <i className="fas fa-arrow-circle-right" />
+                  {i18n.t('generic.moreInfo')} <i className="fas fa-arrow-circle-right" />
                 </NavLink>
               </div>
             </div>
@@ -53,13 +54,13 @@ const Dashboard = () => {
                 <div className="inner">
                   <h3>{subsIms}</h3>
 
-                  <p>IMS Subscribers Online</p>
+                  <p>{i18n.t('dashboard.imsSubscriberHeader')}</p>
                 </div>
                 <div className="icon">
                   <i className="ion ion-person-add" />
                 </div>
                 <NavLink to="/imssubscriber" className="small-box-footer">
-                  More info <i className="fas fa-arrow-circle-right" />
+                  {i18n.t('generic.moreInfo')} <i className="fas fa-arrow-circle-right" />
                 </NavLink>
               </div>
             </div>
@@ -68,7 +69,7 @@ const Dashboard = () => {
                 <div className="inner">
                   <h3>{subsPcrf}</h3>
 
-                  <p>Subscribers PCRF</p>
+                  <p>{i18n.t('dashboard.subscribersPCRFHeader')}</p>
                 </div>
                 <div className="icon">
                   <i className="ion ion-pie-graph" />
@@ -80,7 +81,7 @@ const Dashboard = () => {
                 <div className="inner">
                   <h3>{diameter}</h3>
 
-                  <p>Diameter Peers</p>
+                  <p>{i18n.t('dashboard.diameterPeersHeader')}</p>
                 </div>
                 <div className="icon">
                   <i className="ion ion-pie-graph" />

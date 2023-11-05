@@ -3,7 +3,6 @@ import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import MenuItem from '@mui/material/MenuItem';
-import Button from '@mui/material/Button';
 
 import {SelectField, SaveButtons, InputField, TftGenerator} from '@components';
 import i18n from '@app/utils/i18n';
@@ -101,13 +100,13 @@ const TftAddItem = (props: {
                 value={state.direction}
                 onChange={handleChange}
                 id="direction"
-                label="Direction"
-                helper="Defines traffic direction"
+                label={i18n.t('inputFields.header.direction')}
+                helper={i18n.t('inputFields.desc.direction')}
               >
-                <MenuItem value={0}>Unspecified</MenuItem>
-                <MenuItem value={1}>Downlink</MenuItem>
-                <MenuItem value={2}>Uplink</MenuItem>
-                <MenuItem value={3}>Bidirectional</MenuItem>
+                <MenuItem value={0}>{i18n.t('inputFields.options.tftDirection.0')}</MenuItem>
+                <MenuItem value={1}>{i18n.t('inputFields.options.tftDirection.1')}</MenuItem>
+                <MenuItem value={2}>{i18n.t('inputFields.options.tftDirection.2')}</MenuItem>
+                <MenuItem value={3}>{i18n.t('inputFields.options.tftDirection.3')}</MenuItem>
               </SelectField>
             </Grid>
           </Grid>

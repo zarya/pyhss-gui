@@ -121,7 +121,7 @@ const Login = () => {
                   type="submit"
                   loading={isAuthLoading}
                 >
-                  {t<string>('login.button.signIn.label')}
+                  {t<string>('login.button.signIn')}
                 </PfButton>
               </div>
             </div>

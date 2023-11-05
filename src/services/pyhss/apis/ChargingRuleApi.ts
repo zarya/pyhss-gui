@@ -5,19 +5,19 @@ class ChargingRuleApi {
     return http.get("/charging_rule/list");
   }
 
-  get(id) {
+  get(id: number) {
     return http.get(`/charging_rule/${id}`);
   }
 
-  create(data) {
+  create(data: object) {
     return http.put("/charging_rule/", data);
   }
 
-  update(id, data) {
+  update(id: number, data: object) {
     return http.patch(`/charging_rule/${id}`, data);
   }
 
-  delete(id) {
+  delete(id: number) {
     return http.delete(`/charging_rule/${id}`);
   }
 }

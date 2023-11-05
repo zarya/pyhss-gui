@@ -5,19 +5,19 @@ class TftApi {
     return http.get("/tft/list");
   }
 
-  get(id) {
+  get(id: number) {
     return http.get(`/tft/${id}`);
   }
 
-  create(data) {
+  create(data: object) {
     return http.put("/tft/", data);
   }
 
-  update(id, data) {
+  update(id: number, data: object) {
     return http.patch(`/tft/${id}`, data);
   }
 
-  delete(id) {
+  delete(id: number) {
     return http.delete(`/tft/${id}`);
   }
 }

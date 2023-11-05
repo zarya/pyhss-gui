@@ -86,12 +86,12 @@ const Apn = () => {
                     <TableHead>
                       <TableRow>
                         <TableCell/>
-                        <TableCell>{i18n.t('apn.tablehead.id')}</TableCell>
-                        <TableCell>{i18n.t('apn.tablehead.apn')}</TableCell>
-                        <TableCell>{i18n.t('apn.tablehead.ipVersion')}</TableCell>
-                        <TableCell>{i18n.t('apn.tablehead.qci')}</TableCell>
-                        <TableCell>{i18n.t('apn.tablehead.sgw')}</TableCell>
-                        <TableCell>{i18n.t('apn.tablehead.pgw')}</TableCell>
+                        <TableCell>{i18n.t('inputFields.header.id')}</TableCell>
+                        <TableCell>{i18n.t('inputFields.header.apn')}</TableCell>
+                        <TableCell>{i18n.t('inputFields.header.ipVersion')}</TableCell>
+                        <TableCell>{i18n.t('inputFields.header.qci')}</TableCell>
+                        <TableCell>{i18n.t('inputFields.header.sgw')}</TableCell>
+                        <TableCell>{i18n.t('inputFields.header.pgw')}</TableCell>
                         <TableCell/>
                       </TableRow>
                     </TableHead>

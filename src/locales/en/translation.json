@@ -1,76 +1,16 @@
 {
   "login": {
     "label": {
-      "signIn": "Sign in to start your session",
-      "rememberMe": "Remember Me",
-      "forgotPass": "I forgot my password",
-      "registerNew": "Register a new membership"
+      "signIn": "Sign in to start your session"
     },
     "button": {
-      "signIn": {
-        "label": "Sign In",
-        "social": "Sign in using {{what}}"
-      },
-      "signUp": {
-        "label": "Sign Up",
-        "social": "Sign up using {{what}}"
-      },
+      "signIn": "Sign In",
       "signOut": "Sign Out"
     }
   },
-  "register": {
-    "alreadyHave": "I already have a membership",
-    "registerNew": "Register a new membership",
-    "label": "Register"
-  },
-  "recover": {
-    "forgotYourPassword": "You forgot your password? Here you can easily retrieve a new password.",
-    "oneStepAway": "You are only one step a way from your new password, recover your password now.",
-    "changePassword": "Change Password",
-    "requestNewPassword": "Request New Password"
-  },
-  "main": {
-    "label": {
-      "moreInfo": "More info",
-      "follow": "Follow",
-      "aboutMe": "About Me",
-      "education": "Education",
-      "location": "Location",
-      "skills": "Skills",
-      "notes": "Notes",
-      "activity": "Activity",
-      "timeline": "Timeline",
-      "settings": "Settings"
-    }
-  },
   "header": {
-    "label": {
-      "home": "Home",
-      "contact": "Contact"
-    },
     "language": {
-      "turkish": "Turkish",
-      "english": "English",
-      "german": "German",
-      "french": "French",
-      "spanish": "Spanish"
-    },
-    "messages": {
-      "ago": "{{quantity}} {{unit}} Ago",
-      "seeAll": "See All Messages"
-    },
-    "notifications": {
-      "count": "{{quantity}} Notifications",
-      "newMessagesCount": "{{quantity}} new messages",
-      "friendRequestsCount": "{{quantity}} friend requests",
-      "reportsCount": "{{quantity}} new reports",
-      "seeAll": "See All Notifications"
-    },
-    "user": {
-      "profile": "Profile",
-      "followers": "Followers",
-      "sales": "Sales",
-      "friends": "Friends"
+      "english": "English"
     }
   },
   "menusidebar": {
@@ -86,18 +26,34 @@
       "chargingrule": "Charging Rules"
     }
   },
+  "dashboard": {
+    "subscriberHeader": "Subscribers Online",
+    "imsSubscriberHeader": "IMS Subscribers Online",
+    "subscribersPCRFHeader": "Subscribers PCRF",
+    "diameterPeersHeader": "Diameter Peers"
+  },
+  "apn": {
+    "headAdd": "{{mode}} APN",
+    "chargingHead": "Charging",
+    "chargingRulesHead": "Charging Rules",
+    "arpHead": "Allocation and Retention Priority (ARP)",
+    "qosHead": "Quality of Service (QoS)",
+    "gatewayHead": "Gateway"
+  },
+  "auc": {
+    "setKeys": "Set keys"
+  },
+  "chargingRule": {
+    "headAdd": "{{mode}} Charging rule"
+  },
+  "ims": {
+      "pcscf": "PCSCF",
+      "scscf": "SCSCF",
+      "realm": "Realm",
+      "peer": "Peer"
+  },
   "footer": {
-    "version": "Version",
-    "copyright": "All rights reserved."
-  },
-  "views": {
-    "user": {
-      "profile": "User Profile",
-      "following": "Following"
-    }
-  },
-  "measurement": {
-    "quantityUnit": "{{quantity}} {{unit}}"
+    "version": "Version"
   },
   "generic": {
     "add": "Add",
@@ -106,25 +62,85 @@
     "yes": "Yes",
     "no": "No",
     "edit": "Edit",
-    "lastModified": "Last Modified"
+    "lastModified": "Last Modified",
+    "skip": "Skip",
+    "next": "Next",
+    "finish": "Finish",
+    "back": "Back",
+    "reset": "Reset",
+    "moreInfo": "More info",
+    "search": "Search",
+    "details": "Details",
+    "timestamp": "Timestamp"
   },
-  "apn": {
-    "tablehead": {
-      "id": "ID",
-      "apn": "APN",
-      "ipVersion": "IP Version",
-      "qci": "QCI",
-      "sgw": "SGW",
-      "pgw": "PGW",
-      "chargingCharacteristics": "Charging Characteristics",
-      "arpPriority": "ARP Priority",
-      "arpPreemptionVulnerability": "ARP Preemption Vulnerability",
-      "arpPreemptionCapability": "ARP Preemption Capability",
-      "precedence": "Precedence"
-    }
+  "validator": {
+    "toShort": "To short!",
+    "toLong": "To long!",
+    "onlyNumbers": "Only numbers are allowed!",
+    "required": "Field is required!",
+    "onlyHex": "Only HEX allowed!",
+    "onlyCSV": "Only comma seperated numbers are allowed!"
   },
   "inputFields": {
+    "header": {
+        "imsi": "IMSI",
+        "simVendor": "Vendor",
+        "iccid": "ICCID",
+        "esim": "eSim",
+        "name": "Name",
+        "id": "ID",
+        "apn": "APN",
+        "ipVersion": "IP Version",
+        "qci": "QCI",
+        "sgw": "SGW",
+        "pgw": "PGW",
+        "chargingCharacteristics": "Charging Characteristics",
+        "precedence": "Precedence",
+        "arpPriority": "ARP Priority",
+        "arpPreemptionVulnerability": "ARP Preemption Vulnerability",
+        "arpPreemptionCapability": "ARP Preemption Capability",
+        "tftGroup": "TFT Group",
+        "ratingGroup": "Rating group",
+        "mbr_dl": "MBR DL",
+        "mbr_ul": "MBR UL",
+        "gbr_dl": "GBR DL",
+        "gbr_ul": "GBR UL",
+        "ambr_dl": "AMBR DL",
+        "ambr_ul": "AMBR UL",
+        "ifc": "IFC",
+        "sh": "SH",
+        "msisdn": "MSISDN",
+        "auc": "AUC",
+        "apnDefault": "APN (default)",
+        "defaultAPN": "Default APN",
+        "tuaTimer": "TUA Timer",
+        "rule": "Rule",
+        "direction": "Direction",
+        "batch": "Batch",
+        "ki": "Ki",
+        "opc": "oPC",
+        "amf": "AMF",
+        "kid": "KID",
+        "psk": "PSK",
+        "des": "DES",
+        "adm1": "ADM 1",
+        "pin1": "PIN 1",
+        "pin2": "PIN 2",
+        "puk1": "PUK 1",
+        "puk2": "PUK 2",
+        "misc1": "Misc 1",
+        "misc2": "Misc 2",
+        "misc3": "Misc 3",
+        "misc4": "Misc 4",
+        "ifc_path": "IFC path",
+        "sh_profile": "SH Profile",
+        "msisdn_list": "MSISDN list",
+        "rauTauTimer": "RAU TAU Timer",
+        "nam": "NAM"
+    },
     "desc": {
+        "name": "Name of the entity",
+        "apn": "Access Point Name",
         "imsi":"International mobile subscriber identity",
         "msisdn": "MSISDN",
         "msisdn_list": "Comma seperated list of msisdn",
@@ -134,7 +150,8 @@
         "opc": "oPC",
         "esim": "is this a eSim?",
         "iccid": "Integrated Circuit Card Identifier",
-        "sim_vendor": "Sim vendor",
+        "simVendor": "Sim vendor",
+        "batch": "Batch name",
         "amf": "Access and Mobility Management Function",
         "lpa": "Local Profile Assistant URL for activating eSIM",
         "pin1":"User PIN 1",
@@ -149,7 +166,37 @@
         "misc2":"Misc 2",
         "misc3":"Misc 3",
         "misc4":"Misc 4",
-        "nam": "Network Access Mode [3GPP TS. 123 008 2.1.1.2]"
+        "nam": "Network Access Mode [3GPP TS. 123 008 2.1.1.2]",
+        "pgw": "IP/FQDN of the PGW",
+        "sgw": "IP/FQDN of the sGW",
+        "chargingCharacteristics": "Charging characteristics",
+        "qci": "QoS Class Identifier",
+        "ambr_dl": "Agregated Maximum Bit Rate download:",
+        "ambr_ul": "Agregated Maximum Bit Rate upload:",
+        "gbr_dl": "Guaranteed Bit Rate download:",
+        "gbr_ul": "Guaranteed Bit Rate upload:",
+        "mbr_dl": "Maximum Bit Rate download:",
+        "mbr_ul": "Maximum Bit Rate upload:",
+        "precedence": "Precedence of this rule, allows rule to override or be overridden by a higher priority rule",
+        "arpPriority": "Allocation and Retention Policy - Bearer priority level",
+        "arpPreemptionCapability":"Defines whether the service can be preempted by a higher-priority service",
+        "arpPreemptionVulnerability": "Defines whether a bearer is applicable for such dropping by a preemption capable bearer with a higher priority value.",
+        "ipVersion": "Version(s) of the ip stack that are enabled",
+        "subscriberEnabled": "Subscriber enabled?",
+        "rauTauTimer": "Periodic Tracking Area Update timer",
+        "direction": "Defines traffic direction"
+    },
+    "options": {
+      "nam": {
+        "0": "Packet and circuit",
+        "2": "Packet only"
+      },
+      "tftDirection": {
+        "0": "Unspecified",
+        "1": "Downlink",
+        "2": "Uplink",
+        "3": "Bidirectional"
+      }
     }
   }
 }

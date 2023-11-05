@@ -53,17 +53,17 @@ const ApnItem = (props: { row: ReturnType<typeof Object>, chargingRules: ReturnT
           <Collapse in={open} timeout="auto" unmountOnExit>
             <Box sx={{ margin: 1 }}>
               <Typography variant="h6" gutterBottom component="div">
-                Details
+                {i18n.t('generic.details')} 
               </Typography>
-              <Table size="small" aria-label="purchases">
+              <Table size="small">
                 <TableHead>
                   <TableRow>
-                    <TableCell>AMBR DL</TableCell>
-                    <TableCell>AMBR UL</TableCell>
-                    <TableCell>{i18n.t('apn.tablehead.chargingCharacteristics')}</TableCell>
-                    <TableCell>{i18n.t('apn.tablehead.arpPriority')}</TableCell>
-                    <TableCell>{i18n.t('apn.tablehead.arpPreemptionVulnerability')}</TableCell>
-                    <TableCell>{i18n.t('apn.tablehead.arpPreemptionCapability')}</TableCell>
+                    <TableCell>{i18n.t('inputFields.header.ambr_dl')}</TableCell>
+                    <TableCell>{i18n.t('inputFields.header.ambr_ul')}</TableCell>
+                    <TableCell>{i18n.t('inputFields.header.chargingCharacteristics')}</TableCell>
+                    <TableCell>{i18n.t('inputFields.header.arpPriority')}</TableCell>
+                    <TableCell>{i18n.t('inputFields.header.arpPreemptionVulnerability')}</TableCell>
+                    <TableCell>{i18n.t('inputFields.header.arpPreemptionCapability')}</TableCell>
                     <TableCell>{i18n.t('generic.lastModified')}</TableCell>
                   </TableRow>
                 </TableHead>
@@ -73,8 +73,8 @@ const ApnItem = (props: { row: ReturnType<typeof Object>, chargingRules: ReturnT
                       <TableCell><NetworkBandwidthFormatter data={row.apn_ambr_ul} /></TableCell>
                       <TableCell>{row.charging_characteristics}</TableCell>
                       <TableCell>{row.arp_priority}</TableCell>
-                      <TableCell>{(row.arp_preemption_vulnerability?'Yes':'No')}</TableCell>
-                      <TableCell>{(row.arp_preemption_capability?'Yes':'No')}</TableCell>
+                      <TableCell>{(row.arp_preemption_vulnerability?i18n.t('generic.yes'):i18n.t('generic.no'))}</TableCell>
+                      <TableCell>{(row.arp_preemption_capability?i18n.t('generic.yes'):i18n.t('generic.no'))}</TableCell>
                       <TableCell>{row.last_modified}</TableCell>
                     </TableRow>
                 </TableBody>
@@ -83,19 +83,19 @@ const ApnItem = (props: { row: ReturnType<typeof Object>, chargingRules: ReturnT
             {rules.length > 0 && 
             <Box sx={{ margin: 1 }}>
               <Typography variant="h6" gutterBottom component="div">
-                Charging Rules
+                {i18n.t('apn.chargingRulesHead')} 
               </Typography>
-              <Table size="small" aria-label="purchases">
+              <Table size="small">
                 <TableHead>
                   <TableRow>
-                    <TableCell>Name</TableCell>
-                    <TableCell>QCI</TableCell>
+                    <TableCell>{i18n.t('inputFields.header.name')}</TableCell>
+                    <TableCell>{i18n.t('inputFields.header.qci')}</TableCell>
                     <TableCell>MBR/GBR DL</TableCell>
                     <TableCell>MBR/GBR UL</TableCell>
-                    <TableCell>{i18n.t('apn.tablehead.precedence')}</TableCell>
-                    <TableCell>{i18n.t('apn.tablehead.arpPriority')}</TableCell>
-                    <TableCell>{i18n.t('apn.tablehead.arpPreemptionVulnerability')}</TableCell>
-                    <TableCell>{i18n.t('apn.tablehead.arpPreemptionCapability')}</TableCell>
+                    <TableCell>{i18n.t('inputFields.header.precedence')}</TableCell>
+                    <TableCell>{i18n.t('inputFields.header.arpPriority')}</TableCell>
+                    <TableCell>{i18n.t('inputFields.header.arpPreemptionVulnerability')}</TableCell>
+                    <TableCell>{i18n.t('inputFields.header.arpPreemptionCapability')}</TableCell>
                     <TableCell>{i18n.t('generic.lastModified')}</TableCell>
                   </TableRow>
                 </TableHead>
@@ -108,8 +108,8 @@ const ApnItem = (props: { row: ReturnType<typeof Object>, chargingRules: ReturnT
                       <TableCell style={{whiteSpace: 'nowrap'}}><NetworkBandwidthFormatter data={chRow.mbr_ul} /> / <NetworkBandwidthFormatter data={chRow.gbr_ul} /></TableCell>
                       <TableCell>{chRow.precedence}</TableCell>
                       <TableCell>{chRow.arp_priority}</TableCell>
-                      <TableCell>{(chRow.arp_preemption_vulnerability?'Yes':'No')}</TableCell>
-                      <TableCell>{(chRow.arp_preemption_capability?'Yes':'No')}</TableCell>
+                      <TableCell>{(chRow.arp_preemption_vulnerability?i18n.t('generic.yes'):i18n.t('generic.no'))}</TableCell>
+                      <TableCell>{(chRow.arp_preemption_capability?i18n.t('generic.yes'):i18n.t('generic.no'))}</TableCell>
                       <TableCell>{chRow.last_modified}</TableCell>
                     </TableRow>
                   )}

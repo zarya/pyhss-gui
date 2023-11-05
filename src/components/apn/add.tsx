@@ -1,14 +1,16 @@
 import React from 'react';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
-import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import InputLabel from '@mui/material/InputLabel';
 import Grid from '@mui/material/Grid';
-import FormHelperText from '@mui/material/FormHelperText';
 import i18n from '@app/utils/i18n';
-import {NetworkBandwidthFormatter,InputField, SelectField, SaveButtons} from '@components';
+import {
+  NetworkBandwidthFormatter,
+  InputField,
+  SelectField,
+  SaveButtons,
+} from '@components';
+
 import {ApnApi} from '../../services/pyhss';
 
 const style = {
@@ -63,7 +65,7 @@ const ApnAddItem = (props: { open: ReturnType<typeof Boolean>, handleClose: Retu
        aria-describedby="modal-modal-description"
      >
        <Box sx={style}>
-        <h3>{(edit?i18n.t('generic.edit'):i18n.t('generic.add'))} APN</h3>
+        <h3>{i18n.t('apn.headAdd', {"mode": (edit?i18n.t('generic.edit'):i18n.t('generic.add'))})}</h3>
         <Box
           component="form"
           noValidate
@@ -76,16 +78,16 @@ const ApnAddItem = (props: { open: ReturnType<typeof Boolean>, handleClose: Retu
                 value={state.apn}
                 onChange={handleChange}
                 id="apn"
-                label="APN"
-              >APN Name</InputField>
+                label={i18n.t('inputFields.header.apn')}
+              >{i18n.t('inputFields.desc.apn')}</InputField>
             </Grid>
             <Grid item xs={4}>
               <SelectField
                 value={state.ip_version}
                 onChange={handleChange}
                 id="ip_version"
-                label="IP Version"
-                helper="Version(s) of the ip that are enabled"
+                label={i18n.t('inputFields.header.ipVersion')}
+                helper={i18n.t('inputFields.desc.ipVersion')}
                 >
                   <MenuItem key={1} value={0}>ipv4</MenuItem>
                   <MenuItem key={2} value={1}>ipv6</MenuItem>
@@ -93,16 +95,16 @@ const ApnAddItem = (props: { open: ReturnType<typeof Boolean>, handleClose: Retu
                   <MenuItem key={4} value={3}>ipv4 or ipv6</MenuItem>
               </SelectField>
             </Grid>
-            <Grid item xs={12}><h3>Gateway</h3></Grid>
+            <Grid item xs={12}><h3>{i18n.t('apn.gatewayHead')}</h3></Grid>
             <Grid item xs={6}>
               <InputField
                 required
                 value={state.pgw_address}
                 onChange={handleChange}
                 id="pgw_address"
-                label="PGW"
+                label={i18n.t('inputFields.header.pgw')}
               >
-                IP/FQDN of the PGW
+                {i18n.t('inputFields.desc.pgw')}
               </InputField>
             </Grid>
             <Grid item xs={6}>
@@ -111,20 +113,20 @@ const ApnAddItem = (props: { open: ReturnType<typeof Boolean>, handleClose: Retu
                 value={state.sgw_address}
                 onChange={handleChange}
                 id="sgw_address"
-                label="sGW"
+                label={i18n.t('inputFields.header.sgw')}
               >
-                IP/FQDN of the sGW
+                {i18n.t('inputFields.desc.sgw')}
               </InputField>
             </Grid>
-            <Grid item xs={12}><h3>Charging</h3></Grid>
+            <Grid item xs={12}><h3>{i18n.t('apn.chargingHead')}</h3></Grid>
             <Grid item xs={6}>
               <InputField
                 value={state.charging_characteristics}
                 onChange={handleChange}
                 id="charging_characteristics"
-                label="Charging Characteristics"
+                label={i18n.t('inputFields.header.chargingCharacteristics')}
               >
-                Charging characteristics
+                {i18n.t('inputFields.desc.chargingCharacteristics')}
               </InputField>
             </Grid>
             <Grid item xs={6}>
@@ -137,14 +139,14 @@ const ApnAddItem = (props: { open: ReturnType<typeof Boolean>, handleClose: Retu
                 Comma seperated list of charging rules
               </InputField>
             </Grid>
-            <Grid item xs={12}><h3>QoS</h3></Grid>
+            <Grid item xs={12}><h3>{i18n.t('apn.qosHead')}</h3></Grid>
             <Grid item xs={3}>
               <SelectField
                 value={state.qci}
                 onChange={handleChange}
                 id="qci"
-                label="QCI"
-                helper="QoS Class Identifier"
+                label={i18n.t('inputFields.header.qci')}
+                helper={i18n.t('inputFields.desc.qci')}
               >
                 {Array.from(Array(9), (e, i) => (<MenuItem key={i+1+e} value={i+1}>{i+1}</MenuItem>))}
               </SelectField>
@@ -155,8 +157,8 @@ const ApnAddItem = (props: { open: ReturnType<typeof Boolean>, handleClose: Retu
                 value={state.apn_ambr_ul}
                 onChange={handleChange}
                 id="apn_ambr_ul"
-                label="AMBR ul"
-              >Agregated Maximum Bit Rate upload: <NetworkBandwidthFormatter data={state.apn_ambr_ul} /></InputField>
+                label={i18n.t('inputFields.header.ambr_ul')}
+              >{i18n.t('inputFields.desc.ambr_ul')} <NetworkBandwidthFormatter data={state.apn_ambr_ul} /></InputField>
             </Grid>
             <Grid item xs={4}>
               <InputField
@@ -164,17 +166,17 @@ const ApnAddItem = (props: { open: ReturnType<typeof Boolean>, handleClose: Retu
                 value={state.apn_ambr_dl}
                 onChange={handleChange}
                 id="apn_ambr_dl"
-                label="AMBR dl"
-              >Agregated Maximum Bit Rate download: <NetworkBandwidthFormatter data={state.apn_ambr_dl} /></InputField>
+                label={i18n.t('inputFields.header.ambr_dl')}
+              >{i18n.t('inputFields.desc.ambr_dl')} <NetworkBandwidthFormatter data={state.apn_ambr_dl} /></InputField>
             </Grid>
-            <Grid item xs={12}><h4>Allocation and Retention Priority (ARP)</h4></Grid>
+            <Grid item xs={12}><h4>{i18n.t('apn.arpHead')}</h4></Grid>
             <Grid item xs={4}>
               <SelectField
                 value={state.arp_priority}
                 onChange={handleChange}
                 id="arp_priority"
-                label="Priority"
-                helper="Allocation and Retention Policy - Bearer priority level"
+                label={i18n.t('inputFields.header.arpPriority')}
+                helper={i18n.t('inputFields.desc.arpPriority')}
                 >
                   {Array.from(Array(15), (e, i) => (<MenuItem key={i+1+e} value={i+1}>{i+1}</MenuItem>))}
               </SelectField>
@@ -184,8 +186,8 @@ const ApnAddItem = (props: { open: ReturnType<typeof Boolean>, handleClose: Retu
                 value={state.arp_preemption_capability}
                 onChange={handleChange}
                 id="arp_preemption_capability"
-                label="Preemption capability"
-                helper="Defines whether the service can be preempted by a higher-priority service"
+                label={i18n.t('inputFields.header.arpPreemptionCapability')}
+                helper={i18n.t('inputFields.desc.arpPreemptionCapability')}
                 >
                   <MenuItem value={true}>{i18n.t('generic.yes')}</MenuItem>
                   <MenuItem value={false}>{i18n.t('generic.no')}</MenuItem>
@@ -196,8 +198,8 @@ const ApnAddItem = (props: { open: ReturnType<typeof Boolean>, handleClose: Retu
                 value={state.arp_preemption_vulnerability}
                 onChange={handleChange}
                 id="arp_preemption_vulnerability"
-                label="Preemption vulnerability"
-                helper="Defines whether a bearer is applicable for such dropping by a preemption capable bearer with a higher priority value."
+                label={i18n.t('inputFields.header.arpPreemptionVulnerability')}
+                helper={i18n.t('inputFields.desc.arpPreemptionVulnerability')}
                 >
                   <MenuItem value={true}>{i18n.t('generic.yes')}</MenuItem>
                   <MenuItem value={false}>{i18n.t('generic.no')}</MenuItem>

@@ -34,37 +34,37 @@ const AucAddItem = (props: {
   const onValidate = (field: string, value: string) => {
     let error = ""
     if (field==='imsi' && value === '')
-      error = 'Field is required!';
+      error = i18n.t('validator.required');
     else if (field==='imsi' && !/^\d*$/.test(value))
-      error = 'Only numbers are allowed!';
+      error = i18n.t('validator.onlyNumbers'); 
     else if (field==='imsi' && value.length < 15)
-      error = 'To short!';
+      error = i18n.t('validator.toShort');
 
     if (field==='iccid' && value === '')
-      error = 'Field is required!';
+      error = i18n.t('validator.required');
     else if (field==='iccid' && !/^\d*$/.test(value))
-      error = 'Only numbers are allowed!';
+      error = i18n.t('validator.onlyNumbers'); 
     else if (field==='iccid' && value.length > 0 && value.length < 19)
-      error = 'To short!';
+      error = i18n.t('validator.toShort');
 
     if (!edit || forceKeys) {
       if (field==='ki' && value === '')
-        error = 'Field is required!';
+        error = i18n.t('validator.required');
       else if (field==='ki' && !/^[0-9A-Fa-f]*$/.test(value))
-        error = 'Only HEX allowed!';
+        error = i18n.t('onlyHex'); 
       else if (field==='ki' && value.length < 32)
-        error = 'To short!';
+        error = i18n.t('validator.toShort');
       else if (field==='ki' && value.length > 32)
-        error = 'To long!';
+        error = i18n.t('validator.toLong'); 
 
       if (field==='opc' && value === '')
-        error = 'Field is required!';
+        error = i18n.t('validator.required');
       else if (field==='opc' && !/^[0-9A-Fa-f]*$/.test(value))
-        error = 'Only HEX allowed!';
+        error = i18n.t('onlyHex'); 
       else if (field==='opc' && value.length < 32)
-        error = 'To short!';
+        error = i18n.t('validator.toShort');
       else if (field==='opc' && value.length > 32)
-        error = 'To long!';
+        error = i18n.t('validator.toLong'); 
     }
 
     setError(field, error);
@@ -85,11 +85,11 @@ const AucAddItem = (props: {
             <Grid container spacing={1} rowSpacing={1}>
               <Grid item xs={3}>
                 <InputField
+                  error={errors.imsi}
                   value={state.imsi}
                   onChange={onChangeLocal}
                   id="imsi"
-                  label="IMSI"
-                  error={errors.imsi}
+                  label={i18n.t('inputFields.header.imsi')}
                 >{i18n.t('inputFields.desc.imsi')}</InputField>
               </Grid>
               {(!edit || forceKeys) && <Grid item xs={3}>
@@ -98,7 +98,7 @@ const AucAddItem = (props: {
                   error={errors.ki}
                   onChange={onChangeLocal}
                   id="ki"
-                  label="Ki"
+                  label={i18n.t('inputFields.header.ki')}
                 >{i18n.t('inputFields.desc.ki')}</InputField>
               </Grid>}
               {(!edit || forceKeys) && <Grid item xs={3}>
@@ -107,7 +107,7 @@ const AucAddItem = (props: {
                   value={state.opc}
                   onChange={onChangeLocal}
                   id="opc"
-                  label="OPc"
+                  label={i18n.t('inputFields.header.opc')}
                 >{i18n.t('inputFields.desc.opc')}</InputField>
               </Grid>}
               <Grid item xs={3}>
@@ -116,7 +116,7 @@ const AucAddItem = (props: {
                   error={errors.iccid}
                   onChange={onChangeLocal}
                   id="iccid"
-                  label="ICCID"
+                  label={i18n.t('inputFields.header.iccid')}
                 >{i18n.t('inputFields.desc.iccid')}</InputField>
               </Grid>
               <Grid item xs={2}>
@@ -124,7 +124,7 @@ const AucAddItem = (props: {
                   value={state.esim}
                   onChange={onChangeLocal}
                   id="esim"
-                  label="eSIM"
+                  label={i18n.t('inputFields.header.esim')}
                   helper={i18n.t('inputFields.desc.esim')}
                 >
                   <MenuItem value={true}>{i18n.t('generic.yes')}</MenuItem>
@@ -136,23 +136,23 @@ const AucAddItem = (props: {
                   value={state.sim_vendor}
                   onChange={onChangeLocal}
                   id="sim_vendor"
-                  label="Vendor"
-                >{i18n.t('inputFields.desc.sim_vendor')}</InputField>
+                  label={i18n.t('inputFields.header.simVendor')}
+                >{i18n.t('inputFields.desc.simVendor')}</InputField>
               </Grid>
               <Grid item xs={3}>
                 <InputField
                   value={state.batch_name}
                   onChange={onChangeLocal}
                   id="batch_name"
-                  label="Batch"
-                >Batch name</InputField>
+                  label={i18n.t('inputFields.header.batch')}
+                >{i18n.t('inputFields.desc.batch')}</InputField>
               </Grid>
               <Grid item xs={3}>
                 <InputField
                   value={state.amf}
                   onChange={onChangeLocal}
                   id="amf"
-                  label="AMF"
+                  label={i18n.t('inputFields.header.amf')}
                 >{i18n.t('inputFields.desc.amf')}</InputField>
               </Grid>
               {state.esim === true && <Grid item xs={5}>
@@ -160,7 +160,7 @@ const AucAddItem = (props: {
                   value={state.lpa}
                   onChange={onChangeLocal}
                   id="lpa"
-                  label="LPA"
+                  label={i18n.t('inputFields.header.lpa')}
                 >{i18n.t('inputFields.desc.lpa')}</InputField>
               </Grid>}
               <Grid item xs={12}><h3>User info</h3></Grid>
@@ -169,7 +169,7 @@ const AucAddItem = (props: {
                   value={state.pin1}
                   onChange={onChangeLocal}
                   id="pin1"
-                  label="PIN 1"
+                  label={i18n.t('inputFields.header.pin1')}
                 >{i18n.t('inputFields.desc.pin1')}</InputField>
               </Grid>
               <Grid item xs={3}>
@@ -177,7 +177,7 @@ const AucAddItem = (props: {
                   value={state.puk1}
                   onChange={onChangeLocal}
                   id="puk1"
-                  label="PUK 1"
+                  label={i18n.t('inputFields.header.puk1')}
                 >{i18n.t('inputFields.desc.puk1')}</InputField>
               </Grid>
               <Grid item xs={3}>
@@ -185,7 +185,7 @@ const AucAddItem = (props: {
                   value={state.pin2}
                   onChange={onChangeLocal}
                   id="pin2"
-                  label="PIN 2"
+                  label={i18n.t('inputFields.header.pin2')}
                 >{i18n.t('inputFields.desc.pin2')}</InputField>
               </Grid>
               <Grid item xs={3}>
@@ -193,7 +193,7 @@ const AucAddItem = (props: {
                   value={state.puk2}
                   onChange={onChangeLocal}
                   id="puk2"
-                  label="PUK 2"
+                  label={i18n.t('inputFields.header.puk2')}
                 >{i18n.t('inputFields.desc.puk2')}</InputField>
               </Grid>
               {(!edit || forceKeys) && <Grid item xs={3}>
@@ -201,7 +201,7 @@ const AucAddItem = (props: {
                   value={state.kid}
                   onChange={onChangeLocal}
                   id="kid"
-                  label="KID"
+                  label={i18n.t('inputFields.header.kid')}
                 >{i18n.t('inputFields.desc.kid')}</InputField>
               </Grid>}
               {(!edit || forceKeys) && <Grid item xs={3}>
@@ -209,7 +209,7 @@ const AucAddItem = (props: {
                   value={state.psk}
                   onChange={onChangeLocal}
                   id="psk"
-                  label="PSK"
+                  label={i18n.t('inputFields.header.psk')}
                 >{i18n.t('inputFields.desc.psk')}</InputField>
               </Grid>}
               {(!edit || forceKeys) && <Grid item xs={3}>
@@ -217,7 +217,7 @@ const AucAddItem = (props: {
                   value={state.des}
                   onChange={onChangeLocal}
                   id="des"
-                  label="DES"
+                  label={i18n.t('inputFields.header.des')}
                 >{i18n.t('inputFields.desc.des')}</InputField>
               </Grid>}
               {(!edit || forceKeys) && <Grid item xs={3}>
@@ -225,7 +225,7 @@ const AucAddItem = (props: {
                   value={state.adm1}
                   onChange={onChangeLocal}
                   id="adm1"
-                  label="ADM1"
+                  label={i18n.t('inputFields.header.adm1')}
                 >{i18n.t('inputFields.desc.adm1')}</InputField>
               </Grid>}
               <Grid item xs={12}><h3>Misc</h3></Grid>
@@ -234,7 +234,7 @@ const AucAddItem = (props: {
                   value={state.misc1}
                   onChange={onChangeLocal}
                   id="misc1"
-                  label="misc1"
+                  label={i18n.t('inputFields.header.misc1')}
                 >{i18n.t('inputFields.desc.misc1')}</InputField>
               </Grid>
               <Grid item xs={3}>
@@ -242,7 +242,7 @@ const AucAddItem = (props: {
                   value={state.misc2}
                   onChange={onChangeLocal}
                   id="misc2"
-                  label="misc2"
+                  label={i18n.t('inputFields.header.misc2')}
                 >{i18n.t('inputFields.desc.misc2')}</InputField>
               </Grid>
               <Grid item xs={3}>
@@ -250,7 +250,7 @@ const AucAddItem = (props: {
                   value={state.misc3}
                   onChange={onChangeLocal}
                   id="misc3"
-                  label="misc3"
+                  label={i18n.t('inputFields.header.misc3')}
                 >{i18n.t('inputFields.desc.misc3')}</InputField>
               </Grid>
               <Grid item xs={3}>
@@ -258,7 +258,7 @@ const AucAddItem = (props: {
                   value={state.misc4}
                   onChange={onChangeLocal}
                   id="misc4"
-                  label="misc4"
+                  label={i18n.t('inputFields.header.misc4')}
                 >{i18n.t('inputFields.desc.misc4')}</InputField>
               </Grid>
             </Grid>

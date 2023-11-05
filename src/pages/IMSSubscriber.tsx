@@ -13,6 +13,7 @@ import Paper from '@mui/material/Paper';
 import TextField from '@mui/material/TextField';
 import SpeedDial from '@mui/material/SpeedDial';
 import SpeedDialIcon from '@mui/material/SpeedDialIcon';
+import i18n from '@app/utils/i18n';
 
 const imsSubscriberTemplate = {
   "msisdn": "",
@@ -77,7 +78,7 @@ const IMSSubscriber = () => {
       <section className="content">
         <div className="container-fluid">
           <div className="card">
-            <TextField id="search-field" label="Search" variant="outlined"  onChange={onSearchHandler} value={search} />
+            <TextField id="search-field" label={i18n.t('generic.search')} variant="outlined"  onChange={onSearchHandler} value={search} />
           </div>
           <div className="card">
             <div className="card-body">
@@ -86,11 +87,11 @@ const IMSSubscriber = () => {
                     <TableHead>
                       <TableRow>
                         <TableCell/>
-                        <TableCell>IMSI</TableCell>
-                        <TableCell>MSISDN</TableCell>
-                        <TableCell>IFC</TableCell>
-                        <TableCell>SH</TableCell>
-                        <TableCell>Last Modified</TableCell>
+                        <TableCell>{i18n.t('inputFields.header.imsi')}</TableCell>
+                        <TableCell>{i18n.t('inputFields.header.msisdn')}</TableCell>
+                        <TableCell>{i18n.t('inputFields.header.ifc')}</TableCell>
+                        <TableCell>{i18n.t('inputFields.header.sh')}</TableCell>
+                        <TableCell>{i18n.t('generic.lastModified')}</TableCell>
                         <TableCell/>
                       </TableRow>
                     </TableHead>

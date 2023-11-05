@@ -37,22 +37,21 @@ const ImsSubscriberAddItem = (props: {
   const onValidate = (field: string, value: string) => {
    let error = ""
    if (field==='imsi' && value === '')
-     error = 'Field is required!';
+     error = i18n.t('validator.required');
    else if (field==='imsi' && !/^\d*$/.test(value))
-     error = 'Only numbers are allowed!';
+     error = i18n.t('validator.onlyNumbers');
    else if (field==='imsi' && value.length < 15)
-     error = 'To short!';
+     error = i18n.t('validator.toShort');
 
    if (field==='msisdn' && value === '')
-     error = 'Field is required!';
+     error = i18n.t('validator.required');
    else if (field==='msisdn' && !/^\d*$/.test(value))
-     error = 'Only numbers are allowed!';
+     error = i18n.t('validator.onlyNumbers');
 
    if (field==='msisdn_list' && value === '')
-     error = 'Field is required!';
+     error = i18n.t('validator.required');
    else if (field==='msisdn_list' && !/^[0-8]*(,[0-8]*)*$/.test(value))
-     error = 'Only comma seperated numbers are allowed!';
-
+     error = i18n.t('validator.onlyCSV'); 
 
    setError(field, error);
 
@@ -76,7 +75,7 @@ const ImsSubscriberAddItem = (props: {
             error={errors.imsi}
             onChange={onChangeLocal}
             id="imsi"
-            label="IMSI"
+            label={i18n.t('inputFields.header.imsi')}
             disabled={wizard}
           >{i18n.t('inputFields.desc.imsi')}</InputField>
         </Grid>
@@ -86,7 +85,7 @@ const ImsSubscriberAddItem = (props: {
             error={errors.msisdn}
             onChange={onChangeLocal}
             id="msisdn"
-            label="MSISDN"
+            label={i18n.t('inputFields.header.msisdn')}
             disabled={wizard}
           >{i18n.t('inputFields.desc.msisdn')}</InputField>
         </Grid>
@@ -96,7 +95,7 @@ const ImsSubscriberAddItem = (props: {
             error={errors.msisdn_list}
             onChange={onChangeLocal}
             id="msisdn_list"
-            label="MSISDN List"
+            label={i18n.t('inputFields.header.msisdn_list')}
             required
           >{i18n.t('inputFields.desc.msisdn_list')}</InputField>
         </Grid>
@@ -106,7 +105,7 @@ const ImsSubscriberAddItem = (props: {
             error={errors.ifc_path}
             onChange={onChangeLocal}
             id="ifc_path"
-            label="ifc_path"
+            label={i18n.t('inputFields.header.ifc_path')}
             required
           >{i18n.t('inputFields.desc.ifc_path')}</InputField>
         </Grid>
@@ -116,7 +115,7 @@ const ImsSubscriberAddItem = (props: {
             error={errors.sh_profile}
             onChange={onChangeLocal}
             id="sh_profile"
-            label="SH Profile"
+            label={i18n.t('inputFields.header.sh_profile')}
             required
           >{i18n.t('inputFields.desc.sh_profile')}</InputField>
         </Grid>

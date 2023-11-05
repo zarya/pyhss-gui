@@ -11,6 +11,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import i18n from '@app/utils/i18n';
 
 const tftTemplate = {
   "tft_group_id": 1,
@@ -67,10 +68,10 @@ const Tft = () => {
                   <Table aria-label="collapsible table">
                     <TableHead>
                       <TableRow>
-                        <TableCell>Group</TableCell>
-                        <TableCell>Rule</TableCell>
-                        <TableCell>Direction</TableCell>
-                        <TableCell>Last Updated</TableCell>
+                        <TableCell>{i18n.t('inputFields.header.tftGroup')}</TableCell>
+                        <TableCell>{i18n.t('inputFields.header.rule')}</TableCell>
+                        <TableCell>{i18n.t('inputFields.header.direction')}</TableCell>
+                        <TableCell>{i18n.t('generic.lastModified')}</TableCell>
                         <TableCell/>
                       </TableRow>
                     </TableHead>

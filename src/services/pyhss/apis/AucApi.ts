@@ -5,25 +5,25 @@ class AucApi {
     return http.get("/auc/list");
   }
 
-  get(id) {
+  get(id: number) {
     return http.get(`/auc/${id}`);
   }
 
-  create(data) {
+  create(data: object) {
     return http.put("/auc/", data);
   }
 
-  update(id, data) {
+  update(id: number, data: object) {
     return http.patch(`/auc/${id}`, data);
   }
 
-  delete(id) {
+  delete(id: number) {
     return http.delete(`/auc/${id}`);
   }
-  findByImsi(imsi) {
+  findByImsi(imsi: string) {
     return http.get(`/auc/imsi/${imsi}`);
   }
-  findByIccid(iccid) {
+  findByIccid(iccid: string) {
     return http.get(`/auc/iccid/${iccid}`);
   }
 }

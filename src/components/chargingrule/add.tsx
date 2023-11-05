@@ -1,15 +1,14 @@
 import React from 'react';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import InputLabel from '@mui/material/InputLabel';
 import Grid from '@mui/material/Grid';
-import FormHelperText from '@mui/material/FormHelperText';
-import {NetworkBandwidthFormatter} from '@components';
+import {
+  NetworkBandwidthFormatter,
+  InputField,
+  SelectField,
+} from '@components';
 
 import i18n from '@app/utils/i18n';
 
@@ -59,215 +58,164 @@ const ChargingRuleAddItem = (props: { open: ReturnType<typeof Boolean>, handleCl
 
   return (
     <React.Fragment>
-     <Modal
-       open={open}
-       onClose={handleLocalClose}
-       aria-labelledby="modal-modal-title"
-       aria-describedby="modal-modal-description"
-     >
-       <Box sx={style}>
-        <h3>Add</h3>
-        <Box
-          component="form"
-          noValidate
-          autoComplete="off"
-        >
-          <Grid container spacing={1} rowSpacing={1}>
-            <Grid item xs={3}>
-              <FormControl fullWidth>
-                <TextField
-                  style={{width: '99%'}}
+      <Modal
+        open={open}
+        onClose={handleLocalClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+        <h3>{i18n.t('chargingRule.headAdd', {"mode": (edit?i18n.t('generic.edit'):i18n.t('generic.add'))})}</h3>
+          <Box
+            component="form"
+            noValidate
+            autoComplete="off"
+          >
+            <Grid container spacing={1} rowSpacing={1}>
+              <Grid item xs={3}>
+                <InputField
                   required
-                  id="outlined-required"
-                  label="Name"
-                  onChange={handleChange}
                   value={state.rule_name}
-                  name="rule_name"
-                 aria-describedby="rule_name-helper"
-               />
-               <FormHelperText id="rule_name-helper">Name of the rule</FormHelperText>
-             </FormControl>
-            </Grid>
-            <Grid item xs={2}>
-              <FormControl fullWidth>
-                <TextField
-                  style={{width: '99%'}}
+                  onChange={handleChange}
+                  id="rule_name"
+                  label={i18n.t('inputFields.header.name')}
+                >
+                  {i18n.t('inputFields.desc.name')}
+                </InputField>
+              </Grid>
+              <Grid item xs={2}>
+                <InputField
                   required
-                  id="outlined-required"
                   label="tft_group_id"
                   onChange={handleChange}
                   value={state.tft_group_id}
-                  name="tft_group_id"
-                 aria-describedby="tft_group_id-helper"
-               />
-               <FormHelperText id="tft_group_id-helper">TFT Group</FormHelperText>
-             </FormControl>
-            </Grid>
-            <Grid item xs={3}>
-              <FormControl fullWidth>
-                <TextField
-                  style={{width: '99%'}}
+                  id="tft_group_id"
+                >
+                  {i18n.t('inputFields.desc.tftGroup')}
+                </InputField>
+              </Grid>
+              <Grid item xs={3}>
+                <InputField
                   required
-                  id="outlined-required"
-                  label="rating_group"
+                  label={i18n.t('inputFields.header.ratingGroup')}
                   onChange={handleChange}
                   value={state.rating_group}
-                  name="rating_group"
-                 aria-describedby="rating_group-helper"
-               />
-               <FormHelperText id="rating_group-helper">Rating Group</FormHelperText>
-             </FormControl>
-            </Grid>
-            <Grid item xs={3}>
-              <FormControl fullWidth>
-                <TextField
-                  style={{width: '99%'}}
+                  id="rating_group"
+                >
+                  {i18n.t('inputFields.desc.ratingGroup')}
+                </InputField>
+              </Grid>
+              <Grid item xs={3}>
+                <InputField
                   required
-                  id="outlined-required"
-                  label="precedence"
+                  label={i18n.t('inputFields.header.precedence')}
                   onChange={handleChange}
                   value={state.precedence}
-                  name="precedence"
-                 aria-describedby="precedence-helper"
-               />
-               <FormHelperText id="precedence-helper">Precedence of this rule, allows rule to override or be overridden by a higher priority rule</FormHelperText>
-             </FormControl>
-           </Grid>
-            <Grid item xs={12}><h3>QoS</h3></Grid>
-           <Grid item xs={2}>
-             <FormControl fullWidth style={{ marginTop: 8 }}>
-               <InputLabel id="qci_label">QCI</InputLabel>
-               <Select
-                 labelId="qci_label"
-                 value={state.qci}
-                 label="qci"
-                 onChange={handleChange}
-                 name="qci"
-                 aria-describedby="qci-helper-text"
-               >
-                 {Array.from(Array(9), (e, i) => (<MenuItem key={i+1+e} value={i+1}>{i+1}</MenuItem>))}
-               </Select>
-             <FormHelperText id="qci-helper-text">QCI Value</FormHelperText>
-             </FormControl>
-           </Grid>
-            <Grid item xs={3}>
-              <FormControl fullWidth>
-                <TextField
-                  style={{width: '99%'}}
+                  id="precedence"
+                >
+                  {i18n.t('inputFields.desc.precedence')}
+                </InputField>
+              </Grid>
+              <Grid item xs={12}><h3>{i18n.t('apn.qosHead')}</h3></Grid>
+              <Grid item xs={2}>
+                 <SelectField
+                   required
+                   value={state.qci}
+                   onChange={handleChange}
+                   id="qci"
+                   label={i18n.t('inputFields.header.qci')}
+                   helper={i18n.t('inputFields.desc.qci')}
+                 >
+                   {Array.from(Array(9), (e, i) => (<MenuItem key={i+1+e} value={i+1}>{i+1}</MenuItem>))}
+                 </SelectField>
+              </Grid>
+              <Grid item xs={3}>
+                <InputField
                   required
-                  id="outlined-required"
-                  label="MBR dl"
+                  label={i18n.t('inputFields.header.mbr_dl')}
                   onChange={handleChange}
                   value={state.mbr_dl}
-                  name="mbr_dl"
-                  aria-describedby="mbr_dl-helper"
-               />
-               <FormHelperText id="mbr_dl-helper">Maximum Bit Rate download bandwidth: <NetworkBandwidthFormatter data={state.mbr_dl} /></FormHelperText>
-             </FormControl>
-            </Grid>
-            <Grid item xs={3}>
-              <FormControl fullWidth>
-                <TextField
-                  style={{width: '99%'}}
+                  id="mbr_dl"
+                >
+                  {i18n.t('inputFields.desc.mbr_dl')} <NetworkBandwidthFormatter data={state.mbr_dl} />
+                </InputField>
+              </Grid>
+              <Grid item xs={3}>
+                <InputField
                   required
-                  id="outlined-required"
-                  label="MBR ul"
+                  label={i18n.t('inputFields.header.mbr_ul')}
                   onChange={handleChange}
                   value={state.mbr_ul}
-                  name="mbr_ul"
-                  aria-describedby="mbr_ul-helper"
-               />
-               <FormHelperText id="mbr_ul-helper">Maximum Bit Rate upload: <NetworkBandwidthFormatter data={state.mbr_ul} /></FormHelperText>
-             </FormControl>
-            </Grid>
-            <Grid item xs={3}>
-              <FormControl fullWidth>
-                <TextField
-                  style={{width: '99%'}}
+                  id="mbr_ul"
+                >
+                  {i18n.t('inputFields.desc.mbr_ul')} <NetworkBandwidthFormatter data={state.mbr_ul} />
+                </InputField>
+              </Grid>
+              <Grid item xs={3}>
+                <InputField
                   required
-                  id="outlined-required"
-                  label="GBR download"
+                  label={i18n.t('inputFields.header.gbr_dl')}
                   onChange={handleChange}
                   value={state.gbr_dl}
-                  name="gbr_dl"
-                 aria-describedby="gbr_dl-helper"
-               />
-               <FormHelperText id="gbr_dl-helper">Guaranteed Bit Rate download: <NetworkBandwidthFormatter data={state.gbr_dl} /></FormHelperText>
-             </FormControl>
-            </Grid>
-            <Grid item xs={3}>
-              <FormControl fullWidth>
-                <TextField
-                  style={{width: '99%'}}
+                  id="gbr_dl"
+                 >
+                 {i18n.t('inputFields.desc.gbr_dl')} <NetworkBandwidthFormatter data={state.gbr_dl} />
+               </InputField>
+              </Grid>
+              <Grid item xs={3}>
+                <InputField
                   required
-                  id="outlined-required"
-                  label="GBR ul"
+                  label={i18n.t('inputFields.header.gbr_ul')}
                   onChange={handleChange}
                   value={state.gbr_ul}
-                  name="gbr_ul"
-                 aria-describedby="gbr_ul-helper"
-               />
-               <FormHelperText id="gbr_ul-helper">Guaranteed Bit Rate upload: <NetworkBandwidthFormatter data={state.gbr_ul} /></FormHelperText>
-             </FormControl>
-            </Grid>
-            <Grid item xs={12}><h4>Allocation and Retention Priority (ARP)</h4></Grid>
-            <Grid item xs={3}>
-              <FormControl fullWidth style={{ marginTop: 8 }}>
-                <InputLabel id="arp_priority_label">Priority</InputLabel>
-                <Select
-                  labelId="arp_priority_label"
+                  id="gbr_ul"
+                >
+                  {i18n.t('inputFields.desc.gbr_ul')} <NetworkBandwidthFormatter data={state.gbr_ul} />
+                </InputField>
+              </Grid>
+              <Grid item xs={12}><h4>{i18n.t('apn.arpHead')}</h4></Grid>
+              <Grid item xs={3}>
+                <SelectField
                   value={state.arp_priority}
-                  label="arp_priority"
                   onChange={handleChange}
-                  name="arp_priority"
-                  aria-describedby="arp_priority-helper-text"
+                  id="arp_priority"
+                  label={i18n.t('inputFields.header.arpPriority')}
+                  helper={i18n.t('inputFields.desc.arpPriority')}
                 >
                   {Array.from(Array(15), (e, i) => (<MenuItem key={i+1+e} value={i+1}>{i+1}</MenuItem>))}
-                </Select>
-                <FormHelperText id="arp_priority-helper-text">Allocation and Retention Policy - Bearer priority level</FormHelperText>
-              </FormControl>
-            </Grid>
-            <Grid item xs={3}>
-              <FormControl fullWidth style={{ marginTop: 8 }}>
-                <InputLabel id="arp_preemption_capability_label">arp_preemption_capability</InputLabel>
-                <Select
-                  labelId="arp_preemption_capability_label"
+                </SelectField>
+              </Grid>
+              <Grid item xs={3}>
+                <SelectField
                   value={state.arp_preemption_capability}
-                  label="arp_preemption_capability"
                   onChange={handleChange}
-                  name="arp_preemption_capability"
-                  aria-describedby="arp_preemption_capability-helper"
+                  id="arp_preemption_capability"
+                  label={i18n.t('inputFields.header.arpPreemptionCapability')}
+                  helper={i18n.t('inputFields.desc.arpPreemptionCapability')}
                 >
-                  <MenuItem value={true}>Yes</MenuItem>
-                  <MenuItem value={false}>No</MenuItem>
-                </Select>
-                <FormHelperText id="arp_preemption_capability-helper">Defines whether the service can be preempted by a higher-priority service</FormHelperText>
-              </FormControl>
-            </Grid>
-            <Grid item xs={3}>
-              <FormControl fullWidth style={{ marginTop: 8 }}>
-                <InputLabel id="arp_preemption_vulnerability_label">arp_preemption_vulnerability</InputLabel>
-                <Select
-                  labelId="arp_preemption_vulnerability_label"
+                  <MenuItem value={true}>{i18n.t('generic.yes')}</MenuItem>
+                  <MenuItem value={false}>{i18n.t('generic.no')}</MenuItem>
+                </SelectField>
+              </Grid>
+              <Grid item xs={3}>
+                <SelectField
                   value={state.arp_preemption_vulnerability}
-                  label="arp_preemption_vulnerability"
                   onChange={handleChange}
-                  name="arp_preemption_vulnerability"
-                  aria-describedby="arp_preemption_vulnerability-helper"
+                  id="arp_preemption_vulnerability"
+                  label={i18n.t('inputFields.header.arpPreemptionVulnerability')}
+                  helper={i18n.t('inputFields.desc.arpPreemptionVulnerability')}
                 >
-                  <MenuItem value={true}>Yes</MenuItem>
-                  <MenuItem value={false}>No</MenuItem>
-                </Select>
-                <FormHelperText id="arp_preemption_vulnerability-helper">Defines whether a bearer is applicable for such dropping by a preemption capable bearer with a higher priority value.</FormHelperText>
-              </FormControl>
+                  <MenuItem value={true}>{i18n.t('generic.yes')}</MenuItem>
+                  <MenuItem value={false}>{i18n.t('generic.no')}</MenuItem>
+                </SelectField>
+              </Grid>
             </Grid>
-          </Grid>
-         </Box>
-         <Button variant="contained" onClick={() => handleSave()}>{i18n.t('generic.save')}&nbsp;<i className="fas fa-save"></i></Button>
-          &nbsp;
-         <Button variant="contained" onClick={() => handleLocalClose()}>{i18n.t('generic.cancel')}</Button>
-       </Box>
-     </Modal>
+          </Box>
+          <Button variant="contained" onClick={() => handleSave()}>{i18n.t('generic.save')}&nbsp;<i className="fas fa-save"></i></Button>
+           &nbsp;
+          <Button variant="contained" onClick={() => handleLocalClose()}>{i18n.t('generic.cancel')}</Button>
+        </Box>
+      </Modal>
     </React.Fragment>
   );
 }

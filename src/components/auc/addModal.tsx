@@ -3,6 +3,7 @@ import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import CryptoJS from 'crypto-js';
+import i18n from '@app/utils/i18n';
 
 import {SaveButtons} from '@components';
 import AucAddItem from './add';
@@ -121,7 +122,9 @@ const AucAddModal = (props: { open: boolean, handleClose: any, data: object, edi
   const handleError = (e: boolean) => {
     setError(e);
   }
-
+  
+  //Example how to use handleOPGenerate
+  //<Button variant="contained" onClick={() => console.log(handleOPGenerate("780E6AC95A2E43449C15BDCDD0450982","D7DECB1F50404CC29ECBF989FE73AFC5"))}>test</Button>
   return (
     <React.Fragment>
       <Modal
@@ -131,9 +134,8 @@ const AucAddModal = (props: { open: boolean, handleClose: any, data: object, edi
        aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <Button variant="contained" onClick={() => console.log(handleOPGenerate("780E6AC95A2E43449C15BDCDD0450982","D7DECB1F50404CC29ECBF989FE73AFC5"))}>test</Button>
-          <h3>{(edit?'Edit':'Add')}</h3>
-          {edit && !forceKeys && <Button onClick={handleForceKeys}>Set Keys</Button>}
+          <h3>{(edit?i18n.t('general.edit'):i18n.t('general.add'))}</h3>
+          {edit && !forceKeys && <Button onClick={handleForceKeys}>{i18n.t('auc.setKeys')}</Button>}
           <Box
             component="form"
             noValidate

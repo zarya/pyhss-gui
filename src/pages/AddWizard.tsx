@@ -1,7 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
 import {
-  ContentHeader,
   AucAddItem,
   SubscriberAddItem,
   ImsSubscriberAddItem
@@ -29,6 +28,9 @@ import {
   CardActions,
   CardActionArea,
 } from '@mui/material';
+
+import i18n from '@app/utils/i18n';
+
 
 const steps = ['Add AUC', 'Add Subscriber', 'Add IMS Subscriber', 'Validate'];
 const subscriberTemplate = {
@@ -236,7 +238,7 @@ const AddWizard = () => {
           </Typography>
           <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
             <Box sx={{ flex: '1 1 auto' }} />
-            {aucState && subscriberState && imsSubscriberState && <Button onClick={handleReset}>Reset</Button>}
+            {aucState && subscriberState && imsSubscriberState && <Button onClick={handleReset}>{i18n.t('generic.reset')}</Button>}
           </Box>
         </React.Fragment>
       ) : (
@@ -296,15 +298,15 @@ const AddWizard = () => {
                 sx={{ mr: 1 }}
                 variant="outlined"
               >
-                Back
+                {i18n.t('generic.back')}
               </Button>
               {isStepOptional(activeStep) && (
                 <Button variant="outlined" onClick={handleSkip} sx={{ mr: 1 }} color="secondary">
-                  Skip
+                  {i18n.t('generic.skip')}
                 </Button>
               )}
               <Button onClick={handleNext} variant="contained" disabled={error}>
-                {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+                {activeStep === steps.length - 1 ? i18n.t('generic.finish') : i18n.t('generic.next')}
               </Button>
             </CardActions> 
           </Card>

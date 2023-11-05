@@ -56,36 +56,36 @@ edit?: boolean
   const onValidate = (field: string, value: string) => {
     let error = ""
     if (field==='imsi' && value === '')
-      error = 'Field is required!';
+      error = i18n.t('validator.required'); 
     else if (field==='imsi' && !/^\d*$/.test(value))
-      error = 'Only numbers are allowed!';
+      error = i18n.t('validator.onlyNumbers'); 
     else if (field==='imsi' && value.length < 15)
-      error = 'To short!';
+      error = i18n.t('validator.toShort'); 
 
     if (field==='msisdn' && value === '')
-      error = 'Field is required!';
+      error = i18n.t('validator.required'); 
     else if (field==='msisdn' && !/^\d*$/.test(value))
-      error = 'Only numbers are allowed!';
+      error = i18n.t('validator.onlyNumbers'); 
     
     if (field==='default_apn' && String(value) === '0')
-      error = 'Field is required!';
+      error = i18n.t('validator.required'); 
     else if (field==='default_apn' && !/^\d*$/.test(value))
-      error = 'Only numbers are allowed!';
+      error = i18n.t('validator.onlyNumbers'); 
 
     if (field==='apn_list' && value === '')
-      error = 'Field is required!';
+      error = i18n.t('validator.required'); 
     else if (field==='apn_list' && !/^[1-8]*(,[1-8]*)*$/.test(value))
-      error = 'Only comma seperated numbers are allowed!';
+      error = i18n.t('validator.onlyCSV'); 
 
     if (field==='ue_ambr_ul' && String(value) === '0')
-      error = 'Field is required!';
+      error = i18n.t('validator.required'); 
     else if (field==='ue_ambr_ul' && !/^\d*$/.test(value))
-      error = 'Only numbers are allowed!';
+      error = i18n.t('validator.onlyNumbers'); 
 
     if (field==='ue_ambr_dl' && String(value) === '0')
-      error = 'Field is required!';
+      error = i18n.t('validator.required'); 
     else if (field==='ue_ambr_dl' && !/^\d*$/.test(value))
-      error = 'Only numbers are allowed!';
+      error = i18n.t('validator.onlyNumbers'); 
 
     setError(field, error);
 
@@ -141,7 +141,7 @@ edit?: boolean
                 error={errors.msisdn}
                 onChange={onChangeLocal}
                 id="msisdn"
-                label="MSISDN"
+                label={i18n.t('inputFields.header.msisdn')}
               >{i18n.t('inputFields.desc.msisdn')}</InputField>
             </Grid>
             <Grid item xs={3}>
@@ -149,11 +149,11 @@ edit?: boolean
                 value={state.enabled}
                 onChange={onChange}
                 id="enabled"
-                label="Enabled"
-                helper="Subscriber enabled?"
+                label={i18n.t('generic.enabled')}
+                helper={i18n.t('inputFields.desc.subscriberEnabled')}
               >
-                <MenuItem value={true}>Yes</MenuItem>
-                <MenuItem value={false}>No</MenuItem>
+                <MenuItem value={true}>{i18n.t('generic.yes')}</MenuItem>
+                <MenuItem value={false}>{i18n.t('generic.no')}</MenuItem>
               </SelectField>
             </Grid>
             <Grid item xs={3}>
@@ -161,14 +161,14 @@ edit?: boolean
                 value={state.nam}
                 onChange={onChange}
                 id="nam"
-                label="NAM"
+                label={i18n.t('inputFields.header.nam')}
                 helper={i18n.t('inputFields.desc.nam')}
               >
-                <MenuItem value="0">Packet and circuit</MenuItem>
-                <MenuItem value="2">Packet only</MenuItem>
+                <MenuItem value="0">{i18n.t('inputFields.options.nam.0')}</MenuItem>
+                <MenuItem value="2">{i18n.t('inputFields.options.nam.2')}</MenuItem>
               </SelectField>
             </Grid>
-            <Grid item xs={12}><h3>APN</h3></Grid>
+            <Grid item xs={12}><h3>{i18n.t('inputFields.header.apn')}</h3></Grid>
             <Grid item xs={4}>
               <Autocomplete
                 loading={apnLoading}
@@ -179,7 +179,7 @@ edit?: boolean
                 }}
                 value={(apn.find(a => a.apn_id === state.default_apn) || {'apn':''}).apn}
                 options={apn.map((option) => option.apn)}
-                renderInput={(params) => <TextField {...params} label={`Default APN ${errors.default_apn}`} error={errors.default_apn!==''} />}
+                renderInput={(params) => <TextField {...params} label={`${i18n.t('inputFields.header.defaultAPN')} ${errors.default_apn}`} error={errors.default_apn!==''} />}
               />
             </Grid>
             <Grid item xs={4}>
@@ -204,7 +204,7 @@ edit?: boolean
                 onChange={onChangeLocal}
                 id="ue_ambr_ul"
                 label="AMBR ul"
-              >Agregated Maximum Bit Rate upload: <NetworkBandwidthFormatter data={state.ue_ambr_ul} /></InputField>
+              >{i18n.t('inputFields.desc.ambr_ul')} <NetworkBandwidthFormatter data={state.ue_ambr_ul} /></InputField>
             </Grid>
             <Grid item xs={6}>
               <InputField
@@ -213,7 +213,7 @@ edit?: boolean
                 onChange={onChangeLocal}
                 id="ue_ambr_dl"
                 label="AMBR dl"
-              >Agregated Maximum Bit Rate download: <NetworkBandwidthFormatter data={state.ue_ambr_dl} /></InputField>
+              >{i18n.t('inputFields.desc.ambr_dl')} <NetworkBandwidthFormatter data={state.ue_ambr_dl} /></InputField>
             </Grid>
             <Grid item xs={12}><h3>Timers</h3></Grid>
             <Grid item xs={4}>
@@ -221,8 +221,8 @@ edit?: boolean
                 value={state.subscribed_rau_tau_timer}
                 onChange={onChange}
                 id="subscribed_rau_tau_timer"
-                label="RAU TAU Timer"
-              >Periodic Tracking Area Update timer</InputField>
+                label={i18n.t('inputFields.header.rauTauTimer')}
+              >{i18n.t('inputFields.desc.rauTauTimer')}</InputField>
             </Grid>
           </Grid>
     </React.Fragment>

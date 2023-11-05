@@ -12,6 +12,7 @@ import Paper from '@mui/material/Paper';
 import TextField from '@mui/material/TextField';
 import SpeedDial from '@mui/material/SpeedDial';
 import SpeedDialIcon from '@mui/material/SpeedDialIcon';
+import i18n from '@app/utils/i18n';
 
 const subscriberTemplate = {
   "imsi": "",
@@ -52,7 +53,7 @@ const Subscriber = () => {
     }))
   }
 
-  const handleDelete = (id) => {
+  const handleDelete = (id: number) => {
     SubscriberApi.delete(id).then((data) => {
       console.log(id, data);
       refresh();
@@ -88,14 +89,14 @@ const Subscriber = () => {
                     <TableHead>
                       <TableRow>
                         <TableCell/>
-                        <TableCell>IMSI</TableCell>
-                        <TableCell>Auc</TableCell>
-                        <TableCell>Enabled</TableCell>
-                        <TableCell>MSISDN</TableCell>
-                        <TableCell>APN (default)</TableCell>
-                        <TableCell>AMBR DL</TableCell>
-                        <TableCell>AMBR UL</TableCell>
-                        <TableCell>TUA Timer</TableCell>
+                        <TableCell>{i18n.t('inputFields.header.imsi')}</TableCell>
+                        <TableCell>{i18n.t('inputFields.header.auc')}</TableCell>
+                        <TableCell>{i18n.t('generic.enabled')}</TableCell>
+                        <TableCell>{i18n.t('inputFields.header.msisdn')}</TableCell>
+                        <TableCell>{i18n.t('inputFields.header.apnDefault')}</TableCell>
+                        <TableCell>{i18n.t('inputFields.header.ambr_dl')}</TableCell>
+                        <TableCell>{i18n.t('inputFields.header.ambr_ul')}</TableCell>
+                        <TableCell>{i18n.t('inputFields.header.tuaTimer')}</TableCell>
                         <TableCell/>
                       </TableRow>
                     </TableHead>
