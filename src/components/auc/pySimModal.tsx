@@ -3,9 +3,10 @@ import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
+import MenuItem from '@mui/material/MenuItem';
 import i18n from '@app/utils/i18n';
 import Highlight from 'react-highlight.js';
-import {InputField} from '@components';
+import {InputField, SelectField} from '@components';
 import {ImsSubscriberApi} from "../../services/pyhss";
 import axios from "axios";
 
@@ -48,6 +49,7 @@ const AucPySimModal = (props: { open: boolean, handleClose: any, rows: object })
   }
 
   const onChange = (name: string, value: string) => {
+    setOutput([]);
     setState((prevState) => ({
       ...prevState,
       [name]: value
@@ -97,12 +99,16 @@ const AucPySimModal = (props: { open: boolean, handleClose: any, rows: object })
               >pySim Commandline Options</InputField>
             </Grid>
             <Grid item xs={3}>
-              <InputField
+              <SelectField
                 value={state.mncLength}
                 id="mncLength"
-                label="MNC"
+                label="MNC Length"
                 onChange={onChange}
-              >MNC Length (2/3)</InputField>
+                helper="Length of MNC field"
+              >
+                <MenuItem value="2">2</MenuItem>
+                <MenuItem value="3">3</MenuItem>
+              </SelectField>
             </Grid>
             <Grid item xs={3}>
               <InputField
