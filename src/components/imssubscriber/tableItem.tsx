@@ -52,34 +52,34 @@ const ImsSubscriberItem = (props: { row: ReturnType<typeof Object>, deleteCallba
               <Table size="small" aria-label="PCSCF and SCSCF">
                 <TableHead>
                   <TableRow>
+                    <TableCell>{i18n.t('generic.timestamp')}</TableCell>
                     <TableCell>{i18n.t('ims.pcscf')}</TableCell>
                     <TableCell>{i18n.t('ims.realm')}</TableCell>
                     <TableCell>{i18n.t('ims.peer')}</TableCell>
-                    <TableCell>{i18n.t('generic.timestamp')}</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
                   <TableRow>
+                    <TableCell style={{ whiteSpace: 'nowrap'}}>{row.pcscf_timestamp}</TableCell>
                     <TableCell>{row.pcscf}</TableCell>
                     <TableCell>{row.pcscf_realm}</TableCell>
-                    <TableCell>{row.pcscf_peer}</TableCell>
-                    <TableCell>{row.pcscf_timestamp}</TableCell>
+                    <TableCell>{String(row.pcscf_peer).replace(';','\n')}</TableCell>
                   </TableRow>
                 </TableBody>
                 <TableHead>
                   <TableRow>
+                    <TableCell>{i18n.t('generic.timestamp')}</TableCell>
                     <TableCell>{i18n.t('ims.scscf')}</TableCell>
                     <TableCell>{i18n.t('ims.realm')}</TableCell>
                     <TableCell>{i18n.t('ims.peer')}</TableCell>
-                    <TableCell>{i18n.t('generic.timestamp')}</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
                   <TableRow>
+                    <TableCell style={{ whiteSpace: 'nowrap'}}>{row.scscf_timestamp}</TableCell>
                     <TableCell>{row.scscf}</TableCell>
                     <TableCell>{row.scscf_realm}</TableCell>
-                    <TableCell>{row.scscf_peer}</TableCell>
-                    <TableCell>{row.scscf_timestamp}</TableCell>
+                    <TableCell>{String(row.scscf_peer).replace(';','\n')}</TableCell>
                   </TableRow>
                 </TableBody>
               </Table>

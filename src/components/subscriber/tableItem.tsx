@@ -56,18 +56,18 @@ const SubscriberItem = (props: { row: ReturnType<typeof Object>, deleteCallback:
               <Table size="small">
                 <TableHead>
                   <TableRow>
+                    <TableCell>{i18n.t('generic.timestamp')}</TableCell>
                     <TableCell>{i18n.t('subscriber.mme')}</TableCell>
                     <TableCell>{i18n.t('subscriber.realm')}</TableCell>
                     <TableCell>{i18n.t('subscriber.peer')}</TableCell>
-                    <TableCell>{i18n.t('generic.timestamp')}</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
                     <TableRow key="arp_preemption_capability">
+                      <TableCell style={{ whiteSpace: 'nowrap'}}>{row.serving_mme_timestamp}</TableCell>
                       <TableCell>{row.serving_mme}</TableCell>
                       <TableCell>{row.serving_mme_realm}</TableCell>
-                      <TableCell>{row.serving_mme_peer}</TableCell>
-                      <TableCell>{row.serving_mme_timestamp}</TableCell>
+                      <TableCell>{String(row.serving_mme_peer).replace(';','\n')}</TableCell>
                     </TableRow>
                 </TableBody>
               </Table>
