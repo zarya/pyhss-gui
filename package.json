@@ -57,6 +57,7 @@
     "react": "0.0.0-experimental-c8369527e-20230420",
     "react-bootstrap": "1.6.1",
     "react-dom": "0.0.0-experimental-c8369527e-20230420",
+    "react-highlight.js": "^1.0.7",
     "react-i18next": "12.2.0",
     "react-redux": "8.0.5",
     "react-router-dom": "6.10.0",

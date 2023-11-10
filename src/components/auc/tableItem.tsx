@@ -9,13 +9,14 @@ import TableCell from '@mui/material/TableCell';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Typography from '@mui/material/Typography';
+import Checkbox from '@mui/material/Checkbox';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import { DeleteDialog } from '@components';
 import i18n from '@app/utils/i18n';
 
-const AucItem = (props: { row: ReturnType<typeof Object>, single: ReturnType<typeof Boolean>, deleteCallback: ReturnType<typeof any>, openEditCallback: ReturnType<typeof any> }) => {
-  const { row, single, deleteCallback, openEditCallback } = props;
+const AucItem = (props: { row: ReturnType<typeof Object>, single: ReturnType<typeof Boolean>, deleteCallback: ReturnType<typeof any>, openEditCallback: ReturnType<typeof any>, checkboxCallback: any, checked: boolean }) => {
+  const { row, single, deleteCallback, openEditCallback, checkboxCallback = undefined, checked = false } = props;
   const [open, setOpen] = React.useState(single);
 
   return (
@@ -30,6 +31,19 @@ const AucItem = (props: { row: ReturnType<typeof Object>, single: ReturnType<typ
             {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
           </IconButton>
         </TableCell>
+        {checkboxCallback && (
+        <TableCell>
+          <Checkbox
+            color="primary"
+            id={row.auc_id}
+            checked={checked}
+            onClick={checkboxCallback}
+            inputProps={{
+              'aria-labelledby': row.auc_id,
+            }}
+          />
+        </TableCell>
+        )}
         <TableCell component="th" scope="row">
           {row.auc_id}
         </TableCell>

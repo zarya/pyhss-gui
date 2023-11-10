@@ -20,9 +20,19 @@ class ImsSubscriberApi {
   delete(id: number) {
     return http.delete(`/ims_subscriber/${id}`);
   }
-  findByImsi(id: string) {
-    return http.get(`/ims_subscriber/ims_subscriber_imsi/${id}`);
+
+  findByImsi(imsi: string) {
+    return http.get(`/ims_subscriber/ims_subscriber_imsi/${imsi}`);
   }
+
+  findManyByImsi(imsis: object) {
+    return Promise.all(imsis.map((imsi: string) => this.findByImsi(imsi)
+        .catch(function() {
+          return { statusText: 'FAILED' };
+        })
+    ))
+  }
+
   findByMsisdn(id: string) {
     return http.get(`/ims_subscriber/ims_subscriber_msisdn/${id}`);
   }

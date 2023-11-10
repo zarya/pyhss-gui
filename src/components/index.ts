@@ -25,6 +25,7 @@ import NetworkBandwidthFormatter from './Formatter';
 import InputField from './forms/Input';
 import SelectField from './forms/Select';
 import SaveButtons from './forms/SaveButtons';
+import AucPySimModal from './auc/pySimModal';
 
 export {
     InputField,
@@ -54,4 +55,5 @@ export {
     AddSubscriberWizard,
     AddImsSubscriberWizard,
     NetworkBandwidthFormatter,
+    AucPySimModal,
 };

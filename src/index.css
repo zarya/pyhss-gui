@@ -19,3 +19,7 @@
   outline: none;
   cursor: pointer;
 }
+
+.codePre {
+  color: unset;
+}
