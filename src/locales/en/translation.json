@@ -40,7 +40,8 @@
     "chargingRulesHead": "Charging Rules",
     "arpHead": "Allocation and Retention Priority (ARP)",
     "qosHead": "Quality of Service (QoS)",
-    "gatewayHead": "Gateway"
+    "gatewayHead": "Gateway",
+    "nbiotHead": "NB-IoT"
   },
   "auc": {
     "setKeys": "Set keys"
@@ -80,6 +81,7 @@
     "details": "Details",
     "timestamp": "Timestamp",
     "enabled": "Enabled",
+    "disabled": "Disabled",
     "allowed": "Allowed",
     "network": "Network"
   },
@@ -152,6 +154,11 @@
         "nbiot": "NB-IoT",
         "mnc": "MNC",
         "mcc": "MCC",
+        "scefId": "SCEF Id",
+        "scefRealm": "SCEF Realm",
+        "niddMechanism": "Mechanism",
+        "niddPreferredDataMode": "Preferred data mode",
+        "niddRds": "Reliable Data Service",
         "preference": "Preference"
     },
     "desc": {
@@ -205,6 +212,11 @@
         "subscriberRoamingEnabled": "Roaming enabled?",
         "mnc": "Mobile Network Code",
         "mcc": "Mobile Country Code",
+        "scefId": "ID of SCEF to be used for NIDD for NB-IoT",
+        "scefRealm": "Realm of SCEF to be used for NIDD for NB-IoT",
+        "niddMechanism": "Mechanism used to transfer Non-IP-Data",
+        "niddPreferredDataMode": "Preferred-Data-Mode",
+        "niddRds": "Indicates if Reliable Data Service is enabled or disabled",
         "preference": "Rule preference lower is more prefered"
     },
     "options": {
@@ -217,6 +229,10 @@
         "1": "Downlink",
         "2": "Uplink",
         "3": "Bidirectional"
+      },
+      "niddPreferredDataMode": {
+        "0": "Data over User Plane Preferred",
+        "1": "Data over Control Plane Preferred"
       }
     }
   }

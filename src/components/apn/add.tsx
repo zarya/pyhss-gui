@@ -217,6 +217,63 @@ const ApnAddItem = (props: { open: ReturnType<typeof Boolean>, handleClose: Retu
                   <MenuItem value={false}>{i18n.t('generic.no')}</MenuItem>
               </SelectField>
             </Grid>
+            {state.nbiot && <> 
+            <Grid item xs={12}><h3>{i18n.t('apn.nbiotHead')}</h3></Grid>
+            <Grid item xs={4}>
+              <InputField
+                required
+                value={state.nidd_scef_id}
+                onChange={handleChange}
+                id="nidd_scef_id"
+                label={i18n.t('inputFields.header.scefId')}
+              >{i18n.t('inputFields.desc.scefId')}</InputField>
+            </Grid>
+            <Grid item xs={4}>
+              <InputField
+                required
+                value={state.nidd_scef_realm}
+                onChange={handleChange}
+                id="nidd_scef_realm"
+                label={i18n.t('inputFields.header.scefRealm')}
+              >{i18n.t('inputFields.desc.scefRealm')}</InputField>
+            </Grid>
+            <Grid item xs={4}>
+              <SelectField
+                value={state.nidd_mechanism}
+                onChange={handleChange}
+                id="nidd_mechanism"
+                label={i18n.t('inputFields.header.niddMechanism')}
+                helper={i18n.t('inputFields.desc.niddMechanism')}
+                >
+                  <MenuItem value={0}>SGi-BASED-DATA-DELIVERY</MenuItem>
+                  <MenuItem value={1}>SCEF-BASED-DATA-DELIVERY</MenuItem>
+              </SelectField>
+            </Grid>
+            <Grid item xs={4}>
+              <SelectField
+                value={state.nidd_rds}
+                onChange={handleChange}
+                id="nidd_rds"
+                label={i18n.t('inputFields.header.niddRds')}
+                helper={i18n.t('inputFields.desc.niddRds')}
+                >
+                  <MenuItem value={0}>{i18n.t('generic.disabled')}</MenuItem>
+                  <MenuItem value={1}>{i18n.t('generic.enabled')}</MenuItem>
+              </SelectField>
+            </Grid>
+            <Grid item xs={4}>
+              <SelectField
+                value={state.nidd_preferred_data_mode}
+                onChange={handleChange}
+                id="nidd_preferred_data_mode"
+                label={i18n.t('inputFields.header.niddPreferredDataMode')}
+                helper={i18n.t('inputFields.desc.niddPreferredDataMode')}
+                >
+                  <MenuItem value={0}>{i18n.t('inputFields.options.niddPreferredDataMode.0')}</MenuItem>
+                  <MenuItem value={1}>{i18n.t('inputFields.options.niddPreferredDataMode.1')}</MenuItem>
+              </SelectField>
+            </Grid>
+          </>}
           </Grid>
          </Box>
          <SaveButtons onClickClose={handleLocalClose} onClickSave={handleSave} />
