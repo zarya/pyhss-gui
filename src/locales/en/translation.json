@@ -23,7 +23,9 @@
       "imssubscriber":"IMS Subscribers",
       "mainMenu": "Main Menu",
       "tft": "TFTs",
-      "chargingrule": "Charging Rules"
+      "chargingrule": "Charging Rules",
+      "roamingnetwork": "Networks",
+      "roamingrule": "Rules"
     }
   },
   "dashboard": {
@@ -77,7 +79,9 @@
     "search": "Search",
     "details": "Details",
     "timestamp": "Timestamp",
-    "enabled": "Enabled"
+    "enabled": "Enabled",
+    "allowed": "Allowed",
+    "network": "Network"
   },
   "validator": {
     "toShort": "To short!",
@@ -143,7 +147,12 @@
         "msisdn_list": "MSISDN list",
         "rauTauTimer": "RAU TAU Timer",
         "nam": "NAM",
-        "sqn": "SQN"
+        "sqn": "SQN",
+        "roaming": "Roaming",
+        "nbiot": "NB-IoT",
+        "mnc": "MNC",
+        "mcc": "MCC",
+        "preference": "Preference"
     },
     "desc": {
         "name": "Name of the entity",
@@ -191,7 +200,12 @@
         "ipVersion": "Version(s) of the ip stack that are enabled",
         "subscriberEnabled": "Subscriber enabled?",
         "rauTauTimer": "Periodic Tracking Area Update timer",
-        "direction": "Defines traffic direction"
+        "direction": "Defines traffic direction",
+        "nbiot": "Narrowband IoT",
+        "subscriberRoamingEnabled": "Roaming enabled?",
+        "mnc": "Mobile Network Code",
+        "mcc": "Mobile Country Code",
+        "preference": "Rule preference lower is more prefered"
     },
     "options": {
       "nam": {

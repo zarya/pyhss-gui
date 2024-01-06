@@ -95,6 +95,18 @@ const ApnAddItem = (props: { open: ReturnType<typeof Boolean>, handleClose: Retu
                   <MenuItem key={4} value={3}>ipv4 or ipv6</MenuItem>
               </SelectField>
             </Grid>
+            <Grid item xs={4}>
+              <SelectField
+                value={state.nbiot}
+                onChange={handleChange}
+                id="nbiot"
+                label={i18n.t('inputFields.header.nbiot')}
+                helper={i18n.t('inputFields.desc.nbiot')}
+              >
+                <MenuItem value={true}>{i18n.t('generic.yes')}</MenuItem>
+                <MenuItem value={false}>{i18n.t('generic.no')}</MenuItem>
+              </SelectField>
+            </Grid>
             <Grid item xs={12}><h3>{i18n.t('apn.gatewayHead')}</h3></Grid>
             <Grid item xs={6}>
               <InputField

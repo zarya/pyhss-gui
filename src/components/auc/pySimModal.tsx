@@ -87,18 +87,15 @@ const AucPySimModal = (props: { open: boolean, handleClose: any, rows: object })
         <Box sx={style}>
           <h3>pySim</h3>
           <Grid container spacing={1} rowSpacing={1}>
-            <Grid item xs={1}>
-              <Button variant="outlined" onClick={()=>setHelp(!help)}>Option Help</Button>
-            </Grid>
             <Grid item xs={3}>
               <InputField
-                value={state.options}
-                id="options"
-                label="Options"
+                value={state.networkName}
+                id="networkName"
+                label="Network name"
                 onChange={onChange}
-              >pySim Commandline Options</InputField>
+              >&nbsp;</InputField>
             </Grid>
-            <Grid item xs={3}>
+            <Grid item xs={2}>
               <SelectField
                 value={state.mncLength}
                 id="mncLength"
@@ -112,23 +109,22 @@ const AucPySimModal = (props: { open: boolean, handleClose: any, rows: object })
             </Grid>
             <Grid item xs={3}>
               <InputField
-                value={state.networkName}
-                id="networkName"
-                label="Network name"
-                onChange={onChange}
-              ></InputField>
-            </Grid>
-            <Grid item xs={3}>
-              <InputField
                 value={state.smsc}
                 id="smsc"
                 label="SMSC number"
                 onChange={onChange}
               >SMSC number (Start with + for international no.)</InputField>
             </Grid>
-            <Grid item xs={12}>
-              <Button onClick={()=>onOutput(false)}>Generate</Button>
-              <Button onClick={()=>onOutput(true)}>Generate Dry run</Button>
+            <Grid item xs={10}>
+              <InputField
+                value={state.options}
+                id="options"
+                label="Options"
+                onChange={onChange}
+              >pySim Commandline Options</InputField>
+            </Grid>
+            <Grid item xs={2}>
+              <Button variant="outlined" onClick={()=>setHelp(!help)}>{(help?'Hide':'Show')} Help</Button>
             </Grid>
             {help && (
             <Grid item xs={12}>
@@ -196,6 +192,12 @@ const AucPySimModal = (props: { open: boolean, handleClose: any, rows: object })
               `}
               </Highlight>
             </Grid>)}
+            <Grid item xs={2}>
+              <Button variant="outlined" onClick={()=>onOutput(true)}>Generate Dry run</Button>
+            </Grid>
+            <Grid item xs={2}>
+              <Button variant="contained" onClick={()=>onOutput(false)}>Generate</Button>
+            </Grid>
             <Grid item xs={12}>
               <h4>Output</h4>
             </Grid>

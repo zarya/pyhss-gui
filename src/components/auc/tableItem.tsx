@@ -31,7 +31,7 @@ const AucItem = (props: { row: ReturnType<typeof Object>, single: ReturnType<typ
             {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
           </IconButton>
         </TableCell>
-        {checkboxCallback && (
+        {checkboxCallback && row.opc !== "" && (
         <TableCell>
           <Checkbox
             color="primary"

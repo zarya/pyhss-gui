@@ -39,6 +39,7 @@ const ApnItem = (props: { row: ReturnType<typeof Object>, chargingRules: ReturnT
         <TableCell component="th" scope="row">
           {row.apn}
         </TableCell>
+        <TableCell>{row.nbiot?'Yes':'No'}</TableCell>
         <TableCell>{ipVersion[row.ip_version]}</TableCell>
         <TableCell>{row.qci}</TableCell>
         <TableCell>{row.sgw_address}</TableCell>
@@ -113,6 +114,33 @@ const ApnItem = (props: { row: ReturnType<typeof Object>, chargingRules: ReturnT
                       <TableCell>{chRow.last_modified}</TableCell>
                     </TableRow>
                   )}
+                </TableBody>
+              </Table>
+            </Box>
+            }
+            {row.nbiot &&
+            <Box sx={{ margin: 1}}>
+              <Typography variant="h6" gutterBottom component="div">
+                NB-IoT 
+              </Typography>
+              <Table>
+                <TableHead>
+                  <TableRow>
+                    <TableCell>nidd_scef_id</TableCell>
+                    <TableCell>nidd_scef_realm</TableCell>
+                    <TableCell>nidd_mechanism</TableCell>
+                    <TableCell>nidd_rds</TableCell>
+                    <TableCell>nidd_preferred_data_mode</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  <TableRow>
+                    <TableCell>{row.nidd_scef_id}</TableCell>
+                    <TableCell>{row.nidd_scef_realm}</TableCell>
+                    <TableCell>{row.nidd_mechanism}</TableCell>
+                    <TableCell>{row.nidd_rds}</TableCell>
+                    <TableCell>{row.nidd_preferred_data_mode}</TableCell>
+                  </TableRow>
                 </TableBody>
               </Table>
             </Box>

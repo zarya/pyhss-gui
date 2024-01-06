@@ -42,6 +42,8 @@ const SubscriberAddModal = (props: { open: boolean, handleClose: ReturnType<type
     const item = {
       "imsi": state.imsi,
       "enabled": state.enabled,
+      "roaming_enabled": state.roaming_enabled,
+      "roaming_rule_list": state.roaming_rule_list,
       "auc_id": state.auc_id,
       "default_apn": state.default_apn,
       "apn_list": state.apn_list,

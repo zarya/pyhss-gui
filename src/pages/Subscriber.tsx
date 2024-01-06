@@ -92,6 +92,7 @@ const Subscriber = () => {
                         <TableCell>{i18n.t('inputFields.header.imsi')}</TableCell>
                         <TableCell>{i18n.t('inputFields.header.auc')}</TableCell>
                         <TableCell>{i18n.t('generic.enabled')}</TableCell>
+                        <TableCell>{i18n.t('inputFields.header.roaming')}</TableCell>
                         <TableCell>{i18n.t('inputFields.header.msisdn')}</TableCell>
                         <TableCell>{i18n.t('inputFields.header.apnDefault')}</TableCell>
                         <TableCell>{i18n.t('inputFields.header.ambr_dl')}</TableCell>

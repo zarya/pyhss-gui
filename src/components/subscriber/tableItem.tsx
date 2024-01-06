@@ -36,6 +36,7 @@ const SubscriberItem = (props: { row: ReturnType<typeof Object>, deleteCallback:
         </TableCell>
         <TableCell><Button component={NavLink} to={`/auc?auc=${row.auc_id}`} variant="outlined">{row.auc_id}</Button></TableCell>
         <TableCell>{(row.enabled?i18n.t('generic.yes'):i18n.t('generic.no'))}</TableCell>
+        <TableCell>{(row.roaming_enabled?i18n.t('generic.yes'):i18n.t('generic.no'))} {row.roaming_rule_list}</TableCell>
         <TableCell>{row.msisdn}</TableCell>
         <TableCell>{row.apn_list} ({row.default_apn})</TableCell>
         <TableCell>{row.ue_ambr_dl}</TableCell>

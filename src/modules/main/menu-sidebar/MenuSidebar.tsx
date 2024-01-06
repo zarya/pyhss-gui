@@ -49,6 +49,19 @@ export const MENU: IMenuItem[] = [
     icon: 'fas fa-search-dollar nav-icon',
     path: '/chargingrule'
   },
+  { name: 'Roaming',
+    icon: 'fas fa-broom nav-icon',
+    children: [
+  {
+    name: i18n.t('menusidebar.label.roamingnetwork'),
+    icon: 'fas fa-network-wired nav-icon',
+    path: '/roamingnetwork'
+  },
+  {
+    name: i18n.t('menusidebar.label.roamingrule'),
+    icon: 'fas fa-book nav-icon',
+    path: '/roamingrule'
+  }]},
   {
     name: "Subscriber wizard",
     icon: 'fas fa-magic nav-icon',

@@ -26,7 +26,8 @@ edit?: boolean
     'default_apn':'',
     'apn_list': '',
     'ue_ambr_ul': '',
-    'ue_ambr_dl': ''
+    'ue_ambr_dl': '',
+    'roaming_rule_list': ''
   })
 
   React.useEffect(() => {
@@ -36,6 +37,7 @@ edit?: boolean
     onValidate('apn_list', state.apn_list)
     onValidate('ue_ambr_ul', state.ue_ambr_ul)
     onValidate('ue_ambr_dl', state.ue_ambr_dl)
+    onValidate('roaming_rule_list', state.roaming_rule_list)
     AucApi.getAll().then((data => {
       setAuc(data.data);
       setAucLoading(false);
@@ -86,6 +88,9 @@ edit?: boolean
       error = i18n.t('validator.required'); 
     else if (field==='ue_ambr_dl' && !/^\d*$/.test(value))
       error = i18n.t('validator.onlyNumbers'); 
+
+    else if (field==='roaming_rule_list' && !/^[1-8]*(,[1-8]*)*$/.test(value) && value !== null)
+      error = i18n.t('validator.onlyCSV'); 
 
     setError(field, error);
 
@@ -155,6 +160,27 @@ edit?: boolean
                 <MenuItem value={true}>{i18n.t('generic.yes')}</MenuItem>
                 <MenuItem value={false}>{i18n.t('generic.no')}</MenuItem>
               </SelectField>
+            </Grid>
+            <Grid item xs={3}>
+              <SelectField
+                value={state.roaming_enabled}
+                onChange={onChange}
+                id="roaming_enabled"
+                label={i18n.t('inputFields.header.roaming')}
+                helper={i18n.t('inputFields.desc.subscriberRoamingEnabled')}
+              >
+                <MenuItem value={true}>{i18n.t('generic.yes')}</MenuItem>
+                <MenuItem value={false}>{i18n.t('generic.no')}</MenuItem>
+              </SelectField>
+            </Grid>
+            <Grid item xs={3}>
+              <InputField
+                value={state.roaming_rule_list}
+                error={errors.roaming_rule_list}
+                onChange={onChangeLocal}
+                id="roaming_rule_list"
+                label="Roaming rules"
+              >Roaming rules</InputField>
             </Grid>
             <Grid item xs={3}>
               <SelectField

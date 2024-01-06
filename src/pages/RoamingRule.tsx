@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, {useState} from 'react';
-import {ContentHeader, ApnItem, ApnAddItem} from '@components';
-import {ApnApi, ChargingRuleApi} from "../services/pyhss"
+import {ContentHeader, RoamingRuleItem, RoamingRuleAddModal} from '@components';
+import {RoamingRuleApi, RoamingNetworkApi} from "../services/pyhss"
 import SpeedDial from '@mui/material/SpeedDial';
 import SpeedDialIcon from '@mui/material/SpeedDialIcon';
 import Table from '@mui/material/Table';
@@ -12,61 +12,47 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import i18n from '@app/utils/i18n';
-  
-const apnTemplate = {
-  "apn": "",
-  "ip_version": 0,
-  "pgw_address": "",
-  "sgw_address": "",
-  "charging_characteristics": "0800",
-  "apn_ambr_dl": 0,
-  "apn_ambr_ul": 0,
-  "qci": 9,
-  "arp_priority": 8,
-  "arp_preemption_capability": false,
-  "arp_preemption_vulnerability": false,
-  "charging_rule_list": "",
-  "nbiot": false
+
+const roamingRuleTemplate = {
+  "roaming_rule_id": 0,
+  "roaming_network_id": 0,
+  "allow": true,
+  "enabled": true
 }
 
-const Apn = () => {
-  const [apns, setAPNS] = useState([]);
-  const [dialogData, setDialogData] = useState(apnTemplate);
+const RoamingRule = () => {
+  const [items, setItems] = useState([]);
   const [openAdd, setOpenAdd] = useState(false);
+  const [dialogData, setDialogData] = useState(roamingRuleTemplate);
   const [editMode, setEditMode] = useState(false);
-  const [chargingRules, setChargingRules] = useState([]);
+  const [network, setNetwork] = useState([]);
 
   React.useEffect(() => {
-    ApnApi.getAll().then((data => {
-        setAPNS(data.data)
-    }))
-    ChargingRuleApi.getAll().then((data => {
-        setChargingRules(data.data)
+    RoamingNetworkApi.getAll().then((data => {
+      setNetwork(data.data);
+      RoamingRuleApi.getAll().then((data => {
+        setItems(data.data)
+      }));
     }))
   }, []);
 
   const refresh = () => {
-    ApnApi.getAll().then((data => {
-        setAPNS(data.data)
-    }))
-    ChargingRuleApi.getAll().then((data => {
-        setChargingRules(data.data)
-    }))
+    RoamingRuleApi.getAll().then((data => {
+      setItems(data.data)
+    }));
   }
 
   const handleDelete = (id) => {
-    ApnApi.delete(id).then((data) => {
+    RoamingRuleApi.delete(id).then((data) => {
       refresh();
     })
   }
 
   const handleAdd = () => {
-    setEditMode(false);
     setOpenAdd(true);
   }
   const handleAddClose = () => {
     setOpenAdd(false);
-    setDialogData(apnTemplate);
     refresh();
   }
   const openEdit = (row) => {
@@ -77,7 +63,7 @@ const Apn = () => {
 
   return (
     <div>
-      <ContentHeader title="APNs" />
+      <ContentHeader title="Roaming Rules" />
       <section className="content">
         <div className="container-fluid">
           <div className="card">
@@ -86,20 +72,16 @@ const Apn = () => {
                   <Table aria-label="collapsible table">
                     <TableHead>
                       <TableRow>
-                        <TableCell/>
                         <TableCell>{i18n.t('inputFields.header.id')}</TableCell>
-                        <TableCell>{i18n.t('inputFields.header.apn')}</TableCell>
-                        <TableCell>{i18n.t('inputFields.header.nbiot')}</TableCell>
-                        <TableCell>{i18n.t('inputFields.header.ipVersion')}</TableCell>
-                        <TableCell>{i18n.t('inputFields.header.qci')}</TableCell>
-                        <TableCell>{i18n.t('inputFields.header.sgw')}</TableCell>
-                        <TableCell>{i18n.t('inputFields.header.pgw')}</TableCell>
+                        <TableCell>{i18n.t('generic.network')}</TableCell>
+                        <TableCell>{i18n.t('generic.allowed')}</TableCell>
+                        <TableCell>{i18n.t('generic.enabled')}</TableCell>
                         <TableCell/>
                       </TableRow>
                     </TableHead>
                     <TableBody>
-                      {apns.map((row) => (
-                        <ApnItem key={row.apn_id} row={row} chargingRules={chargingRules} deleteCallback={handleDelete} openEditCallback={openEdit} />
+                      {items.map((row) => (
+                        <RoamingRuleItem key={row.roaming_rule_id} row={row} deleteCallback={handleDelete} openEditCallback={openEdit} network={network} />
                       ))}
                     </TableBody>
                   </Table>
@@ -108,16 +90,16 @@ const Apn = () => {
           </div>
         </div>
         <SpeedDial
-          ariaLabel={i18n.t('generic.add')}
+          ariaLabel="Add"
           sx={{ position: 'absolute', bottom: 80, right: 16 }}
           icon={<SpeedDialIcon />}
           onClick={() => handleAdd()}
           open={openAdd}
         />
-        <ApnAddItem open={openAdd} handleClose={handleAddClose} data={dialogData} edit={editMode} />
+        <RoamingRuleAddModal open={openAdd} handleClose={handleAddClose}  data={dialogData} edit={editMode} />
       </section>
     </div>
   );
 };
 
-export default Apn;
+export default RoamingRule;
