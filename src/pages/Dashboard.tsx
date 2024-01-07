@@ -14,16 +14,19 @@ const Dashboard = () => {
 
   React.useEffect(() => {
     OamApi.servingSubs().then((data => {
-      setSubs(String(Object.keys(data.data).length));
+      const current = new Date;
+      setSubs(String(Object.values(data.data).filter(item => (current - new Date(item.serving_mme_timestamp) < 60 * 60 * 1000)).length));
     }))
     OamApi.servingSubsIms().then((data => {
-      setSubsIms(String(Object.keys(data.data).length));
+      const current = new Date;
+      setSubsIms(String(Object.values(data.data).filter(item => (current - new Date(item.pcscf_timestamp) < 60 * 60 * 1000)).length));
     }))
     OamApi.servingSubsPcrf().then((data => {
-      setSubsPcrf(String(Object.keys(data.data).length));
+      const current = new Date;
+      setSubsPcrf(String(Object.values(data.data).filter(item => (current - new Date(item.serving_pgw_timestamp) < 60 * 60 * 1000)).length));
     }))
     OamApi.diameterPeers().then((data => {
-      setDiameter(String(Object.keys(data.data).length));
+      setDiameter(String(Object.values(data.data).filter(item => item.disconnectTimestamp === "").length));
     }))
   }, []);
 

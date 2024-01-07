@@ -10,6 +10,8 @@ import TableRow from '@mui/material/TableRow';
 import Typography from '@mui/material/Typography';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import SignalCellularNodataIcon from '@mui/icons-material/SignalCellularNodata';
+import SignalCellularAltIcon from '@mui/icons-material/SignalCellularAlt';
 import {NavLink} from 'react-router-dom';
 import Button from '@mui/material/Button';
 import { DeleteDialog } from '@components';
@@ -18,6 +20,9 @@ import i18n from '@app/utils/i18n';
 const SubscriberItem = (props: { row: ReturnType<typeof Object>, deleteCallback: ReturnType<typeof any>, openEditCallback: ReturnType<typeof any> }) => {
   const { row, deleteCallback, openEditCallback } = props;
   const [open, setOpen] = React.useState(false);
+
+  const online = ((new Date) - new Date(row.serving_mme_timestamp) < 60 * 60 * 1000)
+
 
   return (
     <React.Fragment>
@@ -34,6 +39,7 @@ const SubscriberItem = (props: { row: ReturnType<typeof Object>, deleteCallback:
         <TableCell component="th" scope="row">
           {row.imsi}
         </TableCell>
+        <TableCell>{online?(<SignalCellularAltIcon />):(<SignalCellularNodataIcon />)}</TableCell>
         <TableCell><Button component={NavLink} to={`/auc?auc=${row.auc_id}`} variant="outlined">{row.auc_id}</Button></TableCell>
         <TableCell>{(row.enabled?i18n.t('generic.yes'):i18n.t('generic.no'))}</TableCell>
         <TableCell>{(row.roaming_enabled?i18n.t('generic.yes'):i18n.t('generic.no'))} {row.roaming_rule_list}</TableCell>

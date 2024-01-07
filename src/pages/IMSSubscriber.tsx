@@ -88,6 +88,7 @@ const IMSSubscriber = () => {
                       <TableRow>
                         <TableCell/>
                         <TableCell>{i18n.t('inputFields.header.imsi')}</TableCell>
+                        <TableCell/>
                         <TableCell>{i18n.t('inputFields.header.msisdn')}</TableCell>
                         <TableCell>{i18n.t('inputFields.header.ifc')}</TableCell>
                         <TableCell>{i18n.t('inputFields.header.sh')}</TableCell>

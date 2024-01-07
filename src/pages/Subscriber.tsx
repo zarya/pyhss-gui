@@ -90,6 +90,7 @@ const Subscriber = () => {
                       <TableRow>
                         <TableCell/>
                         <TableCell>{i18n.t('inputFields.header.imsi')}</TableCell>
+                        <TableCell/>
                         <TableCell>{i18n.t('inputFields.header.auc')}</TableCell>
                         <TableCell>{i18n.t('generic.enabled')}</TableCell>
                         <TableCell>{i18n.t('inputFields.header.roaming')}</TableCell>

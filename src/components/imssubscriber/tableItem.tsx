@@ -11,12 +11,16 @@ import TableRow from '@mui/material/TableRow';
 import Typography from '@mui/material/Typography';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import SignalCellularNodataIcon from '@mui/icons-material/SignalCellularNodata';
+import SignalCellularAltIcon from '@mui/icons-material/SignalCellularAlt';
 import { DeleteDialog } from '@components';
 import i18n from '@app/utils/i18n';
 
 const ImsSubscriberItem = (props: { row: ReturnType<typeof Object>, deleteCallback: ReturnType<typeof any>, openEditCallback: ReturnType<typeof any> }) => {
   const { row, deleteCallback, openEditCallback } = props;
   const [open, setOpen] = React.useState(false);
+
+  const online = ((new Date) - new Date(row.pcscf_timestamp) < 60 * 60 * 1000)
 
   return (
     <React.Fragment>
@@ -33,6 +37,7 @@ const ImsSubscriberItem = (props: { row: ReturnType<typeof Object>, deleteCallba
         <TableCell component="th" scope="row">
           {row.imsi}
         </TableCell>
+        <TableCell>{online?(<SignalCellularAltIcon />):(<SignalCellularNodataIcon />)}</TableCell>
         <TableCell>{row.msisdn} ({row.msisdn_list})</TableCell>
         <TableCell>{row.ifc_path}</TableCell>
         <TableCell>{row.sh_profile}</TableCell>
