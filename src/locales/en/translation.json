@@ -175,7 +175,7 @@
         "iccid": "Integrated Circuit Card Identifier",
         "simVendor": "Sim vendor",
         "batch": "Batch name",
-        "amf": "Access and Mobility Management Function",
+        "amf": "Authentication Management Field",
         "lpa": "Local Profile Assistant URL for activating eSIM",
         "pin1":"User PIN 1",
         "puk1":"User PUK 1",
